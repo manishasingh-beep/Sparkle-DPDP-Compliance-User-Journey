@@ -99,7 +99,7 @@
 
   .addbtn{width:100%;height:40px;margin-top:10px;border:1px solid #0A2A66;border-radius:10px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
   .addbtn:hover{background:#0A2A66;color:#fff;}
-  .addbtn.added{background:#FBF5E9;border-color:#C8A14A;color:#9C7A2F;}
+  .addbtn.added{background:#fff;border-color:#0A2A66;color:#0A2A66;pointer-events:none;}
   .pdpact:hover,.moreopt:hover{border-color:#C8A14A;}
   .invSize{display:flex;flex-direction:column;gap:1px;border:1px solid #E6E0D6;border-radius:12px;padding:10px 12px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
   .invSize:hover{border-color:#C8A14A;}
@@ -581,22 +581,21 @@
 </div>
 <div id="guestModal" style="display:none;position:absolute;inset:0;z-index:45;pointer-events:none;">
   <div id="gmBackdrop" style="position:absolute;inset:0;background:transparent;pointer-events:none;"></div>
-  <div id="gmSheet" style="position:absolute;left:0;right:0;bottom:0;width:100%;max-width:560px;margin:0 auto;background:#FBF8F3;border-radius:22px 22px 0 0;box-shadow:0 -20px 60px rgba(7,20,42,0.28);padding:26px 28px 28px;transform:translateY(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:auto;">
-    <div style="width:44px;height:5px;border-radius:99px;background:#E2DAC9;margin:0 auto 14px;"></div>
+  <div id="gmSheet" style="position:absolute;top:0;right:0;bottom:0;width:440px;max-width:88%;background:#FBF8F3;border-radius:0;box-shadow:-24px 0 60px rgba(7,20,42,0.28);padding:26px 28px 28px;overflow-y:auto;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:auto;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;">
       <div><div id="gmTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:#0A2A66;">Want to save this visit?</div><div id="gmSubtitle" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#7C7268;margin-top:3px;">Save this visit so our guests can enjoy benefits like:</div></div>
       <button id="gmClose" style="width:34px;height:34px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 6L6 18m12 0L6 6"/></svg></button>
     </div>
-    <div id="gmPointers" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;">
-      <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;">
+    <div id="gmPointers" style="display:flex;flex-direction:column;gap:10px;margin-top:18px;">
+      <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
         <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5l3.2 2.4L12 5l4.8 5.9l3.2-2.4L19 17H5L4 8.5Z"/><path d="M6.5 20h11" stroke-linecap="round"/></svg></span>
         <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Loyalty rewards</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Points and tier benefits on every purchase, growing each visit.</div></div>
       </div>
-      <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;">
+      <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
         <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.75h12a.75.75 0 0 1 .75.75v16.5l-6.75-4-6.75 4V4.5A.75.75 0 0 1 6 3.75Z"/></svg></span>
         <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Picks saved for later</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Every piece viewed today is kept, ready for their next visit.</div></div>
       </div>
-      <div id="gmPointer3" style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;">
+      <div id="gmPointer3" style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
         <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4.5L11 14.5M21 4.5l-6.5 17-4-7.5M21 4.5l-17 6.5 7.5 4"/></svg></span>
         <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Shared on WhatsApp</div><div id="gmPointer3Text" style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Send their curated collection straight to their phone.</div></div>
       </div>
@@ -1057,8 +1056,8 @@
     _endStatus='not_purchased';
     closeEndModal();
     var hasPhone = CUR && CUR.detailed && CUR.phone;
-    if(hasPhone){ setTimeout(function(){ showEndStep('Survey'); openEndModal(); },260); }
-    else { window.__guestModalDoneCallback=function(){ showEndStep('Survey'); openEndModal(); }; setTimeout(function(){ openGuestModal(true); },260); }
+    window.__guestModalDoneCallback=function(){ showEndStep('Survey'); openEndModal(); };
+    setTimeout(function(){ if(hasPhone){ if(typeof openGuestModalAtVerify==='function') openGuestModalAtVerify(); } else { openGuestModal(true); } },260);
   };
   document.querySelectorAll('.surveyOpt').forEach(function(o){ o.onclick=function(){ document.querySelectorAll('.surveyOpt').forEach(function(x){x.classList.remove('sel');}); o.classList.add('sel'); }; });
   var _eSub=document.getElementById('endSurveySubmit'); if(_eSub) _eSub.onclick=function(){ var picked=document.querySelector('.surveyOpt.sel'); _endDetail=picked?picked.getAttribute('data-v'):''; showEndStep('Close'); };
@@ -1087,7 +1086,7 @@
   function openGuestModal(auto){
     document.getElementById('gPhone').value='';
     ['gName','gEmail','gBday','gAnniv','gRefNum','gRefName'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
-    document.getElementById('gmPointers').style.display='grid';
+    document.getElementById('gmPointers').style.display='flex';
     document.getElementById('gmStepPhone').style.display='block';
     document.getElementById('gmStepRecog').style.display='none';
     document.getElementById('gmStepNew').style.display='none';
@@ -1107,11 +1106,22 @@
     window.__waNudged=false;
     var gm=document.getElementById('guestModal'); gm.style.display='block'; gm.style.pointerEvents='auto';
     var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background=auto?'transparent':'rgba(7,20,42,0.35)';bd.style.pointerEvents=auto?'none':'auto';}
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.getElementById('gmSheet').style.transform='translateY(0)'; }); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.getElementById('gmSheet').style.transform='translateX(0)'; }); });
   }
   window.__openGuestModal=openGuestModal;
+  function openGuestModalAtVerify(){
+    openGuestModal(true);
+    document.getElementById('gmPointers').style.display='none';
+    document.getElementById('gmStepPhone').style.display='none';
+    document.getElementById('gmStepVerify').style.display='block';
+    document.getElementById('gPhone').value=(CUR&&CUR.phone)?CUR.phone:'';
+    document.getElementById('gmTitle').textContent='Share today’s collection';
+    document.getElementById('gmSubtitle').textContent='Send what they liked today, with their okay.';
+    if(typeof applyConsentVariantUI==='function') applyConsentVariantUI();
+  }
+  window.__openGuestModalAtVerify=openGuestModalAtVerify;
   function closeGuestModal(){
-    document.getElementById('gmSheet').style.transform='translateY(100%)';
+    document.getElementById('gmSheet').style.transform='translateX(100%)';
     var gm=document.getElementById('guestModal'); gm.style.pointerEvents='none';
     window.__guestPromptDismissed=true;
     setTimeout(function(){ gm.style.display='none'; if(window.__guestModalDoneCallback){ var cb=window.__guestModalDoneCallback; window.__guestModalDoneCallback=null; cb(); } },420);
@@ -1205,7 +1215,7 @@
   });
   // ---- keep phone input + CTA clear of an on-screen keyboard ----
   document.getElementById('gPhone').addEventListener('focus',function(){ var gp=document.getElementById('gmPointers'); if(gp) gp.style.display='none'; });
-  document.getElementById('gPhone').addEventListener('blur',function(){ var gp=document.getElementById('gmPointers'); if(gp && document.getElementById('gmStepPhone').style.display!=='none') gp.style.display='grid'; });
+  document.getElementById('gPhone').addEventListener('blur',function(){ var gp=document.getElementById('gmPointers'); if(gp && document.getElementById('gmStepPhone').style.display!=='none') gp.style.display='flex'; });
   // ---- back navigation + where catalogue came from ----
   var catFrom='viewSession';
   var _pfb=document.getElementById('pfStart'); if(_pfb) _pfb.onclick=function(){ catFrom='viewProfile'; showSearch(); };
@@ -1236,7 +1246,7 @@
   function ensureInTray(prod){ if(!tray.some(function(t){return t.name===prod.name;})){ tray.push(prod); renderTray(); } }
   function addToTray(prod){ if(tray.some(function(t){return t.name===prod.name;})){toast('Already in the tray.');return false;} tray.push(prod); renderTray(); toast(prod.name+' added to tray.'); return true; }
   document.querySelectorAll('.prodc').forEach(function(c){
-    var info=c.lastElementChild;
+    var info=c.children[1];
     var name=info.children[1].textContent, price=info.children[2].textContent, cat=c.getAttribute('data-cat'), img=c.querySelector('img').src;
     var prod={name:name,price:price,cat:cat,img:img};
     c.addEventListener('click',function(){ openInventory(prod); });
@@ -1249,7 +1259,7 @@
   function enhanceCatalogueCards(){
     document.querySelectorAll('#prodgrid .prodc').forEach(function(c){
       if(c.querySelector('.prodcAdd')) return;
-      var info=c.lastElementChild;
+      var info=c.children[1];
       var name=info.children[1].textContent, price=info.children[2].textContent, cat=c.getAttribute('data-cat');
       var imgWrap=c.firstElementChild; if(imgWrap) imgWrap.style.position='relative';
       var meta=document.createElement('div');
@@ -1535,7 +1545,7 @@
       var c=null;
       if(q){ var ql=q.toLowerCase(); c=cards.filter(function(x){return (x.getAttribute('data-name')||'').indexOf(ql)>-1;})[0]; }
       c=c||cards[0];
-      var info=c.lastElementChild;
+      var info=c.children[1];
       openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:c.getAttribute('data-cat'), img:c.querySelector('img').src}); var _nb=document.querySelector('#viewPDP .navback'); if(_nb)_nb.setAttribute('data-bt','viewSearch');
     }
     window.__openSerial=openSerial;
@@ -1623,7 +1633,7 @@
     var opp='<div style="flex:1;min-width:0;padding:12px 16px;border-right:1px solid #F1ECE2;"><div style="'+H+'">Opportunities</div>'+oppRow(GIFT,'Birthday',lbl(k.bday),lbl(k.bdayIn),'bday')+'<div style="height:1px;background:#F5F0E6;"></div>'+oppRow(SPARK,'Anniversary',lbl(k.anniv),lbl(k.annivIn),'anniv')+'</div>';
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}];var _multi=_sch.length>1;function _sb(sc){return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="display:flex;justify-content:space-between;font-family:\'DM Sans\';font-weight:600;font-size:11.5px;color:#3A4252;margin-top:3px;"><span>'+sc.paid+' paid</span><span>'+sc.due+' due</span></div><div style="height:6px;border-radius:3px;background:#ECE5DA;margin-top:6px;overflow:hidden;"><div style="height:100%;width:'+sc.pct+'%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div><div style="font-family:\'DM Sans\';font-weight:400;font-size:10.5px;color:#7C7268;margin-top:5px;">Next \u00b7 '+sc.next+'</div></div>';}var _blocks=_sch.map(_sb).join('<div style="height:1px;background:#F1ECE2;margin:9px 0;"></div>');var _body=_multi?('<div style="position:relative;"><div style="max-height:112px;overflow-y:auto;">'+_blocks+'</div><div style="position:absolute;left:0;right:0;bottom:0;height:24px;background:linear-gradient(to top,#fff,rgba(255,255,255,0));pointer-events:none;"></div></div>'):_blocks;var scheme='<div style="flex:1;min-width:0;padding:12px 16px;"><div style="'+H+'">Active Scheme'+(_multi?'s':'')+'</div>'+_body+'</div>';var cols='<div style="display:flex;border-bottom:1px solid #F1ECE2;">'+opp+scheme+'</div>';
     var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
-    var rv=cards.map(function(c){var info=c.lastElementChild;var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
+    var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
     var recent=rv?('<div style="padding:12px 16px 14px;"><div style="'+H+'">Items viewed in previous visit</div>'+rv+'</div>'):'';
     sn.innerHTML=stats+cols+recent;
     sn.querySelectorAll('.addOpp').forEach(function(bn){bn.onclick=function(){addOpp(k,bn.getAttribute('data-f'));};});
