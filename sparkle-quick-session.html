@@ -24,7 +24,7 @@
   .hRangeToggle{display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:12px;padding:4px;gap:2px;}
   .hRangeSeg{height:34px;padding:0 14px;border:none;border-radius:9px;background:transparent;font-family:'DM Sans';font-weight:600;font-size:12.5px;color:#7C7268;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s;}
   .hRangeSeg:hover{color:#0A2A66;}
-  .hRangeSeg.on{background:#0A2A66;color:#fff;}
+  .hRangeSeg.on{background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;}
   .hRangePopover{position:absolute;top:calc(100% + 8px);right:0;background:#fff;border:1px solid #ECE5DA;border-radius:14px;box-shadow:0 14px 34px rgba(10,27,51,0.16);padding:14px;display:none;z-index:30;min-width:210px;}
   .hRangePopover.show{display:block;}
   .hCalendar{width:272px;}
@@ -52,7 +52,7 @@
   .hProgressTrack{height:6px;background:rgba(10,42,102,0.09);border-radius:999px;margin-top:6px;overflow:hidden;}
   .hProgressFill{height:100%;background:#C8A14A;border-radius:999px;transition:width .4s ease;}
   .ongoBadge{display:inline-flex;align-items:center;height:22px;padding:0 10px;background:rgba(200,161,74,0.14);border-radius:20px;font-family:'DM Sans';font-weight:600;font-size:12px;color:#B8902F;}
-  .resumeBtn{height:42px;padding:0 18px;border:none;border-radius:10px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;flex:none;}
+  .resumeBtn{height:42px;padding:0 18px;border:1.5px solid #0A2A66;border-radius:10px;background:linear-gradient(90deg,rgba(24,75,169,0.5),rgba(6,64,171,0.5),rgba(61,118,227,0.5));color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;flex:none;}
   .compTag{display:inline-flex;align-items:center;height:26px;padding:0 14px;border-radius:20px;background:rgba(62,142,90,0.14);border:1px solid rgba(62,142,90,0.3);font-family:'DM Sans';font-weight:600;font-size:12px;color:#3E8E5A;white-space:nowrap;flex:none;}
   .compTag.neutral{background:rgba(124,114,104,0.1);border-color:rgba(124,114,104,0.28);color:#7C7268;}
   .purBadge{display:inline-flex;align-items:center;height:22px;padding:0 10px;background:rgba(0,136,56,0.12);border-radius:20px;font-family:'DM Sans';font-weight:600;font-size:12px;color:#008838;}
@@ -97,9 +97,9 @@
   .prodc{transition:box-shadow .18s,transform .18s;cursor:pointer;} .prodc:hover{box-shadow:0 12px 26px rgba(10,42,102,0.10);transform:translateY(-2px);}
   .pillsum{display:inline-flex;align-items:center;height:28px;padding:0 12px;background:#fff;border:1px solid #EADFC9;border-radius:30px;font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#0A2A66;}
 
-  .addbtn{width:100%;height:40px;margin-top:10px;border:1px solid #0A2A66;border-radius:10px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
-  .addbtn:hover{background:#0A2A66;color:#fff;}
-  .addbtn.added{background:#fff;border-color:#0A2A66;color:#0A2A66;pointer-events:none;}
+  .addbtn{width:100%;height:40px;margin-top:10px;border:1.5px solid transparent;border-radius:10px;background-image:linear-gradient(#fff,#fff),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);background-origin:border-box;background-clip:padding-box,border-box;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .addbtn:hover{background-image:linear-gradient(#0A2A66,#0A2A66),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;}
+  .addbtn.added{pointer-events:none;}
   .pdpact:hover,.moreopt:hover{border-color:#C8A14A;}
   .invSize{display:flex;flex-direction:column;gap:1px;border:1px solid #E6E0D6;border-radius:12px;padding:10px 12px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
   .invSize:hover{border-color:#C8A14A;}
