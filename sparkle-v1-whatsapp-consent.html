@@ -86,7 +86,7 @@
   .nf input{flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:500;font-size:14px;color:#1a1917;min-width:0;}
   .nf input::placeholder{color:#9B8F7E;}
   .nflab{font-family:'DM Sans';font-weight:500;font-size:14px;color:#9B8F7E;flex:none;}
-  #toast{position:absolute;left:50%;bottom:28px;transform:translateX(-50%) translateY(14px);background:#0A1B33;color:#fff;font-family:'DM Sans';font-weight:500;font-size:14px;padding:13px 22px;border-radius:10px;box-shadow:0 12px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;}
+  #toast{position:absolute;left:50%;bottom:28px;transform:translateX(-50%) translateY(14px);background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#0A1B33;font-family:'DM Sans';font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;box-shadow:0 12px 30px rgba(6,64,171,.35);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   .view{position:absolute;inset:0;flex-direction:column;background:linear-gradient(135deg,#FAF8F5 0%,#ECE6DC 100%);}
@@ -163,10 +163,10 @@
   .v2btn.yes{background:#0A2A66;color:#fff;}
   .v2btn.no{border:1px solid #E2DAC9;color:#655F51;}
 
-  .shimmerAttn{position:relative;overflow:hidden;border-color:#C8A14A !important;animation:shimmerPulse 2.4s ease-in-out infinite;}
+  .shimmerAttn{position:relative;overflow:hidden;border:1.5px solid transparent !important;background-image:linear-gradient(#FFFDF9,#FFFDF9),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3) !important;background-origin:border-box;background-clip:padding-box,border-box;animation:shimmerPulse 2.4s ease-in-out infinite;}
   .shimmerAttn::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.65),transparent);transform:skewX(-20deg);animation:shimmerSweep 2.8s ease-in-out infinite;pointer-events:none;}
   @keyframes shimmerSweep{0%{left:-60%;}55%{left:130%;}100%{left:130%;}}
-  @keyframes shimmerPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,161,74,0.45);}50%{box-shadow:0 0 0 5px rgba(200,161,74,0);}}
+  @keyframes shimmerPulse{0%,100%{box-shadow:0 0 0 0 rgba(6,64,171,0.45);}50%{box-shadow:0 0 0 5px rgba(6,64,171,0);}}
   .shimmerAttn.shimmerBurst{animation:shimmerPulse 1.1s ease-in-out 4;}
   .shimmerAttn.shimmerBurst::after{animation:shimmerSweep 1.3s ease-in-out 4;}
   @media (prefers-reduced-motion: reduce){ .shimmerAttn,.shimmerAttn::after,.shimmerAttn.shimmerBurst,.shimmerAttn.shimmerBurst::after{animation:none;} }
@@ -490,7 +490,7 @@
       </div>
     </div>
   </div>
-  <div class="traybar" style="position:absolute;left:0;right:0;bottom:0;height:100px;background:#fff;border-top:1px solid #ECE5DA;box-shadow:0 -4px 16px rgba(10,27,51,0.06);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:20;"><div style="flex:none;width:200px;display:flex;flex-direction:column;gap:3px;"><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Items</span><span class="tsv tItems">0</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Discount</span><span class="tsv tDisc">—</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Amount</span><span class="tsv tAmt" style="font-weight:700;">₹0</span></div></div><span style="width:1px;height:50px;background:#ECE5DA;flex:none;"></span><button class="trayArrow trayPrev" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button><div class="trayThumbs" style="flex:0 1 auto;display:flex;align-items:center;gap:12px;overflow-x:auto;min-width:0;max-width:560px;padding:10px 12px 8px 8px;"><span class="trayEmpty" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">Add pieces to build the estimate.</span></div><button class="trayArrow trayNext" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button><button class="trayAddMore" style="flex:none;height:44px;padding:0 16px;border:1px solid #D9E0EF;border-radius:11px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;">+ Add More</button><button class="trayClear" style="display:none;flex:none;height:44px;padding:0 16px;border:1px solid #E2DAC9;border-radius:11px;background:#fff;color:#6E6358;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;align-items:center;justify-content:center;line-height:1;">Clear All</button><button class="estBtn disabled" style="flex:none;height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:9px;opacity:0.4;pointer-events:none;">View product estimate <svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="display:inline-block;vertical-align:middle;color:#fff;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>
+  <div class="traybar" style="position:absolute;left:0;right:0;bottom:0;height:100px;background:#fff;border-top:1px solid #ECE5DA;box-shadow:0 -4px 16px rgba(10,27,51,0.06);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:20;"><div style="flex:none;width:200px;display:flex;flex-direction:column;gap:3px;"><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Items</span><span class="tsv tItems">0</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Discount</span><span class="tsv tDisc">—</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Amount</span><span class="tsv tAmt" style="font-weight:700;">₹0</span></div></div><span style="width:1px;height:50px;background:#ECE5DA;flex:none;"></span><button class="trayArrow trayPrev" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button><div class="trayThumbs" style="flex:0 1 auto;display:flex;align-items:center;gap:12px;overflow-x:auto;min-width:0;max-width:560px;padding:10px 12px 8px 8px;"><span class="trayEmpty" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">Add pieces to build the estimate.</span></div><button class="trayArrow trayNext" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button><button class="trayAddMore" style="flex:none;height:44px;padding:0 16px;border:1px solid #D9E0EF;border-radius:11px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;">+ Add More</button><button class="trayClear" style="display:none;flex:none;height:44px;padding:0 16px;border:1px solid #E2DAC9;border-radius:11px;background:#fff;color:#6E6358;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;align-items:center;justify-content:center;line-height:1;">Clear All</button><button class="estBtn disabled" style="flex:none;height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:9px;opacity:0.4;pointer-events:none;">View Total Estimate <svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="display:inline-block;vertical-align:middle;color:#fff;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>
 </div>
 <div class="view" id="viewBilling" style="display:none;">
       <div class="bar"></div>
@@ -621,21 +621,19 @@
       <button id="gmContinue" class="gmbtn disabled" style="margin-top:14px;">Continue</button>
     </div>
     <div id="gmStepRecog" style="display:none;margin-top:18px;">
-      <div style="background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:18px;">
-        <div style="display:flex;align-items:center;gap:13px;">
-          <div id="gmrAv" style="width:46px;height:46px;border-radius:50%;background:#0A2A66;color:#E7CB8E;font-family:'Playfair Display',serif;font-weight:600;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none;">MS</div>
-          <div><div id="gmrName" style="font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#0A2A66;">Manisha Singh</div>
-          <div style="display:inline-flex;align-items:center;gap:6px;margin-top:4px;border:1px solid #D8B86A;border-radius:6px;padding:3px 8px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" style="display:inline-block;vertical-align:middle;color:#B89149;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 20.5h14m-2.128-3H7.128c-1.028 0-1.542 0-1.932-.277c-.39-.276-.56-.761-.9-1.732L2.052 9.077a.97.97 0 0 1 .241-1.007a1.01 1.01 0 0 1 1.26-.123l1.231.81c1.244.818 1.866 1.226 2.495 1.078c.629-.149 1.002-.793 1.749-2.08l2.214-3.82A.88.88 0 0 1 12 3.5c.314 0 .603.166.759.434l2.214 3.82c.747 1.288 1.12 1.932 1.749 2.08c.629.15 1.25-.26 2.494-1.077l1.233-.81a1.01 1.01 0 0 1 1.259.123c.267.264.36.653.24 1.007l-2.245 6.414c-.34.97-.51 1.456-.9 1.732c-.39.277-.903.277-1.931.277"/></svg><span id="gmrTier" style="font-family:'DM Sans';font-weight:600;font-size:12px;color:#8B7239;">Gold Tier · 12,400 pts</span></div></div>
+      <div id="gmRecogWrap" style="display:flex;flex-direction:column;background:#fff;border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(10,42,102,0.05);">
+        <div style="display:flex;align-items:center;gap:13px;padding:15px 17px;background:linear-gradient(90deg,#FBF6EC,#FDFBF6);border-bottom:1px solid #F1ECE2;">
+          <div id="gmrAv" style="width:44px;height:44px;border-radius:50%;background:transparent;border:1.6px solid #B9CDEC;box-sizing:border-box;color:#0A2A66;font-family:'Playfair Display',serif;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none;">MS</div>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
+            <div id="gmrName" style="font-family:'DM Sans';font-weight:500;font-size:14.5px;color:#0A2A66;line-height:19px;">Manisha has shopped with Indriya before</div>
+            <span id="gmrTier" style="font-family:'DM Sans';font-weight:600;font-size:12px;color:#8A6A1C;">Gold Tier · 12,400 pts</span>
+          </div>
         </div>
-        <div style="display:flex;gap:24px;margin-top:16px;padding-top:14px;border-top:1px solid #F0EADF;">
-          <div><div style="font-family:'DM Sans';font-size:12px;color:#7C7268;">Active Since</div><div id="gmrSince" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-top:2px;">2 years</div></div>
-          <div><div style="font-family:'DM Sans';font-size:12px;color:#7C7268;">Last Visit</div><div id="gmrLast" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-top:2px;">2 months ago</div></div>
-          <div><div style="font-family:'DM Sans';font-size:12px;color:#7C7268;">Lifetime Value</div><div id="gmrLtv" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-top:2px;">₹ 3,48,000</div></div>
+        <div id="gmRecogLoader" style="display:flex;align-items:center;gap:11px;padding:14px 17px;">
+          <span class="spin" style="width:18px;height:18px;border-radius:50%;border:2.5px solid #EADFC6;border-top-color:#C8A14A;flex:none;"></span>
+          <span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#6E6358;">Fetching further information…</span>
         </div>
-        <div style="display:flex;gap:18px;margin-top:14px;">
-          <span style="display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#655F51;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" style="display:inline-block;vertical-align:middle;color:#B89149;flex:none;"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"><path d="M13.5 4.5a1.5 1.5 0 0 1-3 0C10.5 3.672 12 2 12 2s1.5 1.672 1.5 2.5Z"/><path stroke-linecap="round" d="M12 6v3"/><path d="M17.667 14c1.564 0 2.833-1.12 2.833-2.5S19.232 9 17.667 9H6.333C4.77 9 3.5 10.12 3.5 11.5S4.769 14 6.333 14c1.371 0 2.571-.859 2.834-2c.262 1.141 1.462 2 2.833 2c1.37 0 2.57-.859 2.833-2c.263 1.141 1.463 2 2.834 2Z"/><path stroke-linecap="round" d="m5 14l.52 2.58c.525 2.597.788 3.895 1.676 4.658c.889.762 2.14.762 4.643.762h.322c2.503 0 3.754 0 4.643-.762c.889-.763 1.15-2.061 1.675-4.658L19 14"/></g></svg><span id="gmrBday">Birthday 11th June</span></span>
-          <span style="display:inline-flex;align-items:center;gap:7px;font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#655F51;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" style="display:inline-block;vertical-align:middle;color:#B89149;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.41 19.968C7.59 17.858 2 13.035 2 8.694C2 5.826 4.105 3.5 7 3.5c1.5 0 3 .5 5 2.5c2-2 3.5-2.5 5-2.5c2.895 0 5 2.326 5 5.194c0 4.34-5.59 9.164-8.41 11.274c-.95.71-2.23.71-3.18 0"/></svg><span id="gmrAnniv">Anniversary 11th December</span></span>
-        </div>
+        <div id="gmRecogSnap" style="display:none;flex-direction:column;"></div>
       </div>
       <button id="gmUse" class="gmbtn">Continue browsing</button>
     </div>
@@ -1281,15 +1279,55 @@
     if(_gmContext==='end'){ recordPurposeConsent(CUR&&CUR.phone?CUR.phone:'','collection','declined'); }
     closeGuestModal();
   };
+  // ---- rich recognition snapshot: quick badge + loader, then the fuller customer picture ----
+  var GM_GIFT='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path d="M3 8h18v3H3zM12 8v13M12 8S10.5 4 8.5 5 8 8 12 8zM12 8s1.5-4 3.5-3 .5 3-3.5 3z"/></svg>';
+  var GM_SPARK='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>';
+  var GM_H="font-family:'DM Sans';font-weight:700;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#B89149;margin-bottom:5px;";
+  function gmIconWrap(svg){return '<span style="width:26px;height:26px;border-radius:7px;background:rgba(200,161,74,0.12);display:flex;align-items:center;justify-content:center;flex:none;">'+svg+'</span>';}
+  function gmOppRow(icon,label,val,sub){ if(!val) return ''; return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;">'+gmIconWrap(icon)+'<div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:11.5px;color:#7C7268;">'+val+(sub?' · '+sub:'')+'</div></div></div>'; }
+  function gmRenderSnap(k){
+    var sn=document.getElementById('gmRecogSnap'); if(!sn) return;
+    var S=[['Loyalty',k.points],['Active since',k.since],['Lifetime',k.ltv],['Last visit',k.last]];
+    var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<3?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
+    var opp='<div style="flex:1;min-width:0;padding:12px 16px;border-right:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
+    var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
+    var scheme='';
+    if(_sch.length){
+      var _multi=_sch.length>1;
+      var _blocks=_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="display:flex;justify-content:space-between;font-family:\'DM Sans\';font-weight:600;font-size:11.5px;color:#3A4252;margin-top:3px;"><span>'+sc.paid+' paid</span><span>'+sc.due+' due</span></div><div style="height:6px;border-radius:3px;background:#ECE5DA;margin-top:6px;overflow:hidden;"><div style="height:100%;width:'+sc.pct+'%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div><div style="font-family:\'DM Sans\';font-weight:400;font-size:10.5px;color:#7C7268;margin-top:5px;">Next · '+sc.next+'</div></div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:9px 0;"></div>');
+      scheme='<div style="flex:1;min-width:0;padding:12px 16px;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+_blocks+'</div>';
+    }
+    var cols=scheme?('<div style="display:flex;border-bottom:1px solid #F1ECE2;">'+opp+scheme+'</div>'):('<div style="display:flex;border-bottom:1px solid #F1ECE2;">'+opp+'</div>');
+    var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
+    var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
+    var recent=rv?('<div style="padding:12px 16px 14px;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>'):'';
+    sn.innerHTML=stats+cols+recent;
+  }
+  var _gmFetchTok=0;
+  function gmShowRecogWithFetch(k){
+    document.getElementById('gmrAv').textContent=k.init;
+    document.getElementById('gmrName').textContent=k.name+' has shopped with Indriya before';
+    document.getElementById('gmrTier').textContent=k.tier+' · '+k.points+' pts';
+    var ld=document.getElementById('gmRecogLoader'), sn=document.getElementById('gmRecogSnap');
+    ld.style.display='flex'; sn.style.display='none'; sn.innerHTML='';
+    document.getElementById('gmStepRecog').style.display='block';
+    document.getElementById('gmTitle').textContent='We recognise them';
+    document.getElementById('gmSubtitle').textContent='One moment — pulling up their history.';
+    var tok=++_gmFetchTok;
+    setTimeout(function(){
+      if(tok!==_gmFetchTok) return;
+      ld.style.display='none';
+      gmRenderSnap(k);
+      sn.style.display='flex';
+      document.getElementById('gmSubtitle').textContent='Their context, at a glance — no re-entry needed.';
+    },1300);
+  }
   document.getElementById('gmContinue').onclick=function(){
     if(this.classList.contains('disabled'))return;
     var ph=document.getElementById('gPhone').value, k=KNOWN[ph];
     resetGmSteps();
     if(k){
-      document.getElementById('gmrAv').textContent=k.init; document.getElementById('gmrName').textContent=k.name; document.getElementById('gmrTier').textContent=k.tier+' · '+k.points+' pts'; document.getElementById('gmrSince').textContent=k.since; document.getElementById('gmrLast').textContent=k.last; document.getElementById('gmrLtv').textContent=k.ltv; document.getElementById('gmrBday').textContent='Birthday '+k.bday; document.getElementById('gmrAnniv').textContent='Anniversary '+k.anniv;
-      document.getElementById('gmTitle').textContent='We recognise them';
-      document.getElementById('gmSubtitle').textContent='Their context, at a glance — no re-entry needed.';
-      document.getElementById('gmStepRecog').style.display='block';
+      gmShowRecogWithFetch(k);
     } else if(_gmContext==='end'){
       goToConsentStep(ph);
     } else {
