@@ -579,7 +579,7 @@
 </div>
 <div id="guestModal" style="display:none;position:absolute;inset:0;z-index:45;pointer-events:none;">
   <div id="gmBackdrop" style="position:absolute;inset:0;background:transparent;pointer-events:none;"></div>
-  <div id="gmSheet" style="position:absolute;top:0;right:0;bottom:0;width:440px;max-width:88%;background:#FBF8F3;border-radius:0;box-shadow:-24px 0 60px rgba(7,20,42,0.28);padding:26px 28px 28px;overflow-y:auto;transform:translateX(100%);transition:transform .4s cubic-bezier(.4,0,.2,1);pointer-events:auto;">
+  <div id="gmSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:100%;max-width:460px;max-height:min(86vh,660px);background:#FBF8F3;border-radius:20px;box-shadow:0 30px 80px rgba(3,20,45,0.35);padding:28px;overflow-y:auto;pointer-events:auto;opacity:0;transition:opacity .25s,transform .25s;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;">
       <div><div id="gmTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:#0A2A66;">Want to save this visit?</div><div id="gmSubtitle" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#7C7268;margin-top:3px;">Save this visit so our guests can enjoy benefits like:</div></div>
       <button id="gmClose" style="width:34px;height:34px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 6L6 18m12 0L6 6"/></svg></button>
@@ -656,7 +656,7 @@
       <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;line-height:1.3;">Did the customer make a purchase today?</div>
       <div style="font-family:'DM Sans';font-size:13px;color:#7C7268;margin-top:6px;">This helps us close the session accurately.</div>
       <div style="display:flex;gap:12px;margin-top:22px;">
-        <button id="endYes" class="gmbtn" style="flex:1;">Yes, they purchased</button>
+        <button id="endYes" class="gmbtn" style="flex:1;height:54px;margin-top:0;">Yes, they purchased</button>
         <button id="endNo" style="flex:1;height:54px;border:1px solid #E2DAC9;border-radius:12px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:700;font-size:15px;cursor:pointer;">No, not this time</button>
       </div>
     </div>
@@ -1091,11 +1091,11 @@
     }
     var gm=document.getElementById('guestModal'); gm.style.display='block'; gm.style.pointerEvents='auto';
     var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background='rgba(7,20,42,0.35)';bd.style.pointerEvents='auto';}
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.getElementById('gmSheet').style.transform='translateX(0)'; }); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ var s=document.getElementById('gmSheet'); s.style.opacity='1'; s.style.transform='translate(-50%,-50%)'; }); });
   }
   window.__openGuestModal=openGuestModal;
   function closeGuestModal(){
-    document.getElementById('gmSheet').style.transform='translateX(100%)';
+    var _gs=document.getElementById('gmSheet'); _gs.style.opacity='0'; _gs.style.transform='translate(-50%,-46%)';
     var gm=document.getElementById('guestModal'); gm.style.pointerEvents='none';
     window.__guestPromptDismissed=true;
     setTimeout(function(){ gm.style.display='none'; if(window.__guestModalDoneCallback){ var cb=window.__guestModalDoneCallback; window.__guestModalDoneCallback=null; cb(); } },420);
