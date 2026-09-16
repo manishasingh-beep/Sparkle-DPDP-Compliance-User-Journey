@@ -591,7 +591,7 @@
       <button id="gmOfferNotNow" style="width:100%;height:46px;margin-top:10px;border:1px solid #D9E0EF;border-radius:12px;background:transparent;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Not now</button>
     </div>
     <div id="gmStepPhoneOnly" style="display:none;margin-top:18px;">
-      <div style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:#7C7268;margin-bottom:12px;">We'll use this only to send today's collection on WhatsApp.</div>
+      <div id="gmPhoneHelp" style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:#7C7268;margin-bottom:12px;">We'll use this to recognise them and personalise future visits.</div>
       <div class="gnf"><span class="pfx">+91</span><input id="gPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/></div>
       <button id="gmContinue" class="gmbtn disabled" style="margin-top:14px;">Continue</button>
       <div style="text-align:center;margin-top:10px;font-family:'DM Sans';font-size:12px;color:#A99F92;">No rush — this stays open until you're ready.</div>
@@ -614,6 +614,15 @@
         </div>
       </div>
       <button id="gmUse" class="gmbtn">Continue with this guest</button>
+    </div>
+    <div id="gmStepInfoNew" style="display:none;margin-top:18px;">
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="gnf"><input id="giName" type="text" placeholder="Name"/></div>
+        <div class="gnf"><input id="giEmail" type="email" placeholder="Email"/></div>
+        <div class="gnf"><span class="lab">Birthday</span><input id="giBday" type="text" inputmode="numeric" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
+        <div class="gnf"><span class="lab">Anniversary</span><input id="giAnniv" type="text" inputmode="numeric" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
+      </div>
+      <button id="gmInfoSave" class="gmbtn" style="margin-top:16px;">Save details</button>
     </div>
     <div id="gmStepSending" style="display:none;margin-top:18px;text-align:center;padding:30px 0;">
       <span class="spin" style="width:22px;height:22px;border-radius:50%;border:2.5px solid #EADFC6;border-top-color:#C8A14A;display:inline-block;"></span>
@@ -1059,20 +1068,29 @@
     if(sendBtn) sendBtn.classList.toggle('disabled', items.length===0);
   }
   function resetGmSteps(){
-    ['gmStepOffer','gmStepPhoneOnly','gmStepRecog','gmStepSending','gmStepConsentChoices','gmStepConsentResult'].forEach(function(id){ var e=document.getElementById(id); if(e) e.style.display='none'; });
+    ['gmStepOffer','gmStepPhoneOnly','gmStepRecog','gmStepInfoNew','gmStepSending','gmStepConsentChoices','gmStepConsentResult'].forEach(function(id){ var e=document.getElementById(id); if(e) e.style.display='none'; });
   }
+  // Two separate moments, never merged: 'manual' = JC noting down who the customer is (personal info,
+  // no consent involved, available any time for new or returning guests). 'end' = the end-of-session
+  // collection-sharing offer, where WhatsApp purpose-consent actually happens.
   function openGuestModal(context){
     _gmContext=context||'manual';
     document.getElementById('gPhone').value='';
     resetGmSteps();
-    document.getElementById('gmStepOffer').style.display='block';
     document.getElementById('gmContinue').classList.add('disabled');
-    document.getElementById('gmTitle').textContent="Save today's collection";
-    document.getElementById('gmSubtitle').textContent="Send the designs you've explored today to WhatsApp so you can revisit them later.";
-    renderOfferPreview();
+    if(_gmContext==='end'){
+      document.getElementById('gmStepOffer').style.display='block';
+      document.getElementById('gmTitle').textContent="Save today's collection";
+      document.getElementById('gmSubtitle').textContent="Send the designs you've explored today to WhatsApp so you can revisit them later.";
+      renderOfferPreview();
+    } else {
+      document.getElementById('gmStepPhoneOnly').style.display='block';
+      document.getElementById('gmTitle').textContent='Add guest details';
+      document.getElementById('gmSubtitle').textContent="A phone number helps us recognise them and personalise future visits.";
+      document.getElementById('gmPhoneHelp').textContent="We'll use this to recognise them and personalise future visits.";
+    }
     var gm=document.getElementById('guestModal'); gm.style.display='block'; gm.style.pointerEvents='auto';
-    var soft=(_gmContext==='mid');
-    var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background=soft?'transparent':'rgba(7,20,42,0.35)';bd.style.pointerEvents=soft?'none':'auto';}
+    var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background='rgba(7,20,42,0.35)';bd.style.pointerEvents='auto';}
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ document.getElementById('gmSheet').style.transform='translateX(0)'; }); });
   }
   window.__openGuestModal=openGuestModal;
@@ -1083,21 +1101,12 @@
     setTimeout(function(){ gm.style.display='none'; if(window.__guestModalDoneCallback){ var cb=window.__guestModalDoneCallback; window.__guestModalDoneCallback=null; cb(); } },420);
   }
   window.__closeGuestModal=closeGuestModal;
-  function makeGuestBtn(id){var b=document.createElement('span');b.id=id;b.className='navGuest';b.textContent='+ Save collection';b.style.cssText='display:none;font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#0A2A66;cursor:pointer;padding:8px 14px;border:1px solid #D9E0EF;border-radius:8px;';b.onclick=function(){openGuestModal('manual');};return b;}
+  function makeGuestBtn(id){var b=document.createElement('span');b.id=id;b.className='navGuest';b.textContent='+ Add guest details';b.style.cssText='display:none;font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#0A2A66;cursor:pointer;padding:8px 14px;border:1px solid #D9E0EF;border-radius:8px;';b.onclick=function(){openGuestModal('manual');};return b;}
   var _elc=document.getElementById('endLinkC'); if(_elc&&!document.getElementById('agbC')){ _elc.parentNode.insertBefore(makeGuestBtn('agbC'), _elc); }
   var _pdpRight=document.querySelector('#viewPDP .bar > div:last-child'); if(_pdpRight&&!document.getElementById('agbP')){ _pdpRight.insertBefore(makeGuestBtn('agbP'), _pdpRight.firstChild); }
   function updateChrome(){ var det=!!(CUR&&CUR.detailed); ['chipCat','chipPdp'].forEach(function(id){var e=document.getElementById(id); if(e) e.style.display=det?'flex':'none';}); ['agbC','agbP'].forEach(function(id){var e=document.getElementById(id); if(e) e.style.display=det?'none':'inline-flex';}); }
   var _showCat2=showCatalogue; showCatalogue=function(){ _showCat2(); updateChrome(); };
   var _openPDP2=openPDP; openPDP=function(prod){ _openPDP2(prod); updateChrome(); };
-  // Contextual value-moment: offer only when there's something worth sending, and only once per session —
-  // triggered by the customer/JC opening the selection summary, never by a timer.
-  var _openEstimate2=openEstimate; openEstimate=function(){
-    _openEstimate2();
-    if(!window.__guestPromptDismissed && !(CUR&&CUR.detailed) && typeof tray!=='undefined' && tray.length>=2){
-      window.__guestPromptDismissed=true;
-      setTimeout(function(){ openGuestModal('mid'); },450);
-    }
-  };
   document.getElementById('gmClose').onclick=closeGuestModal;
   document.getElementById('gmBackdrop').onclick=closeGuestModal;
   document.getElementById('gPhone').addEventListener('input',function(){document.getElementById('gmContinue').classList.toggle('disabled',this.value.length!==10);});
@@ -1150,6 +1159,7 @@
     document.getElementById('gmStepPhoneOnly').style.display='block';
     document.getElementById('gmTitle').textContent='Where should we send it?';
     document.getElementById('gmSubtitle').textContent="We'll use this only to deliver today's collection.";
+    document.getElementById('gmPhoneHelp').textContent="We'll use this only to send today's collection on WhatsApp.";
   };
   document.getElementById('gmOfferNotNow').onclick=function(){
     window.__collectionOffered=true;
@@ -1165,13 +1175,35 @@
       document.getElementById('gmTitle').textContent='We recognise them';
       document.getElementById('gmSubtitle').textContent='Their context, at a glance — no re-entry needed.';
       document.getElementById('gmStepRecog').style.display='block';
-    } else { goToConsentStep(ph); }
+    } else if(_gmContext==='end'){
+      goToConsentStep(ph);
+    } else {
+      document.getElementById('gmTitle').textContent='Add guest details';
+      document.getElementById('gmSubtitle').textContent='New customer — capture what they are happy to share.';
+      document.getElementById('gmStepInfoNew').style.display='block';
+    }
   };
   document.getElementById('gmUse').onclick=function(){
     var ph=document.getElementById('gPhone').value, k=KNOWN[ph];
     CUR=Object.assign({},k,{detailed:true,phone:ph}); updateChrome();
-    toast('Welcome back, '+k.name.split(' ')[0]+'.');
-    goToConsentStep(ph);
+    if(_gmContext==='end'){
+      toast('Welcome back, '+k.name.split(' ')[0]+'.');
+      goToConsentStep(ph);
+    } else {
+      toast('Welcome back, '+k.name.split(' ')[0]+'. Details on file.');
+      closeGuestModal();
+    }
+  };
+  document.getElementById('gmInfoSave').onclick=function(){
+    var ph=document.getElementById('gPhone').value;
+    var nm=document.getElementById('giName').value.trim();
+    var em=document.getElementById('giEmail').value.trim();
+    var bd=document.getElementById('giBday').value.trim();
+    var an=document.getElementById('giAnniv').value.trim();
+    CUR={name:nm||'Guest',tier:'New',points:'0',detailed:true,phone:ph,email:em,dob:bd,anniv:an};
+    updateChrome();
+    toast('Guest details saved.');
+    closeGuestModal();
   };
   document.getElementById('gmConfirmChoices').onclick=function(){
     var ph=document.getElementById('gPhone').value;
