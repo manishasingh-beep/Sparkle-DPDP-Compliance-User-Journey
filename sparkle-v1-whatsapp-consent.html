@@ -632,11 +632,12 @@
       <div style="background:#ECE5DA;border-radius:12px;padding:12px;">
         <div style="background:#fff;border-radius:10px 10px 10px 2px;padding:14px 16px;font-family:'DM Sans';font-size:13px;color:#1a1917;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.06);">
           <div style="font-weight:700;">Your Sparkle collection is ready.</div>
-          <div style="margin-top:2px;">You can choose how you'd like us to stay connected.</div>
+          <div id="gmConsentPreview" style="display:flex;gap:8px;overflow-x:auto;margin-top:10px;"></div>
+          <div style="margin-top:10px;">You can choose how you'd like us to stay connected.</div>
           <div id="gmPurposeList" style="display:flex;flex-direction:column;gap:12px;margin-top:14px;"></div>
           <div style="display:flex;gap:10px;margin-top:16px;">
-            <div id="gmConfirmChoices" class="v2btn yes">Confirm my choices</div>
-            <div id="gmNoThanks" class="v2btn no">No thanks</div>
+            <div id="gmConfirmChoices" class="v2btn yes">Yes I agree</div>
+            <div id="gmNoThanks" class="v2btn no">No, don't allow</div>
           </div>
         </div>
       </div>
@@ -1130,9 +1131,15 @@
     var list=document.getElementById('gmPurposeList'); if(!list) return;
     var known=CUSTOMER_CONSENT[phone]||{};
     list.innerHTML = PURPOSE_ORDER.map(function(p){
-      if(missing.indexOf(p)>-1){ return '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;"><input type="checkbox" class="purposeChk" data-purpose="'+p+'" style="margin-top:2px;width:16px;height:16px;accent-color:#0A2A66;flex:none;"/><span>'+PURPOSE_META[p].label+'</span></label>'; }
+      if(missing.indexOf(p)>-1){ return '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;"><input type="checkbox" class="purposeChk" data-purpose="'+p+'" checked style="margin-top:2px;width:16px;height:16px;accent-color:#0A2A66;flex:none;"/><span>'+PURPOSE_META[p].label+'</span></label>'; }
       return '<div style="font-family:\'DM Sans\';font-size:12px;color:#9B8F7E;">'+PURPOSE_META[p].short+' — already '+(known[p]==='allowed'?'on':'off')+' file, no change needed.</div>';
     }).join('');
+    var prev=document.getElementById('gmConsentPreview');
+    if(prev){
+      var items=(typeof tray!=='undefined'&&tray.length)?tray:[];
+      prev.innerHTML = items.map(function(it){ return '<div style="width:44px;height:44px;border-radius:8px;overflow:hidden;flex:none;border:1px solid #E8E1D6;"><img src="'+it.img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>'; }).join('');
+      prev.style.display = items.length ? 'flex' : 'none';
+    }
   }
   function recordPurposeConsent(phone,purpose,status){
     CONSENT_LOG.push({sessionId:SESSION_ID,store:'NS0002',mobile:phone||null,purpose:purpose,status:status,channel:'whatsapp',ts:new Date().toISOString(),noticeVersion:'v1'});
