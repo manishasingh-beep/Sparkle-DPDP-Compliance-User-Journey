@@ -591,10 +591,22 @@
       <button id="gmOfferNotNow" style="width:100%;height:46px;margin-top:10px;border:1px solid #D9E0EF;border-radius:12px;background:transparent;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Not now</button>
     </div>
     <div id="gmStepPhoneOnly" style="display:none;margin-top:18px;">
-      <div id="gmPhoneHelp" style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:#7C7268;margin-bottom:12px;">We'll use this to recognise them and personalise future visits.</div>
+      <div id="gmPhoneBenefits" style="display:flex;flex-direction:column;gap:10px;overflow:hidden;max-height:400px;opacity:1;margin-bottom:14px;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin-bottom .4s cubic-bezier(.4,0,.2,1);">
+        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
+          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5l3.2 2.4L12 5l4.8 5.9l3.2-2.4L19 17H5L4 8.5Z"/><path d="M6.5 20h11" stroke-linecap="round"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Loyalty rewards</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Points and tier benefits on every purchase, growing each visit.</div></div>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
+          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.75h12a.75.75 0 0 1 .75.75v16.5l-6.75-4-6.75 4V4.5A.75.75 0 0 1 6 3.75Z"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Picks saved for later</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Every piece viewed today is kept, ready for their next visit.</div></div>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
+          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4.5L11 14.5M21 4.5l-6.5 17-4-7.5M21 4.5l-17 6.5 7.5 4"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Shared on WhatsApp</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Send their curated collection straight to their phone.</div></div>
+        </div>
+      </div>
       <div class="gnf"><span class="pfx">+91</span><input id="gPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/></div>
       <button id="gmContinue" class="gmbtn disabled" style="margin-top:14px;">Continue</button>
-      <div style="text-align:center;margin-top:10px;font-family:'DM Sans';font-size:12px;color:#A99F92;">No rush — this stays open until you're ready.</div>
     </div>
     <div id="gmStepRecog" style="display:none;margin-top:18px;">
       <div style="background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:18px;">
@@ -1098,16 +1110,18 @@
     resetGmSteps();
     document.getElementById('gmContinue').classList.add('disabled');
     setGmSheetMode(_gmContext==='end'?'popup':'drawer');
+    var pb=document.getElementById('gmPhoneBenefits');
     if(_gmContext==='end'){
       document.getElementById('gmStepOffer').style.display='block';
       document.getElementById('gmTitle').textContent="Save today's collection";
       document.getElementById('gmSubtitle').textContent="Send the designs you've explored today to WhatsApp so you can revisit them later.";
       renderOfferPreview();
+      if(pb){ pb.style.display='none'; }
     } else {
       document.getElementById('gmStepPhoneOnly').style.display='block';
       document.getElementById('gmTitle').textContent='Add guest details';
       document.getElementById('gmSubtitle').textContent="A phone number helps us recognise them and personalise future visits.";
-      document.getElementById('gmPhoneHelp').textContent="We'll use this to recognise them and personalise future visits.";
+      if(pb){ pb.style.display='flex'; pb.style.maxHeight='400px'; pb.style.opacity='1'; pb.style.marginBottom='14px'; }
     }
     var gm=document.getElementById('guestModal'); gm.style.display='block'; gm.style.pointerEvents='auto';
     var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background='rgba(7,20,42,0.35)';bd.style.pointerEvents='auto';}
@@ -1136,6 +1150,18 @@
   document.getElementById('gmClose').onclick=closeGuestModal;
   document.getElementById('gmBackdrop').onclick=closeGuestModal;
   document.getElementById('gPhone').addEventListener('input',function(){document.getElementById('gmContinue').classList.toggle('disabled',this.value.length!==10);});
+  // Tapping the phone field collapses the benefit cards (animated) so the field + Continue button
+  // have room to sit higher, clear of an on-screen keyboard.
+  document.getElementById('gPhone').addEventListener('focus',function(){
+    if(_gmContext==='end') return;
+    var pb=document.getElementById('gmPhoneBenefits'); if(!pb) return;
+    pb.style.maxHeight='0px'; pb.style.opacity='0'; pb.style.marginBottom='0px';
+  });
+  document.getElementById('gPhone').addEventListener('blur',function(){
+    if(_gmContext==='end') return;
+    var pb=document.getElementById('gmPhoneBenefits'); if(!pb) return;
+    pb.style.maxHeight='400px'; pb.style.opacity='1'; pb.style.marginBottom='14px';
+  });
   function missingPurposes(phone){ var known=CUSTOMER_CONSENT[phone]||{}; return PURPOSE_ORDER.filter(function(p){return known[p]===undefined;}); }
   function goToConsentStep(phone){
     var missing=missingPurposes(phone);
@@ -1191,7 +1217,6 @@
     document.getElementById('gmStepPhoneOnly').style.display='block';
     document.getElementById('gmTitle').textContent='Where should we send it?';
     document.getElementById('gmSubtitle').textContent="We'll use this only to deliver today's collection.";
-    document.getElementById('gmPhoneHelp').textContent="We'll use this only to send today's collection on WhatsApp.";
   };
   document.getElementById('gmOfferNotNow').onclick=function(){
     window.__collectionOffered=true;
