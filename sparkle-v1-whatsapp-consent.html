@@ -1074,11 +1074,30 @@
   // Two separate moments, never merged: 'manual' = JC noting down who the customer is (personal info,
   // no consent involved, available any time for new or returning guests). 'end' = the end-of-session
   // collection-sharing offer, where WhatsApp purpose-consent actually happens.
+  var _gmSheetMode='drawer';
+  // Collection-sharing (consent) is a centered pop-up; personal-info capture ("Add guest details")
+  // is a side drawer — two visually distinct surfaces so they never read as the same action.
+  function setGmSheetMode(mode){
+    var s=document.getElementById('gmSheet'); if(!s) return;
+    _gmSheetMode=mode;
+    if(mode==='popup'){
+      s.style.left='50%'; s.style.right='auto'; s.style.top='50%'; s.style.bottom='auto';
+      s.style.width='100%'; s.style.maxWidth='460px'; s.style.maxHeight='min(86vh,660px)';
+      s.style.borderRadius='20px'; s.style.boxShadow='0 30px 80px rgba(3,20,45,0.35)';
+      s.style.transform='translate(-50%,-46%)'; s.style.opacity='0';
+    } else {
+      s.style.left='auto'; s.style.right='0'; s.style.top='0'; s.style.bottom='0';
+      s.style.width='440px'; s.style.maxWidth='88%'; s.style.maxHeight='none';
+      s.style.borderRadius='0'; s.style.boxShadow='-24px 0 60px rgba(7,20,42,0.28)';
+      s.style.transform='translateX(100%)'; s.style.opacity='1';
+    }
+  }
   function openGuestModal(context){
     _gmContext=context||'manual';
     document.getElementById('gPhone').value='';
     resetGmSteps();
     document.getElementById('gmContinue').classList.add('disabled');
+    setGmSheetMode(_gmContext==='end'?'popup':'drawer');
     if(_gmContext==='end'){
       document.getElementById('gmStepOffer').style.display='block';
       document.getElementById('gmTitle').textContent="Save today's collection";
@@ -1092,11 +1111,17 @@
     }
     var gm=document.getElementById('guestModal'); gm.style.display='block'; gm.style.pointerEvents='auto';
     var bd=document.getElementById('gmBackdrop'); if(bd){bd.style.background='rgba(7,20,42,0.35)';bd.style.pointerEvents='auto';}
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ var s=document.getElementById('gmSheet'); s.style.opacity='1'; s.style.transform='translate(-50%,-50%)'; }); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      var s=document.getElementById('gmSheet');
+      if(_gmSheetMode==='popup'){ s.style.opacity='1'; s.style.transform='translate(-50%,-50%)'; }
+      else { s.style.transform='translateX(0)'; }
+    }); });
   }
   window.__openGuestModal=openGuestModal;
   function closeGuestModal(){
-    var _gs=document.getElementById('gmSheet'); _gs.style.opacity='0'; _gs.style.transform='translate(-50%,-46%)';
+    var s=document.getElementById('gmSheet');
+    if(_gmSheetMode==='popup'){ s.style.opacity='0'; s.style.transform='translate(-50%,-46%)'; }
+    else { s.style.transform='translateX(100%)'; }
     var gm=document.getElementById('guestModal'); gm.style.pointerEvents='none';
     window.__guestPromptDismissed=true;
     setTimeout(function(){ gm.style.display='none'; if(window.__guestModalDoneCallback){ var cb=window.__guestModalDoneCallback; window.__guestModalDoneCallback=null; cb(); } },420);
