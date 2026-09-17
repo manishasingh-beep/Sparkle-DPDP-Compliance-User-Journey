@@ -1294,7 +1294,7 @@
       setTimeout(function(){ nudge.classList.remove('show'); },6500);
     }
   }
-  var _openPDP2=openPDP; openPDP=function(prod){ var _wasEmpty=(typeof tray!=='undefined'&&tray.length===0); _openPDP2(prod); updateChrome(); if(_wasEmpty && typeof tray!=='undefined' && tray.length>0){ setTimeout(showFirstItemNudge,500); } };
+  var _openPDP2=openPDP; openPDP=function(prod){ _openPDP2(prod); updateChrome(); };
   document.getElementById('gmClose').onclick=closeGuestModal;
   document.getElementById('gmBackdrop').onclick=closeGuestModal;
   document.getElementById('gPhone').addEventListener('input',function(){document.getElementById('gmContinue').classList.toggle('disabled',this.value.length!==10);});
@@ -1499,8 +1499,10 @@
     document.querySelectorAll('.trayThumbs .x').forEach(function(x){x.onclick=function(e){e.stopPropagation();tray.splice(+x.getAttribute('data-i'),1);renderTray();};});
     document.querySelectorAll('.trayThumbs .traythumb').forEach(function(el){el.onclick=function(){var it=tray[+el.getAttribute('data-i')]; if(it) openPDP(it);};});
   }
-  function ensureInTray(prod){ if(!tray.some(function(t){return t.name===prod.name;})){ tray.push(prod); renderTray(); } }
-  function addToTray(prod){ if(tray.some(function(t){return t.name===prod.name;})){toast('Already in the tray.');return false;} tray.push(prod); renderTray(); toast(prod.name+' added to tray.'); return true; }
+  // Nudge trigger lives here, not on any one add-path (PDP auto-add, catalogue +Add, inventory
+  // check +) — this is the one chokepoint every path already pushes through.
+  function ensureInTray(prod){ if(!tray.some(function(t){return t.name===prod.name;})){ var wasEmpty=tray.length===0; tray.push(prod); renderTray(); if(wasEmpty) setTimeout(showFirstItemNudge,500); } }
+  function addToTray(prod){ if(tray.some(function(t){return t.name===prod.name;})){toast('Already in the tray.');return false;} var wasEmpty=tray.length===0; tray.push(prod); renderTray(); toast(prod.name+' added to tray.'); if(wasEmpty) setTimeout(showFirstItemNudge,500); return true; }
   document.querySelectorAll('.prodc').forEach(function(c){
     var info=c.children[1];
     var name=info.children[1].textContent, price=info.children[2].textContent, cat=c.getAttribute('data-cat'), img=c.querySelector('img').src;
@@ -1883,7 +1885,7 @@
   function invToggle(serial,btn){ if(!INV_PROD)return;
     var nm=invTrayName(serial);var idx=-1;for(var i=0;i<tray.length;i++){if(tray[i].name===nm){idx=i;break;}}
     if(idx>-1){tray.splice(idx,1);btn.classList.remove('on');btn.innerHTML=INV_PLUS;btn.title='Add to tray';toast('Removed '+serial+' from tray.');}
-    else{var it={name:nm,price:INV_PROD.price,cat:INV_PROD.cat,img:INV_PROD.img,serial:serial};tray.push(it);window.__currProd=it;btn.classList.add('on');btn.innerHTML=INV_CHECK;btn.title='Remove from tray';toast(INV_PROD.name+' ('+serial+') added to tray.');}
+    else{var it={name:nm,price:INV_PROD.price,cat:INV_PROD.cat,img:INV_PROD.img,serial:serial};var wasEmpty=tray.length===0;tray.push(it);window.__currProd=it;btn.classList.add('on');btn.innerHTML=INV_CHECK;btn.title='Remove from tray';toast(INV_PROD.name+' ('+serial+') added to tray.');if(wasEmpty)setTimeout(showFirstItemNudge,500);}
     if(typeof renderTray==='function')renderTray();}
   function openInventory(prod){ if(!prod)return; if(typeof startSession==='function')startSession(); window.__sessViewed=true; INV_PROD=prod;
     var t=document.getElementById('invTitle'); if(t)t.textContent=prod.name;
