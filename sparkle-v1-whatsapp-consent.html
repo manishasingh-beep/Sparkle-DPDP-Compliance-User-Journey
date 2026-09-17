@@ -230,6 +230,8 @@
 
   @keyframes clkPulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
   .clkDot.live{animation:clkPulse 1.8s ease-in-out infinite;}
+@keyframes oppIconSway{0%,100%{transform:rotate(-6deg);}50%{transform:rotate(6deg);}}
+.oppIconMotion{display:inline-flex;transform-origin:50% 88%;animation:oppIconSway 2.6s ease-in-out infinite;}
 @keyframes spin{to{transform:rotate(360deg);}} .spin{animation:spin .8s linear infinite;display:inline-block;box-sizing:border-box;}.coin{position:relative;width:17px;height:17px;border-radius:50%;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);}.coin::before{content:'';position:absolute;inset:1.6px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);box-shadow:inset 0 1px 1.5px rgba(255,255,255,0.55),inset 0 -1px 2px rgba(0,0,0,0.3);box-sizing:border-box;z-index:1;}.coin-gold{background:radial-gradient(circle at 33% 29%,#FBEFC4 0%,#E7C766 38%,#C99C37 70%,#A67C27 100%);}.coin-silver{background:radial-gradient(circle at 33% 29%,#FFFFFF 0%,#E1E6EC 38%,#B5BDC7 70%,#929AA5 100%);}.coin-plat{background:radial-gradient(circle at 33% 29%,#F2F6FC 0%,#C2D0E4 38%,#8DA2C0 70%,#5E7397 100%);}.coinShine{position:absolute;top:-12%;left:-70%;width:46%;height:124%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.92),transparent);transform:skewX(-18deg);animation:coinSheen 3.4s ease-in-out infinite;}@keyframes coinSheen{0%,55%{left:-70%;}82%,100%{left:135%;}}@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7);}50%{opacity:.85;transform:scale(1.1);}}.tw{position:absolute;pointer-events:none;z-index:1;animation:twinkle 3s ease-in-out infinite;}</style></head>
 <body><div id="fit">
   <div id="stage">
@@ -330,15 +332,17 @@
         <div id="pfOppRow" style="display:flex;flex-direction:column;gap:16px;"></div>
       </div>
       <div id="pfSchemeCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
-        <div id="pfSchemeTitle" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:16px;">Active Schemes</div>
-        <div id="pfSchemeBody" style="display:flex;flex-direction:column;"></div>
+        <div style="display:flex;background:#F7FAFE;border:1px solid #E2EBFF;border-radius:12px;padding:4px;gap:4px;margin-bottom:18px;">
+          <button type="button" class="pfSnapTab on" data-t="sch" style="flex:1;height:38px;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13.5px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Active Schemes</button>
+          <button type="button" class="pfSnapTab" data-t="rec" style="flex:1;height:38px;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13.5px;background:transparent;color:#343330;box-shadow:none;">Previously Viewed</button>
+        </div>
+        <div class="pfSnapPane" data-t="sch" id="pfSchemeBody" style="display:flex;flex-direction:column;"></div>
+        <div class="pfSnapPane" data-t="rec" style="display:none;">
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Polki Floral Necklace</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Neckwear</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 40,98,545</span></div>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kundan Drop Earrings</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Earrings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 1,24,500</span></div>
+          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Solitaire Halo Ring</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Rings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 89,000</span></div>
+        </div>
       </div>
-    </div>
-    <div style="margin-top:18px;background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 22px;">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px;"><span style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#B89149;">Recently viewed</span><span style="font-family:'DM Sans';font-weight:500;font-size:12px;color:#A89B93;">Last visit</span></div>
-      <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Polki Floral Necklace</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Neckwear</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 40,98,545</span></div>
-      <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kundan Drop Earrings</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Earrings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 1,24,500</span></div>
-      <div style="display:flex;align-items:center;gap:14px;padding:13px 0;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Solitaire Halo Ring</span><span style="font-family:'DM Sans';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Rings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 89,000</span></div>
     </div>
     <div id="pfInterest" style="display:none;margin-top:18px;background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px;">
       <div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:10px;">Today&rsquo;s interest</div>
@@ -916,7 +920,7 @@
   function initialsOf(nm){ var parts=(nm||'').trim().split(/\s+/).filter(Boolean); if(!parts.length) return 'G'; return (parts[0][0]+(parts[1]?parts[1][0]:'')).toUpperCase(); }
   function pfOppFieldHTML(field,label,icon,subField){
     var val=CUR[field]; var sub=subField?CUR[subField]:null;
-    if(val){ return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;align-items:center;gap:12px;">'+icon+'<div><div style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#3A4252;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:500;font-size:13px;color:#7C7268;">'+val+'</div></div></div>'+(sub?'<div style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#8B7239;white-space:nowrap;flex:none;">'+sub+'</div>':'')+'</div>'; }
+    if(val){ return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;align-items:center;gap:12px;"><span class="oppIconMotion">'+icon+'</span><div><div style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#3A4252;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:500;font-size:13px;color:#7C7268;">'+val+'</div></div></div>'+(sub?'<div style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#8B7239;white-space:nowrap;flex:none;">'+sub+'</div>':'')+'</div>'; }
     return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;align-items:center;gap:12px;">'+icon+'<div><div style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#3A4252;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:12.5px;color:#B5A891;">Not on file</div></div></div><button type="button" class="pfAddBtn" data-f="'+field+'" style="height:30px;padding:0 14px;border:1px solid #C4D5FB;border-radius:8px;background:#fff;color:#0A2A66;font-family:\'DM Sans\';font-weight:600;font-size:12.5px;cursor:pointer;flex:none;">+ Add</button></div>';
   }
   function pfMaritalRowHTML(){
@@ -950,12 +954,12 @@
       };
     });
   }
+  // Active Schemes and Previously Viewed share one card behind a tab switcher (wired once,
+  // just below) instead of stacking as two more full-width sections under Opportunities.
   function renderPfSchemes(k){
-    var body=document.getElementById('pfSchemeBody'), card=document.getElementById('pfSchemeCard'); if(!body||!card) return;
+    var body=document.getElementById('pfSchemeBody'); if(!body) return;
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
-    if(!_sch.length){ card.style.display='none'; return; }
-    card.style.display='block';
-    var st=document.getElementById('pfSchemeTitle'); if(st) st.textContent = _sch.length>1?'Active Schemes':'Active Scheme · '+_sch[0].name;
+    if(!_sch.length){ body.innerHTML='<div style="font-family:\'DM Sans\';font-weight:400;font-size:13px;color:#9B8F7E;font-style:italic;padding:6px 0;">No active scheme yet.</div>'; return; }
     body.innerHTML=_sch.map(function(sc){
       return '<div>'
         +(_sch.length>1?'<div style="font-family:\'DM Sans\';font-weight:700;font-size:13px;color:#0A2A66;margin-bottom:8px;">'+sc.name+'</div>':'')
@@ -965,6 +969,14 @@
         +'</div>';
     }).join('<div style="height:1px;background:#F1ECE2;margin:16px 0;"></div>');
   }
+  document.querySelectorAll('.pfSnapTab').forEach(function(b){
+    b.onclick=function(){
+      document.querySelectorAll('.pfSnapTab').forEach(function(x){ x.classList.remove('on'); x.style.background='transparent'; x.style.color='#343330'; x.style.boxShadow='none'; });
+      b.classList.add('on'); b.style.background='#fff'; b.style.color='#2B5198'; b.style.boxShadow='0 1px 2px rgba(26,25,23,0.1)';
+      var t=b.getAttribute('data-t');
+      document.querySelectorAll('.pfSnapPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
+    };
+  });
   function showProfile(k){
     CUR=k;
     var isNew = !(k.tier && k.tier!=='New');
@@ -1248,7 +1260,7 @@
       document.getElementById('gmInfoSave').style.marginTop='16px';
     } else {
       s.style.left='auto'; s.style.right='0'; s.style.top='0'; s.style.bottom='0';
-      s.style.width='440px'; s.style.maxWidth='88%'; s.style.maxHeight='none';
+      s.style.width='540px'; s.style.maxWidth='92%'; s.style.maxHeight='none';
       s.style.borderRadius='0'; s.style.boxShadow='-24px 0 60px rgba(7,20,42,0.28)';
       s.style.transform='translateX(100%)'; s.style.opacity='1';
       s.style.paddingBottom='94px';
@@ -1404,7 +1416,7 @@
   var GM_GIFT='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8v3.2"/><circle cx="12" cy="2.6" r="0.8" fill="#C8A14A" stroke="none"/><path d="M5 20.5v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7"/><path d="M4 20.5h16"/><path d="M5 15.8c1.15-1.2 2.2-1.2 3.35 0s2.2 1.2 3.3 0s2.2-1.2 3.3 0s2.2 1.2 3.05 0"/></svg>';
   var GM_SPARK='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#C8A14A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="5.2"/><path d="M8.7 9.8L12 4.5l3.3 5.3"/><path d="M8.7 9.8h6.6"/></svg>';
   var GM_H="font-family:'DM Sans';font-weight:700;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#B89149;margin-bottom:5px;";
-  function gmIconWrap(svg){return '<span style="width:26px;height:26px;border-radius:7px;background:rgba(200,161,74,0.12);display:flex;align-items:center;justify-content:center;flex:none;">'+svg+'</span>';}
+  function gmIconWrap(svg){return '<span style="width:26px;height:26px;border-radius:7px;background:rgba(200,161,74,0.12);display:flex;align-items:center;justify-content:center;flex:none;"><span class="oppIconMotion">'+svg+'</span></span>';}
   // The countdown ("in 9 days") sits opposite the label, same weight/size — it's the actual
   // selling point (an upcoming occasion), so it earns equal visual billing, not a faded aside.
   function gmOppRow(icon,label,val,sub){ if(!val) return ''; return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;">'+gmIconWrap(icon)+'<div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:11.5px;color:#7C7268;">'+val+'</div></div>'+(sub?'<div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#8B7239;white-space:nowrap;flex:none;">'+sub+'</div>':'')+'</div>'; }
@@ -1427,9 +1439,10 @@
     return '≈ '+(g<10?g.toFixed(1):Math.round(g))+'g gold secured';
   }
   function schemePaidDueHTML(sc,compact){
-    var gEquiv=goldEquivText(sc), fs=compact?'11.5px':'13px', fsG=compact?'10px':'11.5px';
+    var gEquiv=goldEquivText(sc), fs=compact?'11.5px':'13px', fsG=compact?'12.5px':'15px';
+    var gBadge=gEquiv?'<div style="display:inline-flex;align-items:center;margin-top:5px;padding:3px 10px;border-radius:20px;background:rgba(184,145,73,0.12);font-family:\'DM Sans\';font-weight:700;font-size:'+fsG+';color:#8B7239;">'+gEquiv+'</div>':'';
     return '<div style="display:flex;justify-content:space-between;align-items:flex-start;">'
-      +'<div><div style="font-family:\'DM Sans\';font-weight:600;font-size:'+fs+';color:#3A4252;">'+sc.paid+' paid</div>'+(gEquiv?'<div style="font-family:\'DM Sans\';font-weight:500;font-size:'+fsG+';color:#B89149;margin-top:2px;">'+gEquiv+'</div>':'')+'</div>'
+      +'<div><div style="font-family:\'DM Sans\';font-weight:600;font-size:'+fs+';color:#3A4252;">'+sc.paid+' paid</div>'+gBadge+'</div>'
       +'<div style="font-family:\'DM Sans\';font-weight:600;font-size:'+fs+';color:#3A4252;">'+sc.due+' due</div>'
       +'</div>';
   }
@@ -1455,17 +1468,38 @@
     var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<3?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
     var opp='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
-    var scheme='';
-    if(_sch.length){
-      var _multi=_sch.length>1;
-      var _blocks=_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="margin-top:5px;">'+schemePaidDueHTML(sc,true)+schemeProgressHTML(sc,true)+schemeExtrasHTML(sc,true)+'</div></div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>');
-      scheme='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+_blocks+'</div>';
-    }
-    var cols=opp+scheme;
+    var _multi=_sch.length>1;
+    var schemeInner=_sch.length?_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="margin-top:5px;">'+schemePaidDueHTML(sc,true)+schemeProgressHTML(sc,true)+schemeExtrasHTML(sc,true)+'</div></div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>'):'';
     var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
     var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
-    var recent=rv?('<div style="padding:12px 16px 14px;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>'):'';
-    sn.innerHTML=stats+cols+recent;
+    // Schemes and recently-viewed used to stack as two more full sections under Opportunities —
+    // between the stats, opportunities, and now segmented scheme cards, that read as cluttered.
+    // Tabbing the two lets each get full width/attention without competing for vertical space.
+    var hasSch=!!schemeInner, hasRec=!!rv;
+    var tail='';
+    if(hasSch&&hasRec){
+      tail='<div style="border-top:1px solid #F1ECE2;">'
+        +'<div style="display:flex;background:#F7FAFE;border:1px solid #E2EBFF;border-radius:12px;padding:4px;gap:4px;margin:14px 18px 12px;">'
+        +'<button type="button" class="gmSnapTab on" data-t="sch" style="flex:1;height:36px;border:none;border-radius:9px;cursor:pointer;font-family:\'DM Sans\';font-weight:600;font-size:12.5px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Active Scheme'+(_multi?'s':'')+'</button>'
+        +'<button type="button" class="gmSnapTab" data-t="rec" style="flex:1;height:36px;border:none;border-radius:9px;cursor:pointer;font-family:\'DM Sans\';font-weight:600;font-size:12.5px;background:transparent;color:#343330;box-shadow:none;">Previously Viewed</button>'
+        +'</div>'
+        +'<div class="gmSnapPane" data-t="sch" style="padding:0 18px 16px;">'+schemeInner+'</div>'
+        +'<div class="gmSnapPane" data-t="rec" style="display:none;padding:0 16px 14px;">'+rv+'</div>'
+        +'</div>';
+    } else if(hasSch){
+      tail='<div style="padding:14px 18px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+schemeInner+'</div>';
+    } else if(hasRec){
+      tail='<div style="padding:12px 16px 14px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>';
+    }
+    sn.innerHTML=stats+opp+tail;
+    sn.querySelectorAll('.gmSnapTab').forEach(function(b){
+      b.onclick=function(){
+        sn.querySelectorAll('.gmSnapTab').forEach(function(x){ x.classList.remove('on'); x.style.background='transparent'; x.style.color='#343330'; x.style.boxShadow='none'; });
+        b.classList.add('on'); b.style.background='#fff'; b.style.color='#2B5198'; b.style.boxShadow='0 1px 2px rgba(26,25,23,0.1)';
+        var t=b.getAttribute('data-t');
+        sn.querySelectorAll('.gmSnapPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
+      };
+    });
   }
   var _gmFetchTok=0;
   function gmShowRecogWithFetch(k){
