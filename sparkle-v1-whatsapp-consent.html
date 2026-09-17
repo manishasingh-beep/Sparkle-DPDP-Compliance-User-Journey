@@ -163,14 +163,14 @@
   .v2btn.yes{background:#0A2A66;color:#fff;}
   .v2btn.no{border:1px solid #E2DAC9;color:#655F51;}
 
-  .shimmerAttn{position:relative;overflow:hidden;border:1.5px solid transparent !important;background-color:#fff !important;background-image:linear-gradient(#fff,#fff),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3) !important;background-origin:border-box;background-clip:padding-box,border-box;}
+  .shimmerAttn{position:relative;overflow:hidden;border:1px solid #C4D5FB !important;background:#fff !important;}
   .shimmerAttn::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.65),transparent);transform:skewX(-20deg);animation:shimmerSweep 2.8s ease-in-out infinite;pointer-events:none;}
   @keyframes shimmerSweep{0%{left:-60%;}55%{left:130%;}100%{left:130%;}}
   .shimmerAttn.shimmerBurst::after{animation:shimmerSweep 1.3s ease-in-out 4;}
   @media (prefers-reduced-motion: reduce){ .shimmerAttn::after,.shimmerAttn.shimmerBurst::after{animation:none;} }
-  #gmNudge{position:absolute;z-index:210;max-width:270px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#0A1B33;font-family:'DM Sans';font-weight:600;font-size:12.5px;line-height:1.45;padding:12px 14px;border-radius:12px;box-shadow:0 14px 34px rgba(6,64,171,0.32);opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s;pointer-events:none;}
+  #gmNudge{position:absolute;z-index:210;max-width:270px;background:#FBF8F3;border:1px solid #ECE5DA;color:#3A4252;font-family:'DM Sans';font-weight:500;font-size:12.5px;line-height:1.5;padding:12px 14px;border-radius:12px;box-shadow:0 14px 34px rgba(10,27,51,0.16);opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s;pointer-events:none;}
   #gmNudge.show{opacity:1;transform:translateY(0);}
-  #gmNudge:after{content:'';position:absolute;top:-6px;right:28px;width:12px;height:12px;background:#0640AB;transform:rotate(45deg);}
+  #gmNudge:after{content:'';position:absolute;top:-6px;right:28px;width:12px;height:12px;background:#FBF8F3;border-left:1px solid #ECE5DA;border-top:1px solid #ECE5DA;transform:rotate(45deg);}
 
   .clkTime{font-variant-numeric:tabular-nums;display:inline-block;min-width:42px;text-align:left;}
   .clkState{display:inline-block;min-width:46px;}
@@ -680,6 +680,7 @@
 <div id="endModal" style="display:none;position:absolute;inset:0;z-index:46;pointer-events:none;">
   <div id="endBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.45);pointer-events:auto;"></div>
   <div id="endSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:100%;max-width:440px;background:#FBF8F3;border-radius:20px;box-shadow:0 30px 80px rgba(3,20,45,0.35);padding:28px;pointer-events:auto;opacity:0;transition:opacity .25s,transform .25s;">
+    <button id="endClose" style="position:absolute;top:20px;right:20px;width:34px;height:34px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 6L6 18m12 0L6 6"/></svg></button>
     <div id="endStepAsk">
       <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;line-height:1.3;">Did the customer make a purchase today?</div>
       <div style="font-family:'DM Sans';font-size:13px;color:#7C7268;margin-top:6px;">This helps us close the session accurately.</div>
@@ -1041,6 +1042,7 @@
   function closeEndModal(){ var m=document.getElementById('endModal'); if(!m)return; var s=document.getElementById('endSheet'); s.style.opacity='0'; s.style.transform='translate(-50%,-46%)'; m.style.pointerEvents='none'; setTimeout(function(){ m.style.display='none'; },250); }
   function requestEndSession(){ _endStatus='not_purchased'; _endDetail=''; var sc=document.querySelector('.surveyOpt.sel'); if(sc)sc.classList.remove('sel'); showEndStep('Ask'); openEndModal(); }
   window.__requestEndSession=requestEndSession;
+  var _eClose=document.getElementById('endClose'); if(_eClose) _eClose.onclick=closeEndModal;
   var _eYes=document.getElementById('endYes'); if(_eYes) _eYes.onclick=function(){ _endStatus='purchased'; _endDetail=''; showEndStep('Thanks'); };
   var _eNo=document.getElementById('endNo'); if(_eNo) _eNo.onclick=function(){
     _endStatus='not_purchased';
