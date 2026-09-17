@@ -86,7 +86,7 @@
   .nf input{flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:500;font-size:14px;color:#1a1917;min-width:0;}
   .nf input::placeholder{color:#9B8F7E;}
   .nflab{font-family:'DM Sans';font-weight:500;font-size:14px;color:#9B8F7E;flex:none;}
-  #toast{position:absolute;left:50%;bottom:28px;transform:translateX(-50%) translateY(14px);background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#0A1B33;font-family:'DM Sans';font-weight:700;font-size:14px;padding:13px 22px;border-radius:10px;box-shadow:0 12px 30px rgba(6,64,171,.35);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;}
+  #toast{position:absolute;left:50%;bottom:28px;transform:translateX(-50%) translateY(14px);background:#fff;border:1px solid #C4D5FB;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;padding:12px 22px;border-radius:10px;box-shadow:0 12px 30px rgba(10,42,102,.18);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:60;}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   .view{position:absolute;inset:0;flex-direction:column;background:linear-gradient(135deg,#FAF8F5 0%,#ECE6DC 100%);}
@@ -163,7 +163,7 @@
   .v2btn.yes{background:#0A2A66;color:#fff;}
   .v2btn.no{border:1px solid #E2DAC9;color:#655F51;}
 
-  .shimmerAttn{position:relative;overflow:hidden;border:1.5px solid transparent !important;background-color:transparent !important;background-image:linear-gradient(transparent,transparent),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3) !important;background-origin:border-box;background-clip:padding-box,border-box;}
+  .shimmerAttn{position:relative;overflow:hidden;border:1.5px solid transparent !important;background-color:#fff !important;background-image:linear-gradient(#fff,#fff),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3) !important;background-origin:border-box;background-clip:padding-box,border-box;}
   .shimmerAttn::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.65),transparent);transform:skewX(-20deg);animation:shimmerSweep 2.8s ease-in-out infinite;pointer-events:none;}
   @keyframes shimmerSweep{0%{left:-60%;}55%{left:130%;}100%{left:130%;}}
   .shimmerAttn.shimmerBurst::after{animation:shimmerSweep 1.3s ease-in-out 4;}
@@ -233,9 +233,6 @@
 @keyframes spin{to{transform:rotate(360deg);}} .spin{animation:spin .8s linear infinite;display:inline-block;box-sizing:border-box;}.coin{position:relative;width:17px;height:17px;border-radius:50%;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);}.coin::before{content:'';position:absolute;inset:1.6px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);box-shadow:inset 0 1px 1.5px rgba(255,255,255,0.55),inset 0 -1px 2px rgba(0,0,0,0.3);box-sizing:border-box;z-index:1;}.coin-gold{background:radial-gradient(circle at 33% 29%,#FBEFC4 0%,#E7C766 38%,#C99C37 70%,#A67C27 100%);}.coin-silver{background:radial-gradient(circle at 33% 29%,#FFFFFF 0%,#E1E6EC 38%,#B5BDC7 70%,#929AA5 100%);}.coin-plat{background:radial-gradient(circle at 33% 29%,#F2F6FC 0%,#C2D0E4 38%,#8DA2C0 70%,#5E7397 100%);}.coinShine{position:absolute;top:-12%;left:-70%;width:46%;height:124%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.92),transparent);transform:skewX(-18deg);animation:coinSheen 3.4s ease-in-out infinite;}@keyframes coinSheen{0%,55%{left:-70%;}82%,100%{left:135%;}}@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7);}50%{opacity:.85;transform:scale(1.1);}}.tw{position:absolute;pointer-events:none;z-index:1;animation:twinkle 3s ease-in-out infinite;}</style></head>
 <body><div id="fit">
   <div id="stage">
-  <div class="consentSwitcher" id="consentSwitcher" title="This build demonstrates Variant 1 only">
-    <span class="seg on" data-v="1">1 · WhatsApp Consent</span>
-  </div>
   <div id="gmNudge">✨ Save this visit — unlock loyalty rewards, keep today's picks, and get them on WhatsApp.</div>
     <div class="view" id="viewHome" style="display:flex;">
       <div class="bar"></div>
