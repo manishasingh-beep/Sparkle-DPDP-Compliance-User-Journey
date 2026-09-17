@@ -636,9 +636,18 @@
       <div style="display:flex;flex-direction:column;gap:10px;">
         <div class="gnf"><input id="giName" type="text" placeholder="Name"/></div>
         <div class="gnf"><input id="giEmail" type="email" placeholder="Email"/></div>
-        <div class="gnf"><span class="lab">Birthday</span><input id="giBday" type="text" inputmode="numeric" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
-        <div class="gnf"><span class="lab">Anniversary</span><input id="giAnniv" type="text" inputmode="numeric" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
-        <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;margin-top:6px;">Gender <span style="font-weight:400;font-size:11.5px;color:#9B8F7E;">— optional</span></div>
+      </div>
+      <div style="margin-top:14px;background:#fff;border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;">
+        <div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">
+          <div style="flex:1;padding:0 10px;border-right:1px solid #F1ECE2;min-width:0;"><div style="font-family:'DM Sans';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">Loyalty</div><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">0</div></div>
+          <div style="flex:1;padding:0 10px;border-right:1px solid #F1ECE2;min-width:0;"><div style="font-family:'DM Sans';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">Active since</div><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">Today</div></div>
+          <div style="flex:1;padding:0 10px;border-right:1px solid #F1ECE2;min-width:0;"><div style="font-family:'DM Sans';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">Lifetime</div><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">₹ 0</div></div>
+          <div style="flex:1;padding:0 10px;min-width:0;"><div style="font-family:'DM Sans';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">Last visit</div><div style="font-family:'Playfair Display',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">--</div></div>
+        </div>
+        <div id="giOppRow" style="padding:4px 16px 10px;"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+        <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;">Gender <span style="font-weight:400;font-size:11.5px;color:#9B8F7E;">— optional</span></div>
         <div id="giGenderRow" style="display:flex;flex-wrap:wrap;gap:8px;">
           <span class="giGenderChip" data-g="Male" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Male</span>
           <span class="giGenderChip" data-g="Female" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Female</span>
@@ -712,6 +721,32 @@
       <div style="font-family:'DM Sans';font-size:13px;color:#7C7268;margin-top:6px;">We hope to welcome them back soon.</div>
       <button id="endDoneN" class="gmbtn" style="margin-top:22px;">Done</button>
     </div>
+  </div>
+</div>
+<input type="file" id="imgSearchInput" accept="image/*" capture="environment" style="display:none;"/>
+<div id="imgSearchModal" style="display:none;position:absolute;inset:0;z-index:47;pointer-events:none;">
+  <div id="imgSearchBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);pointer-events:auto;"></div>
+  <div id="imgSearchSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:100%;max-width:460px;max-height:min(86vh,640px);overflow-y:auto;background:#fff;border-radius:20px;box-shadow:0 32px 70px rgba(26,25,23,0.24);padding:24px;pointer-events:auto;opacity:0;transition:opacity .25s,transform .25s;">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <button id="imgSearchBack" style="width:34px;height:34px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#0A2A66;">Search by Image</div>
+        <div style="font-family:'DM Sans';font-size:12.5px;color:#9B8F7E;margin-top:1px;">Find similar jewellery designs by image</div>
+      </div>
+    </div>
+    <div style="height:1px;background:#ECE5DA;margin:16px 0;"></div>
+    <div style="border:1px solid #ECE5DA;border-radius:12px;padding:12px;display:flex;align-items:center;gap:12px;">
+      <div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img id="imgSearchPreview" src="" style="width:100%;height:100%;object-fit:cover;display:block;"/></div>
+      <div style="min-width:0;">
+        <div id="imgSearchName" style="font-family:'DM Sans';font-weight:600;font-size:13.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Photo.jpg</div>
+        <div id="imgSearchMeta" style="font-family:'DM Sans';font-size:11.5px;color:#9B8F7E;margin-top:1px;">Ready to search</div>
+      </div>
+    </div>
+    <div style="margin-top:18px;">
+      <div style="font-family:'DM Sans';font-size:13px;color:#1a1917;"><span style="font-weight:700;">Select category</span> <span style="color:#9B8F7E;">(optional)</span></div>
+      <div id="imgSearchCats" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;background:#FAFBFC;border-radius:10px;padding:10px;"></div>
+    </div>
+    <button id="imgSearchFind" class="gmbtn" style="margin-top:20px;">Find Matches</button>
   </div>
 </div>
   <div id="metalPop" style="display:none;position:absolute;top:80px;right:40px;width:328px;max-height:70vh;overflow-y:auto;background:#fff;border:1px solid #ECE5DA;border-radius:16px;box-shadow:0 24px 60px rgba(7,20,42,0.24);padding:18px 18px 6px;z-index:55;"><div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;"><span style="font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#0A2A66;">Metal Rates</span><span style="font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:.3px;color:#9B8F7E;">&#8377; / gram</span></div><div style="font-family:'DM Sans';font-weight:500;font-size:11px;color:#A99F92;margin:2px 2px 14px;">Updated today &middot; 9:30 AM</div><div style="border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;background:#FEFDFB;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:9px;padding:11px 14px 9px;"><span class="coin coin-gold"><span class="coinShine"></span></span><span style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:.9px;color:#3A4252;text-transform:uppercase;">Gold</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">24KT <span style="font-weight:500;font-size:11px;color:#9B8F7E;">999</span></span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹15,476.21</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">24KT <span style="font-weight:500;font-size:11px;color:#9B8F7E;">995</span></span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹15,414.24</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">22KT <span style="font-weight:500;font-size:11px;color:#9B8F7E;">916</span></span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹14,190.40</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">18KT <span style="font-weight:500;font-size:11px;color:#9B8F7E;">750</span></span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹11,618.77</span></div></div><div style="border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;background:#FEFDFB;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:9px;padding:11px 14px 9px;"><span class="coin coin-silver"><span class="coinShine"></span></span><span style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:.9px;color:#3A4252;text-transform:uppercase;">Silver</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">925S</span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹242.23</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">950S</span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹248.78</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">999S</span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹261.61</span></div></div><div style="border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;background:#FEFDFB;margin-bottom:12px;"><div style="display:flex;align-items:center;gap:9px;padding:11px 14px 9px;"><span class="coin coin-plat"><span class="coinShine"></span></span><span style="font-family:'DM Sans';font-weight:700;font-size:12px;letter-spacing:.9px;color:#3A4252;text-transform:uppercase;">Platinum</span></div><div style="display:flex;align-items:center;justify-content:space-between;padding:9px 15px;border-top:1px solid #F4EFE6;"><span style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#3A4252;">950PT</span><span style="font-family:'DM Sans';font-weight:700;font-size:13.5px;color:#0A2A66;">₹7,083.21</span></div></div></div>
@@ -1308,6 +1343,9 @@
     var ld=document.getElementById('gmRecogLoader'), sn=document.getElementById('gmRecogSnap');
     ld.style.display='flex'; sn.style.display='none'; sn.innerHTML='';
     document.getElementById('gmStepRecog').style.display='block';
+    // Personal-info lookups (context 'manual') are just a peek — no CTA needed, close/back dismisses.
+    // The end-of-session collection flow still needs Continue to move on to consent.
+    document.getElementById('gmUse').style.display=(_gmContext==='end')?'block':'none';
     document.getElementById('gmTitle').textContent='We recognise them';
     document.getElementById('gmSubtitle').textContent='One moment — pulling up their history.';
     var tok=++_gmFetchTok;
@@ -1316,7 +1354,7 @@
       ld.style.display='none';
       gmRenderSnap(k);
       sn.style.display='flex';
-      document.getElementById('gmSubtitle').textContent='Their context, at a glance — no re-entry needed.';
+      document.getElementById('gmSubtitle').textContent='Here are the details';
     },1300);
   }
   document.getElementById('gmContinue').onclick=function(){
@@ -1324,26 +1362,52 @@
     var ph=document.getElementById('gPhone').value, k=KNOWN[ph];
     resetGmSteps();
     if(k){
+      // Recognising them IS the action — attach the session right away, no separate
+      // confirm step. Closing/going back afterwards just dismisses this peek.
+      CUR=Object.assign({},k,{detailed:true,phone:ph}); updateChrome();
       gmShowRecogWithFetch(k);
     } else if(_gmContext==='end'){
       goToConsentStep(ph);
     } else {
       document.getElementById('gmTitle').textContent='Add guest details';
       document.getElementById('gmSubtitle').textContent='New customer — capture what they are happy to share.';
+      _giVals={bday:'',anniv:''};
+      renderGiOpp();
       document.getElementById('gmStepInfoNew').style.display='block';
     }
   };
   document.getElementById('gmUse').onclick=function(){
+    // CUR is already attached at recognition time (see gmContinue above). This button only
+    // shows for the end-of-session collection flow, to move on to consent.
     var ph=document.getElementById('gPhone').value, k=KNOWN[ph];
-    CUR=Object.assign({},k,{detailed:true,phone:ph}); updateChrome();
-    if(_gmContext==='end'){
-      toast('Welcome back, '+k.name.split(' ')[0]+'.');
-      goToConsentStep(ph);
-    } else {
-      toast('Welcome back, '+k.name.split(' ')[0]+'. Details on file.');
-      closeGuestModal();
-    }
+    toast('Welcome back, '+k.name.split(' ')[0]+'.');
+    goToConsentStep(ph);
   };
+  // New-customer opportunities: no sensible default for these two, so show an inline +Add
+  // (same pattern as the recognized-customer snapshot) instead of a plain always-open field.
+  var _giVals={bday:'',anniv:''};
+  function giOppRowHTML(field,label,icon){
+    var val=_giVals[field];
+    if(val){ return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;">'+gmIconWrap(icon)+'<div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:11.5px;color:#7C7268;">'+val+'</div></div></div>'; }
+    return '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;"><div style="display:flex;align-items:center;gap:10px;">'+gmIconWrap(icon)+'<div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:11px;color:#B5A891;">Not on file</div></div></div><button type="button" class="giAddBtn" data-f="'+field+'" style="height:28px;padding:0 12px;border:1px solid #C4D5FB;border-radius:8px;background:#fff;color:#0A2A66;font-family:\'DM Sans\';font-weight:600;font-size:12px;cursor:pointer;flex:none;">+ Add</button></div>';
+  }
+  function renderGiOpp(){
+    var wrap=document.getElementById('giOppRow'); if(!wrap) return;
+    wrap.innerHTML=giOppRowHTML('bday','Birthday',GM_GIFT)+'<div style="height:1px;background:#F5F0E6;"></div>'+giOppRowHTML('anniv','Anniversary',GM_SPARK);
+    wrap.querySelectorAll('.giAddBtn').forEach(function(bn){
+      bn.onclick=function(){
+        var field=bn.getAttribute('data-f');
+        var inp=document.createElement('input'); inp.type='text'; inp.placeholder='DD/MM'; inp.maxLength=5;
+        inp.style.cssText="height:28px;width:80px;border:1px solid #C8A14A;border-radius:8px;padding:0 10px;outline:none;font-family:'DM Sans';font-weight:500;font-size:12px;color:#1a1917;flex:none;";
+        inp.oninput=function(){ var v=this.value.replace(/[^0-9]/g,'').slice(0,4); this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v; };
+        bn.parentNode.replaceChild(inp,bn); inp.focus();
+        var done=false;
+        function save(){ if(done)return; done=true; _giVals[field]=inp.value.trim(); renderGiOpp(); }
+        inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); save(); } });
+        inp.addEventListener('blur',save);
+      };
+    });
+  }
   document.querySelectorAll('.giGenderChip').forEach(function(chip){
     chip.onclick=function(){
       var already=chip.classList.contains('sel');
@@ -1356,8 +1420,8 @@
     var ph=document.getElementById('gPhone').value;
     var nm=document.getElementById('giName').value.trim();
     var em=document.getElementById('giEmail').value.trim();
-    var bd=document.getElementById('giBday').value.trim();
-    var an=document.getElementById('giAnniv').value.trim();
+    var bd=_giVals.bday;
+    var an=_giVals.anniv;
     var gc=document.querySelector('.giGenderChip.sel'); var gd=gc?gc.getAttribute('data-g'):'';
     var rn=document.getElementById('giRefNum').value.trim();
     var rname=document.getElementById('giRefName').value.trim();
@@ -1710,6 +1774,57 @@
       openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:c.getAttribute('data-cat'), img:c.querySelector('img').src}); var _nb=document.querySelector('#viewPDP .navback'); if(_nb)_nb.setAttribute('data-bt','viewSearch');
     }
     window.__openSerial=openSerial;
+    // ---- Search by Image ----
+    var IMG_CATS=['Rings','Earrings','Bangles','Neckwear','Bracelet','Chain','Pendant','Mangalsutra','Nos-pins','Coins'];
+    function renderImgSearchCats(){
+      var wrap=document.getElementById('imgSearchCats'); if(!wrap) return;
+      wrap.innerHTML=IMG_CATS.map(function(c){return '<span class="imgCatChip" data-cat="'+c+'" style="height:34px;padding:0 14px;display:inline-flex;align-items:center;border:1px solid #E2DAC9;border-radius:30px;font-family:\'DM Sans\';font-weight:500;font-size:12.5px;color:#3A4252;cursor:pointer;background:#fff;transition:all .12s;">'+c+'</span>';}).join('');
+      wrap.querySelectorAll('.imgCatChip').forEach(function(ch){
+        ch.onclick=function(){
+          var already=ch.classList.contains('sel');
+          wrap.querySelectorAll('.imgCatChip').forEach(function(x){x.classList.remove('sel');x.style.background='#fff';x.style.borderColor='#E2DAC9';x.style.color='#3A4252';});
+          if(!already){ ch.classList.add('sel'); ch.style.background='#0A2A66'; ch.style.borderColor='#0A2A66'; ch.style.color='#fff'; }
+        };
+      });
+    }
+    function openImgSearchModal(file){
+      renderImgSearchCats();
+      var url=URL.createObjectURL(file);
+      document.getElementById('imgSearchPreview').src=url;
+      document.getElementById('imgSearchName').textContent=file.name||'Photo.jpg';
+      document.getElementById('imgSearchMeta').textContent=(file.size?(file.size/1024/1024).toFixed(1)+'MB · ':'')+'Ready to search';
+      var m=document.getElementById('imgSearchModal'); m.style.display='block'; m.style.pointerEvents='auto';
+      var s=document.getElementById('imgSearchSheet');
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ s.style.opacity='1'; s.style.transform='translate(-50%,-50%)'; }); });
+    }
+    function closeImgSearchModal(){
+      var s=document.getElementById('imgSearchSheet'); if(!s) return; s.style.opacity='0'; s.style.transform='translate(-50%,-46%)';
+      var m=document.getElementById('imgSearchModal'); m.style.pointerEvents='none';
+      setTimeout(function(){ m.style.display='none'; },250);
+    }
+    var _imgInput=document.getElementById('imgSearchInput');
+    var _srchImageBtn=document.getElementById('srchImage');
+    if(_srchImageBtn) _srchImageBtn.onclick=function(){ if(_imgInput) _imgInput.click(); };
+    if(_imgInput) _imgInput.addEventListener('change',function(){
+      var f=this.files&&this.files[0]; this.value='';
+      if(!f) return;
+      openImgSearchModal(f);
+    });
+    var _imgBack=document.getElementById('imgSearchBack'); if(_imgBack) _imgBack.onclick=closeImgSearchModal;
+    var _imgBackdrop=document.getElementById('imgSearchBackdrop'); if(_imgBackdrop) _imgBackdrop.onclick=closeImgSearchModal;
+    var _imgFind=document.getElementById('imgSearchFind'); if(_imgFind) _imgFind.onclick=function(){
+      var sel=document.querySelector('.imgCatChip.sel');
+      var cat=sel?sel.getAttribute('data-cat'):null;
+      var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc'));
+      var match = cat ? cards.filter(function(c){return c.getAttribute('data-cat')===cat;})[0] : null;
+      match = match || cards[0];
+      closeImgSearchModal();
+      if(match){
+        var info=match.children[1];
+        openPDP({name:info.children[1].textContent, price:info.children[2].textContent, cat:match.getAttribute('data-cat'), img:match.querySelector('img').src});
+        var _nb=document.querySelector('#viewPDP .navback'); if(_nb)_nb.setAttribute('data-bt','viewSearch');
+      }
+    };
     function toggleGo(){ if(go) go.style.display=(si&&si.value.trim())?'inline-flex':'none'; }
     if(si){ si.addEventListener('input',toggleGo); si.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); var q=si.value.trim(); if(q){ openSerial(q); } } }); }
     if(go){ go.onclick=function(){ var q=(si&&si.value||'').trim(); if(!q) return; openSerial(q); }; }
