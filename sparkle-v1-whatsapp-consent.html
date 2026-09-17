@@ -324,16 +324,14 @@
     <div style="display:flex;background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:20px 4px;margin-top:22px;">
       <div style="flex:1;padding:0 22px;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Loyalty Points</div><div id="pfLoyalty" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">12,400</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Active Since</div><div id="pfSince" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">2 years</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Lifetime Value</div><div id="pfLtv" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">₹ 3,48,000</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Last Visit</div><div id="pfLast" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">2 months ago</div></div>
     </div>
-    <div id="pfGridWrap" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;">
-      <div style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px;">
+    <div id="pfGridWrap" style="display:flex;flex-direction:column;gap:18px;margin-top:18px;">
+      <div style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
         <div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:16px;">Opportunities</div>
         <div id="pfOppRow" style="display:flex;flex-direction:column;gap:16px;"></div>
       </div>
-      <div id="pfSchemeCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px;">
-        <div id="pfSchemeTitle" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:14px;">Active Scheme &middot; GGP</div>
-        <div style="display:flex;justify-content:space-between;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;margin-bottom:8px;"><span id="pfSchemePaid">&#8377; 10,000 paid</span><span id="pfSchemeDue">&#8377; 15,000 due</span></div>
-        <div style="height:8px;border-radius:6px;background:#EFE8DC;overflow:hidden;"><div id="pfSchemeBar" style="width:40%;height:100%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div>
-        <div id="pfSchemeNext" style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;margin-top:12px;">Next instalment &middot; 12 July 2026</div>
+      <div id="pfSchemeCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
+        <div id="pfSchemeTitle" style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:16px;">Active Schemes</div>
+        <div id="pfSchemeBody" style="display:flex;flex-direction:column;"></div>
       </div>
     </div>
     <div style="margin-top:18px;background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 22px;">
@@ -583,7 +581,7 @@
 </div>
 <div id="guestModal" style="display:none;position:absolute;inset:0;z-index:45;pointer-events:none;">
   <div id="gmBackdrop" style="position:absolute;inset:0;background:transparent;pointer-events:none;"></div>
-  <div id="gmSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:100%;max-width:460px;max-height:min(86vh,660px);background:#FBF8F3;border-radius:20px;box-shadow:0 30px 80px rgba(3,20,45,0.35);padding:28px;overflow-y:auto;pointer-events:auto;opacity:0;transition:opacity .25s,transform .25s;">
+  <div id="gmSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-46%);width:100%;max-width:460px;max-height:min(86vh,660px);background:#fff;border-radius:20px;box-shadow:0 30px 80px rgba(3,20,45,0.35);padding:28px;overflow-y:auto;pointer-events:auto;opacity:0;transition:opacity .25s,transform .25s;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;">
       <div><div id="gmTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:#0A2A66;">Want to save this visit?</div><div id="gmSubtitle" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#7C7268;margin-top:3px;">Save this visit so our guests can enjoy benefits like:</div></div>
       <button id="gmClose" style="width:34px;height:34px;border:1px solid #E2DAC9;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 6L6 18m12 0L6 6"/></svg></button>
@@ -595,18 +593,20 @@
       <button id="gmOfferNotNow" style="width:100%;height:46px;margin-top:10px;border:1px solid #D9E0EF;border-radius:12px;background:transparent;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Not now</button>
     </div>
     <div id="gmStepPhoneOnly" style="display:none;margin-top:18px;">
-      <div id="gmPhoneBenefits" style="display:flex;flex-direction:column;gap:10px;overflow:hidden;max-height:400px;opacity:1;margin-bottom:14px;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin-bottom .4s cubic-bezier(.4,0,.2,1);">
-        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
-          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5l3.2 2.4L12 5l4.8 5.9l3.2-2.4L19 17H5L4 8.5Z"/><path d="M6.5 20h11" stroke-linecap="round"/></svg></span>
-          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Loyalty rewards</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Points and tier benefits on every purchase, growing each visit.</div></div>
+      <div id="gmPhoneBenefits" style="display:flex;flex-direction:column;overflow:hidden;max-height:400px;opacity:1;margin-bottom:6px;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .25s ease,margin-bottom .4s cubic-bezier(.4,0,.2,1);">
+        <div style="display:flex;align-items:flex-start;gap:13px;padding:12px 0;">
+          <span style="width:30px;height:30px;border-radius:9px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5l3.2 2.4L12 5l4.8 5.9l3.2-2.4L19 17H5L4 8.5Z"/><path d="M6.5 20h11" stroke-linecap="round"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#1a1917;">Loyalty rewards</div><div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#9B8F7E;margin-top:2px;line-height:1.4;">Points and tier benefits on every purchase, growing each visit.</div></div>
         </div>
-        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
-          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.75h12a.75.75 0 0 1 .75.75v16.5l-6.75-4-6.75 4V4.5A.75.75 0 0 1 6 3.75Z"/></svg></span>
-          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Picks saved for later</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Every piece viewed today is kept, ready for their next visit.</div></div>
+        <div style="height:1px;background:#F1ECE2;"></div>
+        <div style="display:flex;align-items:flex-start;gap:13px;padding:12px 0;">
+          <span style="width:30px;height:30px;border-radius:9px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.75h12a.75.75 0 0 1 .75.75v16.5l-6.75-4-6.75 4V4.5A.75.75 0 0 1 6 3.75Z"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#1a1917;">Picks saved for later</div><div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#9B8F7E;margin-top:2px;line-height:1.4;">Every piece viewed today is kept, ready for their next visit.</div></div>
         </div>
-        <div style="background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:16px;display:flex;flex-direction:row;align-items:flex-start;gap:12px;">
-          <span style="width:34px;height:34px;border-radius:10px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4.5L11 14.5M21 4.5l-6.5 17-4-7.5M21 4.5l-17 6.5 7.5 4"/></svg></span>
-          <div><div style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#1a1917;">Shared on WhatsApp</div><div style="font-family:'DM Sans';font-weight:400;font-size:11.5px;color:#7C7268;margin-top:4px;line-height:1.45;">Send their curated collection straight to their phone.</div></div>
+        <div style="height:1px;background:#F1ECE2;"></div>
+        <div style="display:flex;align-items:flex-start;gap:13px;padding:12px 0;">
+          <span style="width:30px;height:30px;border-radius:9px;background:#FBF3E1;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4.5L11 14.5M21 4.5l-6.5 17-4-7.5M21 4.5l-17 6.5 7.5 4"/></svg></span>
+          <div><div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#1a1917;">Shared on WhatsApp</div><div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#9B8F7E;margin-top:2px;line-height:1.4;">Send their curated collection straight to their phone.</div></div>
         </div>
       </div>
       <div class="gnf"><span class="pfx">+91</span><input id="gPhone" type="tel" inputmode="numeric" maxlength="10" placeholder="Mobile number" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/></div>
@@ -852,7 +852,7 @@
   var fit=document.getElementById('fit'),stage=document.getElementById('stage');
   function resize(){var s=fit.clientWidth/1280;stage.style.transform='scale('+s+')';fit.style.height=(800*s)+'px';}
   resize();window.addEventListener('resize',resize);
-  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026'},{name:'GQP',paid:'₹ 3,000',due:'₹ 9,000',pct:25,next:'20 Aug 2026'}]};var PROFILE2={name:'Aarav Mehta',init:'AM',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026'}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
+  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
   var sel={cats:[],occ:null,who:null,'for':null,budget:null};
   var phone=document.getElementById('phone');
   var saveBtn=document.getElementById('saveBtn'),saveLbl=document.getElementById('saveLbl');
@@ -950,6 +950,21 @@
       };
     });
   }
+  function renderPfSchemes(k){
+    var body=document.getElementById('pfSchemeBody'), card=document.getElementById('pfSchemeCard'); if(!body||!card) return;
+    var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
+    if(!_sch.length){ card.style.display='none'; return; }
+    card.style.display='block';
+    var st=document.getElementById('pfSchemeTitle'); if(st) st.textContent = _sch.length>1?'Active Schemes':'Active Scheme · '+_sch[0].name;
+    body.innerHTML=_sch.map(function(sc){
+      return '<div>'
+        +(_sch.length>1?'<div style="font-family:\'DM Sans\';font-weight:700;font-size:13px;color:#0A2A66;margin-bottom:8px;">'+sc.name+'</div>':'')
+        +'<div style="display:flex;justify-content:space-between;font-family:\'DM Sans\';font-weight:500;font-size:13px;color:#7C7268;"><span>'+sc.paid+' paid</span><span>'+sc.due+' due</span></div>'
+        +'<div style="height:8px;border-radius:6px;background:#EFE8DC;overflow:hidden;margin-top:8px;"><div style="width:'+sc.pct+'%;height:100%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div>'
+        +schemeExtrasHTML(sc,false)
+        +'</div>';
+    }).join('<div style="height:1px;background:#F1ECE2;margin:16px 0;"></div>');
+  }
   function showProfile(k){
     CUR=k;
     var isNew = !(k.tier && k.tier!=='New');
@@ -963,20 +978,7 @@
     var ltvEl=document.getElementById('pfLtv'); if(ltvEl) ltvEl.textContent = k.ltv||'₹ 0';
     var lastEl=document.getElementById('pfLast'); if(lastEl) lastEl.textContent = k.last||'--';
     renderPfOpp();
-    var sch=(k.schemes&&k.schemes.length)?k.schemes[0]:(k.scheme?{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}:null);
-    var schCard=document.getElementById('pfSchemeCard'); var gridWrap=document.getElementById('pfGridWrap');
-    if(sch){
-      if(schCard) schCard.style.display='block';
-      var st=document.getElementById('pfSchemeTitle'); if(st) st.textContent='Active Scheme · '+sch.name;
-      var sp=document.getElementById('pfSchemePaid'); if(sp) sp.textContent=sch.paid+' paid';
-      var sd=document.getElementById('pfSchemeDue'); if(sd) sd.textContent=sch.due+' due';
-      var sb=document.getElementById('pfSchemeBar'); if(sb) sb.style.width=sch.pct+'%';
-      var sn=document.getElementById('pfSchemeNext'); if(sn) sn.textContent='Next instalment · '+sch.next;
-      if(gridWrap) gridWrap.style.gridTemplateColumns='1fr 1fr';
-    } else {
-      if(schCard) schCard.style.display='none';
-      if(gridWrap) gridWrap.style.gridTemplateColumns='1fr';
-    }
+    renderPfSchemes(k);
     var chips=interestChips();var box=document.getElementById('pfInterest');if(chips.length){box.style.display='block';document.getElementById('pfInterestChips').innerHTML=chips.map(function(x){return '<span class="pillsum">'+x+'</span>';}).join('');}else{box.style.display='none';}
     if(typeof startSession==='function')startSession();
     showView('viewProfile');
@@ -1404,19 +1406,36 @@
   var GM_H="font-family:'DM Sans';font-weight:700;font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:#B89149;margin-bottom:5px;";
   function gmIconWrap(svg){return '<span style="width:26px;height:26px;border-radius:7px;background:rgba(200,161,74,0.12);display:flex;align-items:center;justify-content:center;flex:none;">'+svg+'</span>';}
   function gmOppRow(icon,label,val,sub){ if(!val) return ''; return '<div style="display:flex;align-items:center;gap:10px;padding:6px 0;">'+gmIconWrap(icon)+'<div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:400;font-size:11.5px;color:#7C7268;">'+val+(sub?' · '+sub:'')+'</div></div></div>'; }
+  var GM_SPARKLE_ICON='<svg viewBox="0 0 24 24" width="{S}" height="{S}" fill="none" style="flex:none;margin-top:1px;" stroke="#B89149" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>';
+  // Shared across the drawer's recognised-customer snapshot and the full-screen profile so a
+  // scheme reads the same everywhere: paid/pending is always shown, and once only one (or zero)
+  // instalments remain we swap the "next instalment" line for a gentle in-store nudge instead —
+  // a prompt to raise redemption with the customer, plus a quiet note that tells the JC there's
+  // nothing left to chase once it's fully paid.
+  function schemeExtrasHTML(sc,compact){
+    if(sc.instTotal==null||sc.instPaid==null) return '<div style="font-family:\'DM Sans\';font-weight:400;font-size:'+(compact?'10.5px':'13px')+';color:#7C7268;margin-top:'+(compact?'5px':'12px')+';">Next instalment · '+sc.next+'</div>';
+    var pending=Math.max(sc.instTotal-sc.instPaid,0), matured=pending<=0, near=!matured&&pending===1;
+    var icon=GM_SPARKLE_ICON.split('{S}').join(compact?'13':'15');
+    var countLine='<div style="font-family:\'DM Sans\';font-weight:500;font-size:'+(compact?'10.5px':'13px')+';color:#7C7268;margin-top:'+(compact?'5px':'12px')+';">'+sc.instPaid+' of '+sc.instTotal+' instalments paid'+(matured?'':' · '+pending+' pending')+'</div>';
+    if(!matured&&!near){ return countLine+'<div style="font-family:\'DM Sans\';font-weight:400;font-size:'+(compact?'10.5px':'12.5px')+';color:#9B8F7E;margin-top:2px;">Next · '+sc.next+'</div>'; }
+    var nudgeCopy=matured?'Fully paid — a lovely moment to invite them in for their piece.':'One instalment from redemption — worth flagging on their next visit.';
+    var nudge='<div style="margin-top:'+(compact?'7px':'10px')+';background:#FBF6EC;border:1px solid #EAD9AE;border-radius:'+(compact?'8px':'10px')+';padding:'+(compact?'8px 10px':'10px 12px')+';display:flex;align-items:flex-start;gap:8px;">'+icon+'<div style="font-family:\'DM Sans\';font-weight:500;font-size:'+(compact?'10.5px':'12px')+';color:#6E5A28;line-height:1.45;">'+nudgeCopy+'</div></div>';
+    var jcTag=matured?('<div style="display:flex;align-items:center;gap:5px;margin-top:'+(compact?'5px':'7px')+';"><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#9B8F7E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span style="font-family:\'DM Sans\';font-weight:500;font-size:'+(compact?'10px':'11px')+';color:#9B8F7E;">Nothing left to chase on this one</span></div>'):'';
+    return countLine+nudge+jcTag;
+  }
   function gmRenderSnap(k){
     var sn=document.getElementById('gmRecogSnap'); if(!sn) return;
     var S=[['Loyalty',k.points],['Active since',k.since],['Lifetime',k.ltv],['Last visit',k.last]];
     var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<3?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
-    var opp='<div style="flex:1;min-width:0;padding:12px 16px;border-right:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
+    var opp='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
     var scheme='';
     if(_sch.length){
       var _multi=_sch.length>1;
-      var _blocks=_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="display:flex;justify-content:space-between;font-family:\'DM Sans\';font-weight:600;font-size:11.5px;color:#3A4252;margin-top:3px;"><span>'+sc.paid+' paid</span><span>'+sc.due+' due</span></div><div style="height:6px;border-radius:3px;background:#ECE5DA;margin-top:6px;overflow:hidden;"><div style="height:100%;width:'+sc.pct+'%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div><div style="font-family:\'DM Sans\';font-weight:400;font-size:10.5px;color:#7C7268;margin-top:5px;">Next · '+sc.next+'</div></div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:9px 0;"></div>');
-      scheme='<div style="flex:1;min-width:0;padding:12px 16px;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+_blocks+'</div>';
+      var _blocks=_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="display:flex;justify-content:space-between;font-family:\'DM Sans\';font-weight:600;font-size:11.5px;color:#3A4252;margin-top:3px;"><span>'+sc.paid+' paid</span><span>'+sc.due+' due</span></div><div style="height:6px;border-radius:3px;background:#ECE5DA;margin-top:6px;overflow:hidden;"><div style="height:100%;width:'+sc.pct+'%;background:linear-gradient(90deg,#184BA9,#3D76E3);"></div></div>'+schemeExtrasHTML(sc,true)+'</div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>');
+      scheme='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+_blocks+'</div>';
     }
-    var cols=scheme?('<div style="display:flex;border-bottom:1px solid #F1ECE2;">'+opp+scheme+'</div>'):('<div style="display:flex;border-bottom:1px solid #F1ECE2;">'+opp+'</div>');
+    var cols=opp+scheme;
     var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
     var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
     var recent=rv?('<div style="padding:12px 16px 14px;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>'):'';
@@ -1433,7 +1452,7 @@
     // Personal-info lookups (context 'manual') are just a peek — no CTA needed, close/back dismisses.
     // The end-of-session collection flow still needs Continue to move on to consent.
     document.getElementById('gmUse').style.display=(_gmContext==='end')?'block':'none';
-    document.getElementById('gmTitle').textContent='We recognise them';
+    document.getElementById('gmTitle').textContent='Welcome back!';
     document.getElementById('gmSubtitle').textContent='One moment — pulling up their history.';
     var tok=++_gmFetchTok;
     setTimeout(function(){
