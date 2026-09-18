@@ -523,11 +523,11 @@
             </div>
           </div>
           <div id="bfPanSection" style="display:none;flex-direction:column;gap:10px;width:100%;border-top:1px solid #EADFC9;margin-top:4px;padding-top:20px;">
-            <span class="bfLab">PAN Card* <span style="font-weight:500;font-size:12.5px;color:#8A7A4A;">&mdash; required for purchases above &#8377; 2,00,000</span></span>
-            <div id="bfPanIdle" style="display:flex;flex-direction:column;gap:10px;align-items:center;">
-              <button type="button" id="bfPanScanBtn" class="gmbtn" style="margin-top:0;display:flex;align-items:center;justify-content:center;gap:9px;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
-              <span id="bfPanManualLink" style="font-family:'DM Sans';font-weight:600;font-size:12.5px;color:#0A2A66;cursor:pointer;">Enter PAN manually instead</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <span class="bfLab" style="margin:0;">PAN Card*</span>
+              <button type="button" id="bfPanScanBtn" style="height:36px;padding:0 16px;border:1px solid #C4D5FB;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:7px;flex:none;white-space:nowrap;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
             </div>
+            <span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#8A7A4A;">Required for purchases above &#8377; 2,00,000</span>
             <div id="bfPanManual" style="display:none;flex-direction:column;gap:10px;">
               <input id="bfPan" class="billField" maxlength="10" placeholder="ABCDE1234F" style="width:100%;text-transform:uppercase;letter-spacing:1px;font-weight:600;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10)"/>
               <button type="button" id="bfPanManualUse" class="gmbtn disabled" style="margin-top:0;">Use this PAN</button>
@@ -1883,7 +1883,10 @@
     var PAN_DEMO_VALUE='ABCDE1234F', PAN_DEMO_DOB='15 / 08 / 1988';
     var _panScanTok=0;
     function panShow(id){
-      ['bfPanIdle','bfPanManual','bfPanFailed','bfPanFetched','bfPanVerifying','bfPanStatus'].forEach(function(x){
+      // 'bfPanIdle' has no container of its own — it's just "show the scan button, hide
+      // the rest", since scanning is the only thing offered before anything's been fetched.
+      var scanBtn=document.getElementById('bfPanScanBtn'); if(scanBtn) scanBtn.style.display=(id==='bfPanIdle')?'flex':'none';
+      ['bfPanManual','bfPanFailed','bfPanFetched','bfPanVerifying','bfPanStatus'].forEach(function(x){
         var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none';
       });
     }
@@ -1906,7 +1909,6 @@
       },1700);
     }
     var _psb=document.getElementById('bfPanScanBtn'); if(_psb) _psb.onclick=function(){ panOpenScan(); };
-    var _pml=document.getElementById('bfPanManualLink'); if(_pml) _pml.onclick=function(){ var i=document.getElementById('bfPan'); if(i){i.value='';i.focus();} var u=document.getElementById('bfPanManualUse'); if(u)u.classList.add('disabled'); panShow('bfPanManual'); };
     var _psc=document.getElementById('panScanClose'); if(_psc) _psc.onclick=function(){ _panScanTok++; var sc=document.getElementById('panScan'); if(sc) sc.style.display='none'; panShow('bfPanFailed'); };
     var _prs=document.getElementById('bfPanRetryScan'); if(_prs) _prs.onclick=function(){ panOpenScan(); };
     var _pgm=document.getElementById('bfPanGoManual'); if(_pgm) _pgm.onclick=function(){ var i=document.getElementById('bfPan'); if(i){i.value='';i.focus();} var u=document.getElementById('bfPanManualUse'); if(u)u.classList.add('disabled'); panShow('bfPanManual'); };
