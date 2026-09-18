@@ -253,7 +253,7 @@
           </div>
           <div class="hRangeWrap" id="hRangeWrap">
             <div class="hRangeToggle" id="hRangeToggle">
-              <button type="button" class="hRangeSeg on" data-val="today">Yesterday</button>
+              <button type="button" class="hRangeSeg on" data-val="today">Today</button>
               <button type="button" class="hRangeSeg" data-val="week">This Week</button>
               <button type="button" class="hRangeSeg" data-val="month">This Month</button>
               <button type="button" class="hRangeSeg" data-val="custom">Custom</button>
@@ -692,7 +692,10 @@
         </div>
         <div id="gmRecogSnap" style="display:none;flex-direction:column;"></div>
       </div>
-      <button id="gmUse" class="gmbtn">Continue browsing</button>
+      <div id="gmEndActions" style="display:none;gap:10px;margin-top:16px;">
+        <button type="button" id="gmKeepExploring" style="flex:1;height:50px;border:1px solid #C4D5FB;border-radius:12px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Keep Exploring</button>
+        <button type="button" id="gmSendCollection" class="gmbtn" style="flex:1;margin-top:0;">Send Collection</button>
+      </div>
     </div>
     <div id="gmStepInfoNew" style="display:none;margin-top:18px;max-height:min(58vh,460px);overflow-y:auto;padding-right:2px;">
       <div style="display:flex;flex-direction:column;gap:10px;">
@@ -828,6 +831,40 @@
         <div style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;margin-top:14px;">Sent on WhatsApp</div>
         <div id="rsDonePhone" style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;margin-top:4px;">+91 &mdash;</div>
         <button id="rsDone" class="gmbtn" style="margin-top:20px;">Done</button>
+      </div>
+    </div>
+  </div>
+  <div id="otpSignModal" style="display:none;position:absolute;inset:0;z-index:92;">
+    <div id="otpSignBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:440px;max-width:92%;max-height:88vh;overflow-y:auto;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="display:flex;flex-direction:column;gap:4px;"><span style="font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#C8A14A;">Verify to continue</span><span id="otpSignTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;">Confirm with OTP</span></div>
+        <button type="button" id="otpSignClose" style="width:32px;height:32px;border-radius:50%;border:1px solid #E6E0D6;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6E6358" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div id="osStepStart" style="display:none;flex-direction:column;gap:14px;">
+        <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">We&rsquo;ll send a 6-digit code to <span id="osDest" style="color:#0A2A66;font-weight:600;"></span> to confirm this.</span>
+        <button type="button" id="osSend" class="gmbtn" style="margin-top:0;">Send OTP</button>
+      </div>
+      <div id="osStepEnter" style="display:none;flex-direction:column;gap:14px;">
+        <span style="font-family:'DM Sans';font-weight:400;font-size:14px;line-height:1.5;color:#796d62;">Enter the 6-digit code sent to <span id="osDest2" style="color:#0A2A66;font-weight:600;"></span></span>
+        <div id="osOtpBoxes" style="display:flex;gap:10px;">
+          <input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/><input class="otpBox" maxlength="1" inputmode="numeric"/>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;font-family:'DM Sans';font-size:13px;"><span style="color:#A99F92;">Didn&rsquo;t receive it?</span><span id="osResend" style="color:#A99F92;font-weight:600;cursor:default;">Resend in 0:30</span></div>
+      </div>
+      <div id="osStepSign" style="display:none;flex-direction:column;gap:10px;">
+        <div id="osOtpAlready" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:12.5px;color:#008838;margin-bottom:4px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Phone already verified &mdash; just sign to confirm</div>
+        <span class="bfLab" style="margin:0;">Customer&rsquo;s Signature* <span style="font-weight:400;font-size:12.5px;color:#9B8F7E;">&mdash; have them sign below</span></span>
+        <div style="position:relative;width:100%;height:120px;border:1px solid #CCC;border-radius:12px;background:#fff;overflow:hidden;">
+          <canvas id="osSigCanvas" style="width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;"></canvas>
+          <span id="osSigPlaceholder" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:'DM Sans';font-weight:400;font-size:13px;color:#C9BFB0;pointer-events:none;">Sign here</span>
+          <button type="button" id="osSigClear" style="position:absolute;right:10px;top:10px;height:28px;padding:0 12px;border:1px solid #E2DAC9;border-radius:8px;background:#fff;color:#7C7268;font-family:'DM Sans';font-weight:600;font-size:11.5px;cursor:pointer;">Clear</button>
+        </div>
+        <button type="button" id="osConfirm" class="gmbtn disabled" style="margin-top:6px;">Confirm</button>
+      </div>
+      <div id="osStepDone" style="display:none;flex-direction:column;align-items:center;gap:8px;padding:10px 0 4px;text-align:center;">
+        <span style="width:48px;height:48px;border-radius:50%;background:rgba(0,136,56,0.1);display:inline-flex;align-items:center;justify-content:center;"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span>
+        <div style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;">Verified &amp; signed</div>
       </div>
     </div>
   </div>
@@ -1290,7 +1327,7 @@
     // gmContinue/gmUse/gmInfoSave are shared across drawer + popup steps. In the drawer, pin
     // them to a constant spot at the bottom of the panel so the CTA never moves between steps;
     // in the popup, let them sit in-flow since the popup itself sizes to its (short) content.
-    var drawerBtns=['gmContinue','gmUse','gmInfoSave'];
+    var drawerBtns=['gmContinue','gmEndActions','gmInfoSave'];
     if(mode==='popup'){
       s.style.left='50%'; s.style.right='auto'; s.style.top='50%'; s.style.bottom='auto';
       s.style.width='100%'; s.style.maxWidth='460px'; s.style.maxHeight='min(86vh,660px)';
@@ -1444,7 +1481,7 @@
   document.getElementById('gmOfferSend').onclick=function(){
     if(this.classList.contains('disabled'))return;
     window.__collectionOffered=true;
-    if(CUR && CUR.phone){ document.getElementById('gPhone').value=CUR.phone; goToConsentStep(CUR.phone); return; }
+    if(CUR && CUR.phone){ document.getElementById('gPhone').value=CUR.phone; window.__requestOtpSign(CUR.phone,'Confirm before sending their collection',function(){ goToConsentStep(CUR.phone); }); return; }
     resetGmSteps();
     document.getElementById('gmStepPhoneOnly').style.display='block';
     document.getElementById('gmTitle').textContent='Where should we send it?';
@@ -1544,6 +1581,26 @@
       };
     });
   }
+  // The end-of-session "send collection" moment only needs to confirm who they are and flag
+  // anything worth mentioning right now — not the full recognised-customer dossier (stats,
+  // schemes-with-progress-bars, recently viewed) that the "peek" (manual) context shows.
+  function gmRenderSnapCompact(k){
+    var sn=document.getElementById('gmRecogSnap'); if(!sn) return;
+    var rows=[];
+    if(k.bday) rows.push(gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn));
+    if(k.anniv) rows.push(gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn));
+    var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next,instPaid:k.instPaid,instTotal:k.instTotal}]:[]);
+    _sch.forEach(function(sc){
+      var line;
+      if(sc.instTotal!=null&&sc.instPaid!=null){
+        var pending=Math.max(sc.instTotal-sc.instPaid,0);
+        line = pending===0?'Fully paid — ready to redeem':(pending===1?'1 instalment from redemption':pending+' of '+sc.instTotal+' instalments left');
+      } else { line='Next instalment · '+sc.next; }
+      rows.push(gmOppRow(GM_SPARK,sc.name,line,null));
+    });
+    if(!rows.length){ sn.innerHTML='<div style="padding:14px 18px;font-family:\'DM Sans\';font-size:13px;color:#9B8F7E;font-style:italic;">Nothing new to flag for this visit.</div>'; return; }
+    sn.innerHTML='<div style="padding:8px 18px 16px;">'+rows.join('<div style="height:1px;background:#F5F0E6;"></div>')+'</div>';
+  }
   var _gmFetchTok=0;
   function gmShowRecogWithFetch(k){
     document.getElementById('gmrAv').textContent=k.init;
@@ -1554,15 +1611,15 @@
     document.getElementById('gmStepRecog').style.display='block';
     document.getElementById('gmBack').style.display='flex';
     // Personal-info lookups (context 'manual') are just a peek — no CTA needed, close/back dismisses.
-    // The end-of-session collection flow still needs Continue to move on to consent.
-    document.getElementById('gmUse').style.display=(_gmContext==='end')?'block':'none';
+    // The end-of-session collection flow needs its own two actions to move on to consent.
+    document.getElementById('gmEndActions').style.display=(_gmContext==='end')?'flex':'none';
     document.getElementById('gmTitle').textContent='Welcome back!';
     document.getElementById('gmSubtitle').textContent='One moment — pulling up their history.';
     var tok=++_gmFetchTok;
     setTimeout(function(){
       if(tok!==_gmFetchTok) return;
       ld.style.display='none';
-      gmRenderSnap(k);
+      if(_gmContext==='end'){ gmRenderSnapCompact(k); } else { gmRenderSnap(k); }
       sn.style.display='flex';
       document.getElementById('gmSubtitle').textContent='Here are the details';
     },1300);
@@ -1577,19 +1634,23 @@
       CUR=Object.assign({},k,{detailed:true,phone:ph}); updateChrome();
       gmShowRecogWithFetch(k);
     } else if(_gmContext==='end'){
-      goToConsentStep(ph);
+      window.__requestOtpSign(ph,'Confirm before sending their collection',function(){ goToConsentStep(ph); });
     } else {
       document.getElementById('gmTitle').textContent='Add guest details';
       document.getElementById('gmSubtitle').textContent='New customer — capture what they are happy to share.';
       document.getElementById('gmStepInfoNew').style.display='block';
     }
   };
-  document.getElementById('gmUse').onclick=function(){
-    // CUR is already attached at recognition time (see gmContinue above). This button only
-    // shows for the end-of-session collection flow, to move on to consent.
+  // CUR is already attached at recognition time (see gmContinue above). These two only show
+  // for the end-of-session collection flow: dismiss without sending, or verify (OTP + a fresh
+  // signature) and move on to the purpose-consent choices.
+  document.getElementById('gmKeepExploring').onclick=function(){ closeGuestModal(); };
+  document.getElementById('gmSendCollection').onclick=function(){
     var ph=document.getElementById('gPhone').value, k=KNOWN[ph];
-    toast('Welcome back, '+k.name.split(' ')[0]+'.');
-    goToConsentStep(ph);
+    window.__requestOtpSign(ph,'Confirm before sending their collection',function(){
+      toast('Welcome back, '+k.name.split(' ')[0]+'.');
+      goToConsentStep(ph);
+    });
   };
   document.getElementById('gmBack').onclick=function(){
     resetGmSteps();
@@ -1617,8 +1678,12 @@
     var rname=document.getElementById('giRefName').value.trim();
     CUR={name:nm||'Guest',tier:'New',points:'0',since:'Today',ltv:'₹ 0',last:'--',detailed:true,phone:ph,email:em,gender:gd,refNum:rn,refName:rname,bday:'',anniv:'',marital:''};
     updateChrome();
-    toast('Guest details saved.');
-    closeGuestModal();
+    document.getElementById('guestModal').style.pointerEvents='none';
+    window.__requestOtpSign(ph,'Confirm their details',function(){
+      var gm=document.getElementById('guestModal'); if(gm) gm.style.pointerEvents='auto';
+      toast('Guest details saved.');
+      closeGuestModal();
+    });
   };
   document.getElementById('gmConfirmChoices').onclick=function(){
     var ph=document.getElementById('gPhone').value;
@@ -1935,7 +2000,19 @@
     });
     var _otpIv=null;
     function startResend(){ var el=document.getElementById('otpResend'); if(!el)return; clearInterval(_otpIv); var s=30; el.style.cursor='default'; el.style.color='#A99F92'; el.textContent='Resend in 0:'+(s<10?'0'+s:s); _otpIv=setInterval(function(){ s--; if(s<=0){ clearInterval(_otpIv); el.textContent='Resend OTP'; el.style.color='#2b5198'; el.style.cursor='pointer'; } else { el.textContent='Resend in 0:'+(s<10?'0'+s:s); } },1000); }
-    function sendOtp(){ var n=val('bfNum'); document.getElementById('otpStart').style.display='none'; var oe=document.getElementById('otpEnter'); oe.style.display='flex'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); toast('OTP sent to \u2022\u2022\u2022\u2022 '+(n?n.slice(-4):'')); }
+    function sendOtp(){
+      var n=val('bfNum');
+      // Same phone already verified an OTP elsewhere (drawer, end-session, rate share) within
+      // the last 15 minutes \u2014 skip straight to the signature instead of asking again.
+      if(window.__isOtpValid&&window.__isOtpValid(n)){
+        document.getElementById('otpStart').style.display='none';
+        var oe2=document.getElementById('otpEnter'); if(oe2) oe2.style.display='none';
+        otpBoxes.forEach(function(b){b.value='0';b.classList.add('filled');});
+        _vfCheckSignReveal(); vfSync();
+        toast('Already verified with OTP.');
+        return;
+      }
+      document.getElementById('otpStart').style.display='none'; var oe=document.getElementById('otpEnter'); oe.style.display='flex'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); toast('OTP sent to \u2022\u2022\u2022\u2022 '+(n?n.slice(-4):'')); }
     window.__otpReset=function(){ clearInterval(_otpIv); document.getElementById('otpStart').style.display='flex'; document.getElementById('otpEnter').style.display='none'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); var ss=document.getElementById('vfSignSection'); if(ss) ss.style.display='none'; if(window.__resetSignature) window.__resetSignature(); };
     var vs=document.getElementById('vfSend'); if(vs) vs.onclick=sendOtp;
     var rs=document.getElementById('otpResend'); if(rs) rs.onclick=function(){ if(rs.style.cursor==='pointer'){ otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); vfSync(); toast('A new OTP has been sent.'); } };
@@ -1971,7 +2048,7 @@
       fitCanvas();
     })();
     var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
-    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ var rc=window.__redeemCount||0; var sub=document.querySelector('#viewDone .doneSub'); if(sub) sub.innerHTML=rc>0?'Your redemption request is verified.<br/>Please proceed to the cash counter for payment.':'Their billing details are captured.<br/>Please proceed to the cash counter for payment.'; if(window.__finalizeSession)window.__finalizeSession('purchased', rc>0?'Redeemed':''); showView('viewDone'); };
+    var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ if(window.__markOtpValid)window.__markOtpValid(val('bfNum')); var rc=window.__redeemCount||0; var sub=document.querySelector('#viewDone .doneSub'); if(sub) sub.innerHTML=rc>0?'Your redemption request is verified.<br/>Please proceed to the cash counter for payment.':'Their billing details are captured.<br/>Please proceed to the cash counter for payment.'; if(window.__finalizeSession)window.__finalizeSession('purchased', rc>0?'Redeemed':''); showView('viewDone'); };
     var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ if(typeof stopSession==='function')stopSession(); window.__sessViewed=false; if(typeof reset==='function')reset(); CUR=null; if(typeof updateChrome==='function')updateChrome(); showView('viewHome'); };
     // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
     window.__playDone=function(){
@@ -2180,18 +2257,108 @@
   });
   document.getElementById('rsSend').onclick=function(){
     if(this.classList.contains('disabled')) return;
-    document.getElementById('rsStepPhone').style.display='none';
-    document.getElementById('rsStepSending').style.display='block';
-    setTimeout(function(){
-      document.getElementById('rsStepSending').style.display='none';
-      document.getElementById('rsDonePhone').textContent='+91 '+document.getElementById('rsPhone').value;
-      document.getElementById('rsStepDone').style.display='block';
-    },900);
+    var ph=document.getElementById('rsPhone').value;
+    document.getElementById('rateShareModal').style.display='none';
+    window.__requestOtpSign(ph,'Confirm before sharing rates',function(){
+      document.getElementById('rateShareModal').style.display='block';
+      document.getElementById('rsStepPhone').style.display='none';
+      document.getElementById('rsStepSending').style.display='block';
+      setTimeout(function(){
+        document.getElementById('rsStepSending').style.display='none';
+        document.getElementById('rsDonePhone').textContent='+91 '+ph;
+        document.getElementById('rsStepDone').style.display='block';
+      },900);
+    });
   };
   function closeRateShare(){ document.getElementById('rateShareModal').style.display='none'; }
   document.getElementById('rateShareClose').onclick=closeRateShare;
   document.getElementById('rateShareBackdrop').onclick=closeRateShare;
   document.getElementById('rsDone').onclick=function(){ closeRateShare(); toast('Rates shared on WhatsApp.'); };
+  // ---- shared OTP + signature verification: any touchpoint that captures personal info routes
+  // through here. One OTP stays valid for 15 minutes across ALL touchpoints for the same phone —
+  // verifying once (drawer, end-session, rate share, billing) covers the others in that window.
+  // A signature is still captured fresh every time; only the OTP identity-check is reused.
+  window.__otpVerified={phone:null,until:0};
+  function isOtpValid(phone){ return !!phone && window.__otpVerified.phone===phone && Date.now()<window.__otpVerified.until; }
+  function markOtpValid(phone){ if(phone) window.__otpVerified={phone:phone,until:Date.now()+15*60*1000}; }
+  window.__isOtpValid=isOtpValid; window.__markOtpValid=markOtpValid;
+  (function(){
+    var _osOtpBoxes=[].slice.call(document.querySelectorAll('#osOtpBoxes .otpBox'));
+    var _osOtpIv=null, _osPhone=null, _osCallback=null;
+    function osShow(id){ ['osStepStart','osStepEnter','osStepSign','osStepDone'].forEach(function(x){ var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none'; }); }
+    function osGetOtp(){ return _osOtpBoxes.map(function(b){return b.value;}).join(''); }
+    function osStartResend(){
+      var el=document.getElementById('osResend'); if(!el) return;
+      clearInterval(_osOtpIv); var s=30; el.style.cursor='default'; el.style.color='#A99F92'; el.textContent='Resend in 0:'+(s<10?'0'+s:s);
+      _osOtpIv=setInterval(function(){ s--; if(s<=0){ clearInterval(_osOtpIv); el.textContent='Resend OTP'; el.style.color='#2b5198'; el.style.cursor='pointer'; } else { el.textContent='Resend in 0:'+(s<10?'0'+s:s); } },1000);
+    }
+    function osSendOtp(){
+      var d2=document.getElementById('osDest2'); if(d2) d2.textContent='•••• '+_osPhone.slice(-4);
+      osShow('osStepEnter');
+      _osOtpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');});
+      if(_osOtpBoxes[0])_osOtpBoxes[0].focus();
+      osStartResend();
+    }
+    _osOtpBoxes.forEach(function(b,i){
+      b.addEventListener('input',function(){
+        b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value);
+        if(b.value&&i<_osOtpBoxes.length-1)_osOtpBoxes[i+1].focus();
+        if(osGetOtp().length===6){ osShow('osStepSign'); osFitSig(); }
+      });
+      b.addEventListener('keydown',function(e){ if(e.key==='Backspace'&&!b.value&&i>0){_osOtpBoxes[i-1].focus();} });
+      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<_osOtpBoxes.length;j++){_osOtpBoxes[j].value=d[j]||'';_osOtpBoxes[j].classList.toggle('filled',!!d[j]);} (_osOtpBoxes[Math.min(d.length,5)]||b).focus(); if(osGetOtp().length===6){ osShow('osStepSign'); osFitSig(); } });
+    });
+    var _osResendEl=document.getElementById('osResend'); if(_osResendEl) _osResendEl.onclick=function(){ if(_osResendEl.style.cursor==='pointer'){ osSendOtp(); toast('A new OTP has been sent.'); } };
+    var _osSendBtn=document.getElementById('osSend'); if(_osSendBtn) _osSendBtn.onclick=osSendOtp;
+    // signature canvas — same drawn-not-typed approach as the billing verify page's pad
+    var _osCanvas=document.getElementById('osSigCanvas'), _osCtx=_osCanvas?_osCanvas.getContext('2d'):null, _osDrawing=false;
+    function osFitSig(){
+      if(!_osCanvas||!_osCtx) return;
+      var rect=_osCanvas.getBoundingClientRect(); if(!rect.width||!rect.height) return;
+      var dpr=window.devicePixelRatio||1;
+      _osCanvas.width=rect.width*dpr; _osCanvas.height=rect.height*dpr;
+      _osCtx.setTransform(1,0,0,1,0,0); _osCtx.scale(dpr,dpr);
+      _osCtx.lineWidth=2.2; _osCtx.lineCap='round'; _osCtx.lineJoin='round'; _osCtx.strokeStyle='#0A2A66';
+    }
+    function osPt(e){ var rect=_osCanvas.getBoundingClientRect(); return {x:e.clientX-rect.left,y:e.clientY-rect.top}; }
+    function osStart(e){ _osDrawing=true; window.__osSigDrawn=true; var ph=document.getElementById('osSigPlaceholder'); if(ph) ph.style.display='none'; var p=osPt(e); _osCtx.beginPath(); _osCtx.moveTo(p.x,p.y); osSyncConfirm(); e.preventDefault(); }
+    function osMove(e){ if(!_osDrawing) return; var p=osPt(e); _osCtx.lineTo(p.x,p.y); _osCtx.stroke(); e.preventDefault(); }
+    function osStop(){ _osDrawing=false; }
+    if(_osCanvas){ _osCanvas.addEventListener('pointerdown',osStart); _osCanvas.addEventListener('pointermove',osMove); window.addEventListener('pointerup',osStop); }
+    function osResetSig(){ window.__osSigDrawn=false; if(_osCtx&&_osCanvas) _osCtx.clearRect(0,0,_osCanvas.width,_osCanvas.height); var ph=document.getElementById('osSigPlaceholder'); if(ph) ph.style.display='block'; osSyncConfirm(); }
+    function osSyncConfirm(){ var b=document.getElementById('osConfirm'); if(b) b.classList.toggle('disabled',!window.__osSigDrawn); }
+    var _osClearBtn=document.getElementById('osSigClear'); if(_osClearBtn) _osClearBtn.onclick=function(){ osResetSig(); };
+    var _osConfirmBtn=document.getElementById('osConfirm'); if(_osConfirmBtn) _osConfirmBtn.onclick=function(){
+      if(this.classList.contains('disabled')) return;
+      markOtpValid(_osPhone);
+      osShow('osStepDone');
+      setTimeout(function(){
+        document.getElementById('otpSignModal').style.display='none';
+        var cb=_osCallback; _osCallback=null;
+        if(cb) cb();
+      },900);
+    };
+    function osClose(){ clearInterval(_osOtpIv); document.getElementById('otpSignModal').style.display='none'; _osCallback=null; }
+    var _osCloseBtn=document.getElementById('otpSignClose'); if(_osCloseBtn) _osCloseBtn.onclick=osClose;
+    var _osBackdrop=document.getElementById('otpSignBackdrop'); if(_osBackdrop) _osBackdrop.onclick=osClose;
+    // Main entry point: requestOtpSign(phone, label, onDone). Skips straight to the signature
+    // step if this phone already verified an OTP within the last 15 minutes.
+    window.__requestOtpSign=function(phone, label, onDone){
+      if(!phone||phone.length!==10){ toast('A 10-digit mobile number is needed first.'); return; }
+      _osPhone=phone; _osCallback=onDone;
+      var t=document.getElementById('otpSignTitle'); if(t) t.textContent=label||'Confirm with OTP';
+      var d=document.getElementById('osDest'); if(d) d.textContent='+91 '+phone;
+      osResetSig();
+      document.getElementById('otpSignModal').style.display='block';
+      if(isOtpValid(phone)){
+        var already=document.getElementById('osOtpAlready'); if(already) already.style.display='flex';
+        osShow('osStepSign'); osFitSig();
+      } else {
+        var already2=document.getElementById('osOtpAlready'); if(already2) already2.style.display='none';
+        osShow('osStepStart');
+      }
+    };
+  })();
 
   // ---- product search screen + view toggle (v2) ----
   function setToggle(which){
