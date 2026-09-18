@@ -121,9 +121,7 @@
   .traythumbImgWrap{position:relative;width:64px;height:64px;border-radius:11px;border:1px solid #E8E1D6;background:#F4EEE4;}
   .traythumbImgWrap img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block;}
   .traythumbRate{font-family:'DM Sans';font-weight:700;font-size:10.5px;color:#0A2A66;white-space:nowrap;line-height:1;}
-  .traySetGroup{display:flex;flex-direction:column;gap:5px;padding:8px 10px 7px;border:1.5px solid #C4D5FB;border-radius:16px;background:#F7FAFF;flex:none;}
-  .traySetGroup .traySetLabel{font-family:'DM Sans';font-weight:700;font-size:9.5px;letter-spacing:.4px;text-transform:uppercase;color:#2B5198;}
-  .traySetGroup .traySetRow{display:flex;gap:10px;}
+  .traySetGroup{display:flex;gap:10px;padding:9px 10px;border:1.5px solid #C4D5FB;border-radius:16px;background:#F7FAFF;flex:none;}
   .traythumb .x{position:absolute;top:-7px;right:-7px;width:22px;height:22px;border-radius:50%;background:#0A2A66;border:1.5px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;line-height:1;z-index:5;box-shadow:0 1px 4px rgba(0,0,0,0.3);}
   .estItem{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:12px;}
 
@@ -446,7 +444,7 @@
 <div class="view" id="viewPDP" style="display:none;">
   <div class="bar"></div>
   <div class="viewToggle" style="padding:12px 40px 0;display:flex;flex:none;"><div style="flex:1;background:#F7FAFE;border:1px solid #E2EBFF;border-radius:14px;padding:8px;display:flex;gap:8px;"><button class="tgProduct" style="flex:1;height:40px;border:none;border-radius:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;background:transparent;color:#343330;box-shadow:none;">Product View</button><button class="tgCatalogue" style="flex:1;height:40px;border:none;border-radius:11px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Catalogue View</button></div></div>
-  <div id="pdpScroll" style="flex:1;overflow-y:auto;padding:16px 40px 120px;">
+  <div id="pdpScroll" style="flex:1;overflow-y:auto;padding:16px 40px 138px;">
     <div style="display:flex;gap:30px;align-items:flex-start;">
       <div style="width:320px;flex:none;">
         <div style="border:1px solid #E2EBFF;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 4px 6px rgba(0,0,0,0.06);">
@@ -506,7 +504,7 @@
       </div>
     </div>
   </div>
-  <div class="traybar" style="position:absolute;left:0;right:0;bottom:0;height:100px;background:#fff;border-top:1px solid #ECE5DA;box-shadow:0 -4px 16px rgba(10,27,51,0.06);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:20;"><div style="flex:none;width:200px;display:flex;flex-direction:column;gap:3px;"><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Items</span><span class="tsv tItems">0</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Discount</span><span class="tsv tDisc">—</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Amount</span><span class="tsv tAmt" style="font-weight:700;">₹0</span></div></div><span style="width:1px;height:50px;background:#ECE5DA;flex:none;"></span><button class="trayArrow trayPrev" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button><div class="trayThumbs" style="flex:0 1 auto;display:flex;align-items:center;gap:12px;overflow-x:auto;min-width:0;max-width:560px;padding:10px 12px 8px 8px;"><span class="trayEmpty" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">Add pieces to build the estimate.</span></div><button class="trayArrow trayNext" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button><button class="trayAddMore" style="flex:none;height:44px;padding:0 16px;border:1px solid #D9E0EF;border-radius:11px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;">+ Add More</button><button class="trayClear" style="display:none;flex:none;height:44px;padding:0 16px;border:1px solid #E2DAC9;border-radius:11px;background:#fff;color:#6E6358;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;align-items:center;justify-content:center;line-height:1;">Clear All</button><button class="estBtn disabled" style="flex:none;height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:9px;opacity:0.4;pointer-events:none;">View Total Estimate <svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="display:inline-block;vertical-align:middle;color:#fff;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>
+  <div class="traybar" style="position:absolute;left:0;right:0;bottom:0;height:118px;background:#fff;border-top:1px solid #ECE5DA;box-shadow:0 -4px 16px rgba(10,27,51,0.06);display:flex;align-items:center;gap:16px;padding:0 28px;z-index:20;"><div style="flex:none;width:200px;display:flex;flex-direction:column;gap:3px;"><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Items</span><span class="tsv tItems">0</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Discount</span><span class="tsv tDisc">—</span></div><div style="display:flex;justify-content:space-between;"><span class="tsl">Total Amount</span><span class="tsv tAmt" style="font-weight:700;">₹0</span></div></div><span style="width:1px;height:50px;background:#ECE5DA;flex:none;"></span><button class="trayArrow trayPrev" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 6s-6 4.419-6 6s6 6 6 6"/></svg></button><div class="trayThumbs" style="flex:0 1 auto;display:flex;align-items:center;gap:12px;overflow-x:auto;min-width:0;max-width:560px;padding:16px 12px 14px 8px;"><span class="trayEmpty" style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">Add pieces to build the estimate.</span></div><button class="trayArrow trayNext" style="display:none;width:34px;height:34px;border-radius:50%;border:1px solid #E2DAC9;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button><button class="trayAddMore" style="flex:none;height:44px;padding:0 16px;border:1px solid #D9E0EF;border-radius:11px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;">+ Add More</button><button class="trayClear" style="display:none;flex:none;height:44px;padding:0 16px;border:1px solid #E2DAC9;border-radius:11px;background:#fff;color:#6E6358;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;align-items:center;justify-content:center;line-height:1;">Clear All</button><button class="estBtn disabled" style="flex:none;height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:9px;opacity:0.4;pointer-events:none;">View Total Estimate <svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="display:inline-block;vertical-align:middle;color:#fff;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>
 </div>
 <div class="view" id="viewBilling" style="display:none;">
       <div class="bar"></div>
@@ -521,8 +519,28 @@
           </div>
           <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Gender <span style="font-weight:500;font-size:12px;color:#9B8F7E;">&mdash; optional</span></span><div id="bfGender" style="display:flex;flex-wrap:wrap;gap:10px;"><span class="chip" data-g="Male" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Male</span><span class="chip" data-g="Female" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Female</span><span class="chip" data-g="Other" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Other</span></div></div>
           <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Purchasing for <span style="font-weight:500;font-size:12px;color:#9B8F7E;">&mdash; optional</span></span><div id="bfPurpose" style="display:flex;flex-wrap:wrap;gap:10px;"><span class="chip" data-p="Self" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Self</span><span class="chip" data-p="Spouse" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Spouse</span><span class="chip" data-p="Kids" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Kids</span><span class="chip" data-p="Mother" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Mother</span><span class="chip" data-p="Siblings" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Siblings</span><span class="chip" data-p="Friends" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Friends</span><span class="chip" data-p="Other relatives" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Other relatives</span><span class="chip" data-p="Prefer not to say" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#FFFDF9;border:1px solid #E8E1D6;border-radius:40px;font-family:'DM Sans',sans-serif;font-weight:500;font-size:14px;color:#3A4252;cursor:pointer;white-space:nowrap;transition:all .15s;">Prefer not to say</span></div></div>
-          <div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Billing Address*</span><textarea id="bfAddr" class="billField" placeholder="Flat / Street / City / State / PIN &mdash; the bill will be generated on this address"></textarea></div>
-          <div id="bfPanSection" style="display:none;flex-direction:column;gap:10px;width:100%;border-top:1px solid #EADFC9;margin-top:4px;padding-top:20px;"><span class="bfLab">PAN Card* <span style="font-weight:500;font-size:12.5px;color:#8A7A4A;">&mdash; required for purchases above &#8377; 2,00,000</span></span><div style="display:flex;gap:12px;align-items:center;"><input id="bfPan" class="billField" maxlength="10" placeholder="ABCDE1234F" style="flex:1;text-transform:uppercase;letter-spacing:1px;font-weight:600;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10)"/><button id="bfPanVerify" style="height:50px;padding:0 22px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;white-space:nowrap;flex:none;">Verify</button></div><div id="bfPanStatus" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#008838;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>PAN verified &amp; details fetched</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;width:100%;">
+            <span class="bfLab">Billing Address*</span>
+            <textarea id="bfAddrLine" class="billField" placeholder="Flat / Street / Locality &mdash; the bill will be generated on this address"></textarea>
+            <div style="display:flex;gap:12px;width:100%;">
+              <div style="flex:0.8;"><input id="bfPin" class="billField" maxlength="6" inputmode="numeric" placeholder="PIN code" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,6)"/></div>
+              <div style="flex:1;"><input id="bfCity" class="billField" placeholder="City"/></div>
+              <div style="flex:1;"><input id="bfState" class="billField" placeholder="State"/></div>
+            </div>
+          </div>
+          <div id="bfPanSection" style="display:none;flex-direction:column;gap:10px;width:100%;border-top:1px solid #EADFC9;margin-top:4px;padding-top:20px;">
+            <span class="bfLab">PAN Card* <span style="font-weight:500;font-size:12.5px;color:#8A7A4A;">&mdash; required for purchases above &#8377; 2,00,000</span></span>
+            <div style="position:relative;width:100%;">
+              <input id="bfPan" class="billField" maxlength="10" placeholder="ABCDE1234F" style="width:100%;padding-right:56px;text-transform:uppercase;letter-spacing:1px;font-weight:600;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10)"/>
+              <button type="button" id="bfPanScanBtn" title="Scan PAN card" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);width:38px;height:38px;border:none;border-radius:9px;background:#F4EEE4;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8A6A1C;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg></button>
+            </div>
+            <div id="bfPanVerifyRow" style="display:none;align-items:center;justify-content:space-between;gap:10px;">
+              <span style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:#9B8F7E;">Fetched from card &mdash; confirm with government records</span>
+              <button type="button" id="bfPanVerify" style="height:34px;padding:0 16px;border:1px solid #C4D5FB;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;flex:none;white-space:nowrap;">Verify with SETU</button>
+            </div>
+            <div id="bfPanVerifying" style="display:none;align-items:center;gap:8px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;"><span class="spin" style="width:14px;height:14px;border-radius:50%;border:2px solid #EADFC6;border-top-color:#C8A14A;display:inline-block;"></span>Verifying with SETU (Government of India)&hellip;</div>
+            <div id="bfPanStatus" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#008838;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>PAN verified via SETU</div>
+          </div>
           <div id="billTenders" style="border-top:1px solid #ECE5DA;margin-top:10px;padding-top:22px;display:flex;flex-direction:column;gap:16px;"><div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;">Available Tenders</span><span style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#796d62;">Points, schemes and advances this customer can redeem</span></div><div id="tenderRows" style="display:flex;flex-direction:column;gap:16px;"></div></div><div id="billNoTenders" style="display:none;border:1px dashed #E2DAC9;border-radius:12px;padding:16px;background:#FCFBF9;"><div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;margin-bottom:4px;">No tenders to redeem</div><div style="font-family:'DM Sans';font-weight:400;font-size:13px;line-height:1.5;color:#796d62;">This customer has no loyalty points, schemes or advances on record. You can still capture their billing details and continue to payment.</div></div>
           <div id="billConsentSection" style="border-top:1px solid #ECE5DA;margin-top:10px;padding-top:22px;display:flex;flex-direction:column;gap:14px;">
             <div style="display:flex;flex-direction:column;gap:6px;"><span style="font-family:'DM Sans';font-weight:700;font-size:15px;color:#1a1917;">Their Consent</span><span style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#796d62;">Please hand them the tablet to review and confirm &mdash; this covers exactly what&rsquo;s below, nothing more.</span></div>
@@ -565,6 +583,14 @@
             </div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;"><span class="tenderChk" id="vfConsent"></span><span id="vfConsentLabel" style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#2b5198;">I consent to the redemption of the above selected tenders*</span></div>
+          <div id="vfSignSection" style="display:none;flex-direction:column;gap:10px;">
+            <span class="bfLab">Customer&rsquo;s Signature* <span style="font-weight:400;font-size:12.5px;color:#9B8F7E;">&mdash; have them sign below to confirm</span></span>
+            <div style="position:relative;width:100%;height:130px;border:1px solid #CCC;border-radius:12px;background:#fff;overflow:hidden;">
+              <canvas id="sigCanvas" style="width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;"></canvas>
+              <span id="sigPlaceholder" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:'DM Sans';font-weight:400;font-size:13px;color:#C9BFB0;pointer-events:none;">Sign here</span>
+              <button type="button" id="sigClear" style="position:absolute;right:10px;top:10px;height:28px;padding:0 12px;border:1px solid #E2DAC9;border-radius:8px;background:#fff;color:#7C7268;font-family:'DM Sans';font-weight:600;font-size:11.5px;cursor:pointer;">Clear</button>
+            </div>
+          </div>
         </div>
       </div>
       <div style="position:absolute;left:0;right:0;bottom:0;background:#fff;box-shadow:0 -1px 6px rgba(26,25,23,0.12);padding:24px;display:flex;justify-content:center;">
@@ -844,18 +870,6 @@
         <div style="height:1px;background:#F0EBE1;margin:22px 0 2px;"></div>
         <div style="display:grid;grid-template-columns:1.2fr 1.3fr 1fr 52px;padding:14px 6px 8px;font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:0.8px;text-transform:uppercase;color:#9B8F7E;"><span>City</span><span>Store</span><span>Serial No</span><span></span></div>
         <div id="invRows"></div>
-      </div>
-    </div>
-  </div>
-  <div id="panModal" style="display:none;position:absolute;inset:0;z-index:85;">
-    <div id="panBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
-    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;max-width:calc(100% - 48px);background:#fff;border:1px solid #ECE5DA;border-radius:18px;box-shadow:0 32px 60px rgba(26,25,23,0.28);padding:28px 28px 24px;text-align:center;">
-      <span style="width:56px;height:56px;border-radius:50%;background:rgba(192,73,43,0.10);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="#C0492B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v4M12 17h.01"/></svg></span>
-      <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:20px;color:#1a1917;">Couldn&rsquo;t verify PAN</div>
-      <div style="font-family:'DM Sans';font-weight:400;font-size:14px;color:#796d62;line-height:21px;margin-top:8px;">We couldn&rsquo;t verify this PAN with government records right now. Re-enter the details, or scan the physical PAN card to fetch them automatically.</div>
-      <div style="display:flex;flex-direction:column;gap:10px;margin-top:22px;">
-        <button id="panScanBtn" style="width:100%;height:46px;border:none;border-radius:12px;background:linear-gradient(90deg,#184ba9,#0640ab,#3d76e3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Scan PAN card</button>
-        <button id="panRetry" style="width:100%;height:46px;border:1px solid #C4D5FB;border-radius:12px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Enter manually again</button>
       </div>
     </div>
   </div>
@@ -1638,16 +1652,14 @@
       var idxs=bySet[setName]; if(idxs.length<2) return;
       var thumbs=idxs.map(function(i){ return container.querySelector('.traythumb[data-i="'+i+'"]'); }).filter(Boolean);
       if(thumbs.length<2) return;
+      // The border alone reads as "these belong together" — no separate label needed.
       var wrap=document.createElement('div'); wrap.className='traySetGroup';
-      var label=document.createElement('span'); label.className='traySetLabel'; label.textContent=setName;
-      var row=document.createElement('div'); row.className='traySetRow';
-      thumbs.forEach(function(t){ row.appendChild(t); });
-      wrap.appendChild(label); wrap.appendChild(row);
+      thumbs.forEach(function(t){ wrap.appendChild(t); });
       container.insertBefore(wrap, container.firstChild);
     });
   }
   function syncTrayBarHeight(hasGroup){
-    var barH=hasGroup?132:100, padB=barH+20;
+    var barH=hasGroup?124:118, padB=barH+20;
     document.querySelectorAll('.traybar').forEach(function(bar){ bar.style.height=barH+'px'; });
     var ps=document.getElementById('pdpScroll'); if(ps) ps.style.paddingBottom=padB+'px';
   }
@@ -1795,10 +1807,10 @@
   document.querySelectorAll('#viewCatalogue .estBtn').forEach(function(b){ if(b.firstChild) b.firstChild.nodeValue='View product description page '; b.onclick=function(){ if(tray.length) openPDP(tray[tray.length-1]); }; });
   document.getElementById('estClose').onclick=closeEstimate;
   document.getElementById('estBackdrop').onclick=closeEstimate;
-  document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&CUR&&CUR.phone?CUR.phone:''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; var nd=document.getElementById('bfDob'); if(nd) nd.value=known&&CUR&&CUR.dob?CUR.dob:''; var ne=document.getElementById('bfEmail'); if(ne) ne.value=known&&CUR&&CUR.email?CUR.email:''; var _cnt=(window.__renderTenders?window.__renderTenders():0); var _bt=document.getElementById('billTenders'),_bn=document.getElementById('billNoTenders'); if(_bt)_bt.style.display=_cnt>0?'flex':'none'; if(_bn)_bn.style.display=_cnt>0?'none':'block'; window.__hasTenders=_cnt>0; var _gt=0; if(typeof tray!=='undefined'){tray.forEach(function(it){var _sub=priceNum(it.price)||0;_gt+=_sub+Math.round(_sub*0.03);});} window.__orderTotal=_gt; var _panS=document.getElementById('bfPanSection'); if(_panS)_panS.style.display=(_gt>200000)?'flex':'none'; var _panNote=document.getElementById('billConsentPanNote'); if(_panNote)_panNote.style.display=(_gt>200000)?'inline':'none'; window.__panVerified=false; var _panSt=document.getElementById('bfPanStatus'); if(_panSt)_panSt.style.display='none'; var _panIn=document.getElementById('bfPan'); if(_panIn)_panIn.value=''; window.__purpose=null; window.__gender=null; document.querySelectorAll('#bfPurpose .chip,#bfGender .chip').forEach(function(x){x.classList.remove('sel');}); var _bcE=document.getElementById('billConsent'); if(_bcE)_bcE.classList.remove('on'); var _bcLg=document.getElementById('billConsentLog'); if(_bcLg)_bcLg.style.display='none'; closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
+  document.getElementById('estContinue').onclick=function(){ var act=['viewSession','viewProfile','viewCatalogue','viewPDP'].filter(function(v){var e=document.getElementById(v);return e&&getComputedStyle(e).display!=='none';})[0]||'viewCatalogue'; window.__billReturn=act; var known=!!(CUR&&CUR.detailed); var nn=document.getElementById('bfNum'); if(nn) nn.value=known&&CUR&&CUR.phone?CUR.phone:''; var na=document.getElementById('bfName'); if(na) na.value=known&&CUR?(CUR.name||''):''; var nd=document.getElementById('bfDob'); if(nd) nd.value=known&&CUR&&CUR.dob?CUR.dob:''; var ne=document.getElementById('bfEmail'); if(ne) ne.value=known&&CUR&&CUR.email?CUR.email:''; var _cnt=(window.__renderTenders?window.__renderTenders():0); var _bt=document.getElementById('billTenders'),_bn=document.getElementById('billNoTenders'); if(_bt)_bt.style.display=_cnt>0?'flex':'none'; if(_bn)_bn.style.display=_cnt>0?'none':'block'; window.__hasTenders=_cnt>0; var _gt=0; if(typeof tray!=='undefined'){tray.forEach(function(it){var _sub=priceNum(it.price)||0;_gt+=_sub+Math.round(_sub*0.03);});} window.__orderTotal=_gt; var _panS=document.getElementById('bfPanSection'); if(_panS)_panS.style.display=(_gt>200000)?'flex':'none'; var _panNote=document.getElementById('billConsentPanNote'); if(_panNote)_panNote.style.display=(_gt>200000)?'inline':'none'; window.__panVerified=false; var _panSt=document.getElementById('bfPanStatus'); if(_panSt)_panSt.style.display='none'; var _panVr=document.getElementById('bfPanVerifyRow'); if(_panVr)_panVr.style.display='none'; var _panVg=document.getElementById('bfPanVerifying'); if(_panVg)_panVg.style.display='none'; var _panIn=document.getElementById('bfPan'); if(_panIn)_panIn.value=''; window.__purpose=null; window.__gender=null; document.querySelectorAll('#bfPurpose .chip,#bfGender .chip').forEach(function(x){x.classList.remove('sel');}); var _bcE=document.getElementById('billConsent'); if(_bcE)_bcE.classList.remove('on'); var _bcLg=document.getElementById('billConsentLog'); if(_bcLg)_bcLg.style.display='none'; closeEstimate(); showView('viewBilling'); if(window.__billSync)window.__billSync(); };
   (function(){
     function val(id){var e=document.getElementById(id);return e?e.value.trim():'';}
-    function billSync(){ var _bc=document.getElementById('billConsent'); var okv=val('bfNum')&&val('bfName')&&val('bfAddr')&&!!(_bc&&_bc.classList.contains('on')); if(window.__orderTotal>200000){okv=okv&&!!window.__panVerified;} var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
+    function billSync(){ var _bc=document.getElementById('billConsent'); var okv=val('bfNum')&&val('bfName')&&val('bfAddrLine')&&val('bfPin')&&val('bfCity')&&val('bfState')&&!!(_bc&&_bc.classList.contains('on')); if(window.__orderTotal>200000){okv=okv&&!!window.__panVerified;} var pr=document.getElementById('billProceed'); if(pr){pr.style.opacity=okv?'1':'0.5';pr.style.pointerEvents=okv?'auto':'none';} }
     window.__billSync=billSync;
     function billRecog(){
       var ph=val('bfNum'); var k=(typeof KNOWN!=='undefined')?KNOWN[ph]:null;
@@ -1834,19 +1846,60 @@
 
     var bk=document.getElementById('billBack'); if(bk) bk.onclick=function(){ showView(window.__billReturn||'viewCatalogue'); if(typeof openEstimate==='function'&&tray.length) openEstimate(); };
     document.querySelectorAll('#tenderRows .tenderChk').forEach(function(c){ c.onclick=function(){ c.classList.toggle('on'); billSync(); }; });
-    ['bfNum','bfName','bfAddr','bfDob','bfEmail'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('input',billSync);});
+    ['bfNum','bfName','bfAddrLine','bfPin','bfCity','bfState','bfDob','bfEmail'].forEach(function(id){var e=document.getElementById(id); if(e) e.addEventListener('input',billSync);});
+    // PIN drives city/state, never the other way round — a JC keying in a PIN shouldn't also
+    // have to type the city/state they already implied. Still editable after, for the rare miss.
+    var PIN_LOOKUP={'400050':['Mumbai','Maharashtra'],'400051':['Mumbai','Maharashtra'],'400052':['Mumbai','Maharashtra'],'400001':['Mumbai','Maharashtra'],'110001':['New Delhi','Delhi'],'560001':['Bengaluru','Karnataka'],'380001':['Ahmedabad','Gujarat'],'700001':['Kolkata','West Bengal'],'600001':['Chennai','Tamil Nadu'],'411001':['Pune','Maharashtra']};
+    var PIN_PREFIX={'40':['Mumbai','Maharashtra'],'11':['New Delhi','Delhi'],'56':['Bengaluru','Karnataka'],'38':['Ahmedabad','Gujarat'],'70':['Kolkata','West Bengal'],'60':['Chennai','Tamil Nadu'],'41':['Pune','Maharashtra'],'30':['Jaipur','Rajasthan'],'20':['Lucknow','Uttar Pradesh']};
+    var _bfPinEl=document.getElementById('bfPin');
+    if(_bfPinEl) _bfPinEl.addEventListener('input',function(){
+      if(this.value.length!==6) return;
+      var loc=PIN_LOOKUP[this.value]||PIN_PREFIX[this.value.slice(0,2)];
+      var cityEl=document.getElementById('bfCity'), stateEl=document.getElementById('bfState');
+      if(loc){ if(cityEl) cityEl.value=loc[0]; if(stateEl) stateEl.value=loc[1]; billSync(); }
+      else if(cityEl&&!cityEl.value){ cityEl.placeholder='City (couldn\'t auto-detect)'; }
+    });
     var pr=document.getElementById('billProceed'); if(pr) pr.onclick=function(){ var sel=[].slice.call(document.querySelectorAll('#tenderRows .tenderChk.on')); window.__redeemCount=sel.length; var total=0,html=''; sel.forEach(function(c){ var nm=c.getAttribute('data-tname'),disp=c.getAttribute('data-tdisp'),v=parseInt(c.getAttribute('data-tval'),10)||0; total+=v; html+='<div class="vfRow"><span style="font-family:DM Sans,sans-serif;font-weight:500;font-size:14px;color:#796d62;">'+nm+'</span><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14px;color:#2b5198;">'+disp+'</span></div>'; }); document.getElementById('vfList').innerHTML=html; document.getElementById('vfCount').textContent=sel.length+' item'+(sel.length===1?'':'s')+' selected'; document.getElementById('vfTotal').textContent=fmtMoney(total); var _vcl=document.getElementById('vfConsentLabel'); if(_vcl) _vcl.textContent=sel.length>0?'I consent to the redemption of the above selected tenders*':'I confirm this billing is correct and ready to verify*'; document.getElementById('vfName').textContent=val('bfName')||'Customer'; var _n=val('bfNum'); var _mask='•••• '+(_n?_n.slice(-4):''); document.getElementById('otpDest').innerHTML=_mask; document.getElementById('otpDest2').innerHTML=_mask; if(window.__otpReset)window.__otpReset(); document.getElementById('vfConsent').classList.remove('on'); vfSync(); showView('viewVerify'); };
     document.querySelectorAll('#bfGender .chip').forEach(function(p){p.onclick=function(){document.querySelectorAll('#bfGender .chip').forEach(function(x){x.classList.remove('sel');});p.classList.add('sel');window.__gender=p.getAttribute('data-g');};});
     var _bc=document.getElementById('billConsent'); if(_bc) _bc.onclick=function(){ _bc.classList.toggle('on'); var lg=document.getElementById('billConsentLog'); if(lg) lg.style.display=_bc.classList.contains('on')?'inline':'none'; billSync(); };
     document.querySelectorAll('#bfPurpose .chip').forEach(function(p){p.onclick=function(){document.querySelectorAll('#bfPurpose .chip').forEach(function(x){x.classList.remove('sel');});p.classList.add('sel');window.__purpose=p.getAttribute('data-p');billSync();};});
-    function _panClose(){var m=document.getElementById('panModal');if(m)m.style.display='none';}
     function _panScanClose(){var m=document.getElementById('panScan');if(m)m.style.display='none';}
-    var _pvf=document.getElementById('bfPanVerify'); if(_pvf)_pvf.onclick=function(){ if(val('bfPan').length!==10){toast('Enter the full 10-character PAN.');return;} var m=document.getElementById('panModal'); if(m)m.style.display='block'; };
-    var _pbd=document.getElementById('panBackdrop'); if(_pbd)_pbd.onclick=_panClose;
-    var _pry=document.getElementById('panRetry'); if(_pry)_pry.onclick=function(){_panClose();var e=document.getElementById('bfPan');if(e){e.focus();}};
-    var _psb=document.getElementById('panScanBtn'); if(_psb)_psb.onclick=function(){_panClose();var sc=document.getElementById('panScan');if(sc)sc.style.display='flex';setTimeout(function(){_panScanClose();var e=document.getElementById('bfPan');if(e)e.value='ABCDE1234F';window.__panVerified=true;var st=document.getElementById('bfPanStatus');if(st)st.style.display='flex';toast('PAN fetched from card successfully.');billSync();},1700);};
+    // Camera-scan is the primary path now, not a "Verify" button: scanning fetches the PAN
+    // straight into the field, then a separate SETU government-records check runs on it —
+    // fetch and verify are two distinct, visible steps, never merged into one click.
+    function _panSetHidden(){
+      var vr=document.getElementById('bfPanVerifyRow'); if(vr) vr.style.display='none';
+      var vg=document.getElementById('bfPanVerifying'); if(vg) vg.style.display='none';
+      var st=document.getElementById('bfPanStatus'); if(st) st.style.display='none';
+    }
+    function _panStartVerify(){
+      _panSetHidden();
+      var vg=document.getElementById('bfPanVerifying'); if(vg) vg.style.display='flex';
+      setTimeout(function(){
+        if(vg) vg.style.display='none';
+        var st=document.getElementById('bfPanStatus'); if(st) st.style.display='flex';
+        window.__panVerified=true;
+        toast('PAN verified with SETU.');
+        billSync();
+      },1100);
+    }
+    var _psb=document.getElementById('bfPanScanBtn'); if(_psb)_psb.onclick=function(){
+      var sc=document.getElementById('panScan'); if(sc)sc.style.display='flex';
+      setTimeout(function(){
+        _panScanClose();
+        var e=document.getElementById('bfPan'); if(e)e.value='ABCDE1234F';
+        toast('PAN fetched from card.');
+        _panStartVerify();
+      },1700);
+    };
     var _psc=document.getElementById('panScanClose'); if(_psc)_psc.onclick=_panScanClose;
-    var _pin=document.getElementById('bfPan'); if(_pin)_pin.addEventListener('input',function(){window.__panVerified=false;var st=document.getElementById('bfPanStatus');if(st)st.style.display='none';billSync();});
+    var _pvf=document.getElementById('bfPanVerify'); if(_pvf)_pvf.onclick=function(){ _panStartVerify(); };
+    var _pin=document.getElementById('bfPan'); if(_pin)_pin.addEventListener('input',function(){
+      window.__panVerified=false;
+      _panSetHidden();
+      var vr=document.getElementById('bfPanVerifyRow'); if(vr) vr.style.display=this.value.length===10?'flex':'none';
+      billSync();
+    });
     var _dobEl=document.getElementById('bfDob');
     if(_dobEl)_dobEl.addEventListener('input',function(){var d=_dobEl.value.replace(/\D/g,'').slice(0,8);var out=d.slice(0,2);if(d.length>2)out+=' / '+d.slice(2,4);if(d.length>4)out+=' / '+d.slice(4,8);_dobEl.value=out;if(window.__billSync)window.__billSync();});
     var _dobPick=document.getElementById('bfDobPicker');
@@ -1854,22 +1907,55 @@
     // verify wiring
     var otpBoxes=[].slice.call(document.querySelectorAll('#otpBoxes .otpBox'));
     function getOtp(){ return otpBoxes.map(function(b){return b.value;}).join(''); }
-    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfConsent').classList.contains('on'); var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
+    function vfSync(){ var okv=getOtp().length===6 && document.getElementById('vfConsent').classList.contains('on') && !!window.__signatureDrawn; var r=document.getElementById('vfRedeem'); if(r){r.style.opacity=okv?'1':'0.5';r.style.pointerEvents=okv?'auto':'none';} }
     var vb=document.getElementById('vfBack'); if(vb) vb.onclick=function(){ showView('viewBilling'); };
     var ve=document.getElementById('vfEdit'); if(ve) ve.onclick=function(){ showView('viewBilling'); };
     // segmented OTP entry: auto-advance, backspace, paste
+    // The signature section only appears once the OTP is fully entered — signing is the last
+    // step, not something shown upfront alongside a code the JC hasn't even sent yet.
+    function _vfCheckSignReveal(){ var s=document.getElementById('vfSignSection'); if(s) s.style.display=(getOtp().length===6)?'flex':'none'; }
     otpBoxes.forEach(function(b,i){
-      b.addEventListener('input',function(){ b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value); if(b.value&&i<otpBoxes.length-1)otpBoxes[i+1].focus(); vfSync(); });
+      b.addEventListener('input',function(){ b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value); if(b.value&&i<otpBoxes.length-1)otpBoxes[i+1].focus(); _vfCheckSignReveal(); vfSync(); });
       b.addEventListener('keydown',function(e){ if(e.key==='Backspace'&&!b.value&&i>0){otpBoxes[i-1].focus();} });
-      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<otpBoxes.length;j++){otpBoxes[j].value=d[j]||'';otpBoxes[j].classList.toggle('filled',!!d[j]);} (otpBoxes[Math.min(d.length,5)]||b).focus(); vfSync(); });
+      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<otpBoxes.length;j++){otpBoxes[j].value=d[j]||'';otpBoxes[j].classList.toggle('filled',!!d[j]);} (otpBoxes[Math.min(d.length,5)]||b).focus(); _vfCheckSignReveal(); vfSync(); });
     });
     var _otpIv=null;
     function startResend(){ var el=document.getElementById('otpResend'); if(!el)return; clearInterval(_otpIv); var s=30; el.style.cursor='default'; el.style.color='#A99F92'; el.textContent='Resend in 0:'+(s<10?'0'+s:s); _otpIv=setInterval(function(){ s--; if(s<=0){ clearInterval(_otpIv); el.textContent='Resend OTP'; el.style.color='#2b5198'; el.style.cursor='pointer'; } else { el.textContent='Resend in 0:'+(s<10?'0'+s:s); } },1000); }
     function sendOtp(){ var n=val('bfNum'); document.getElementById('otpStart').style.display='none'; var oe=document.getElementById('otpEnter'); oe.style.display='flex'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); toast('OTP sent to \u2022\u2022\u2022\u2022 '+(n?n.slice(-4):'')); }
-    window.__otpReset=function(){ clearInterval(_otpIv); document.getElementById('otpStart').style.display='flex'; document.getElementById('otpEnter').style.display='none'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); };
+    window.__otpReset=function(){ clearInterval(_otpIv); document.getElementById('otpStart').style.display='flex'; document.getElementById('otpEnter').style.display='none'; otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); var ss=document.getElementById('vfSignSection'); if(ss) ss.style.display='none'; if(window.__resetSignature) window.__resetSignature(); };
     var vs=document.getElementById('vfSend'); if(vs) vs.onclick=sendOtp;
     var rs=document.getElementById('otpResend'); if(rs) rs.onclick=function(){ if(rs.style.cursor==='pointer'){ otpBoxes.forEach(function(b){b.value='';b.classList.remove('filled');}); if(otpBoxes[0])otpBoxes[0].focus(); startResend(); vfSync(); toast('A new OTP has been sent.'); } };
-    var sg=document.getElementById('vfSign'); if(sg) sg.onclick=function(){ sg.classList.add('signed'); sg.innerHTML='<span style="font-family:Playfair Display,serif;font-style:italic;font-weight:500;font-size:26px;color:#1a1917;">'+(val('bfName')||'Signed')+'</span>'; vfSync(); };
+    // Customer signature: a real drawn signature (pointer events cover mouse/touch/pen in one
+    // listener), not a tap-to-fill placeholder — this is a tablet handed to the customer.
+    (function(){
+      var canvas=document.getElementById('sigCanvas'); if(!canvas) return;
+      var ctx=canvas.getContext('2d');
+      var placeholder=document.getElementById('sigPlaceholder');
+      var drawing=false;
+      function fitCanvas(){
+        var rect=canvas.getBoundingClientRect(); if(!rect.width||!rect.height) return;
+        var dpr=window.devicePixelRatio||1;
+        canvas.width=rect.width*dpr; canvas.height=rect.height*dpr;
+        ctx.setTransform(1,0,0,1,0,0); ctx.scale(dpr,dpr);
+        ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#0A2A66';
+      }
+      function ptPos(e){ var rect=canvas.getBoundingClientRect(); return {x:e.clientX-rect.left,y:e.clientY-rect.top}; }
+      function start(e){ drawing=true; window.__signatureDrawn=true; if(placeholder) placeholder.style.display='none'; var p=ptPos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); vfSync(); e.preventDefault(); }
+      function move(e){ if(!drawing) return; var p=ptPos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); }
+      function stop(){ drawing=false; }
+      canvas.addEventListener('pointerdown',start);
+      canvas.addEventListener('pointermove',move);
+      window.addEventListener('pointerup',stop);
+      window.__resetSignature=function(){ fitCanvas(); window.__signatureDrawn=false; if(placeholder) placeholder.style.display='block'; };
+      var sc=document.getElementById('sigClear'); if(sc) sc.onclick=function(){ window.__resetSignature(); vfSync(); };
+      // Section starts hidden (display:none), so its canvas has zero size until first shown —
+      // (re)size it every time the signature step actually becomes visible.
+      var _ss=document.getElementById('vfSignSection');
+      if(_ss && typeof MutationObserver!=='undefined'){
+        new MutationObserver(function(){ if(_ss.style.display!=='none') fitCanvas(); }).observe(_ss,{attributes:true,attributeFilter:['style']});
+      }
+      fitCanvas();
+    })();
     var vc=document.getElementById('vfConsent'); if(vc) vc.onclick=function(){ vc.classList.toggle('on'); vfSync(); };
     var vr=document.getElementById('vfRedeem'); if(vr) vr.onclick=function(){ var rc=window.__redeemCount||0; var sub=document.querySelector('#viewDone .doneSub'); if(sub) sub.innerHTML=rc>0?'Your redemption request is verified.<br/>Please proceed to the cash counter for payment.':'Their billing details are captured.<br/>Please proceed to the cash counter for payment.'; if(window.__finalizeSession)window.__finalizeSession('purchased', rc>0?'Redeemed':''); showView('viewDone'); };
     var dh=document.getElementById('doneHome'); if(dh) dh.onclick=function(){ if(typeof stopSession==='function')stopSession(); window.__sessViewed=false; if(typeof reset==='function')reset(); CUR=null; if(typeof updateChrome==='function')updateChrome(); showView('viewHome'); };
