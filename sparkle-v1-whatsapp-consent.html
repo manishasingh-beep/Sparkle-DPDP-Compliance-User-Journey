@@ -158,9 +158,6 @@
   .consentSwitcher .seg{height:28px;padding:0 13px;border-radius:999px;font-family:'DM Sans';font-weight:600;font-size:11.5px;color:#AEB9D6;cursor:pointer;white-space:nowrap;display:flex;align-items:center;transition:background .15s,color .15s;}
   .consentSwitcher .seg:hover{color:#fff;}
   .consentSwitcher .seg.on{background:#fff;color:#0A1B33;}
-  .v2btn{flex:1;text-align:center;padding:9px 0;border-radius:8px;font-weight:600;font-size:12.5px;cursor:pointer;font-family:'DM Sans';}
-  .v2btn.yes{background:#0A2A66;color:#fff;}
-  .v2btn.no{border:1px solid #E2DAC9;color:#655F51;}
 
   .shimmerAttn{position:relative;overflow:hidden;border:1px solid #C4D5FB !important;background:#fff !important;}
   .shimmerAttn::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.65),transparent);transform:skewX(-20deg);animation:shimmerSweep 2.8s ease-in-out infinite;pointer-events:none;}
@@ -467,10 +464,15 @@
         <h1 id="pdpName" style="font-family:'Playfair Display',serif;font-weight:600;font-size:23px;color:#0A2A66;line-height:28px;">22KT Yellow Gold with Stone Neckwear - Choker.</h1>
         <div style="display:flex;align-items:center;gap:8px;margin-top:3px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;"><span>Item OEAYA80-ACNL851</span><span style="width:4px;height:4px;border-radius:50%;background:#C9BFB0;"></span><span id="pdpSerialVal">Serial A0033666</span><button type="button" id="pdpCopySerial" title="Copy serial number" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;border:none;background:transparent;border-radius:6px;cursor:pointer;color:#9B8F7E;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.2"/><path d="M16 8V6.2A2.2 2.2 0 0 0 13.8 4H6.2A2.2 2.2 0 0 0 4 6.2v7.6A2.2 2.2 0 0 0 6.2 16H8"/></svg></button></div>
         <div style="border:1px solid #E2EBFF;border-radius:12px;margin-top:20px;overflow:hidden;background:#fff;">
-          <div style="background:#F7FAFF;padding:8px;border-bottom:1px solid #E2EBFF;display:flex;gap:6px;">
-            <button type="button" class="pdpInfoTab on" data-t="price" style="flex:1;height:36px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.08);">Price Breakdown</button>
-            <button type="button" class="pdpInfoTab" data-t="stone" style="flex:1;height:36px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13px;background:transparent;color:#655F51;box-shadow:none;">Stone Information</button>
-          </div>
+          <label style="background:#F7FAFF;padding:12px 16px;border-bottom:1px solid #E2EBFF;display:flex;align-items:center;justify-content:space-between;cursor:pointer;">
+            <span id="pdpInfoLabelPrice" style="font-family:'DM Sans';font-weight:700;font-size:13px;color:#2B5198;">Price Breakdown</span>
+            <span style="display:flex;align-items:center;gap:10px;">
+              <span id="pdpInfoLabelStone" style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#655F51;">Stone Information</span>
+              <span id="pdpInfoToggle" role="switch" aria-checked="false" style="position:relative;width:40px;height:22px;border-radius:20px;background:#D9D0C0;transition:background .2s;flex:none;">
+                <span id="pdpInfoThumb" style="position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.2);transition:transform .2s;"></span>
+              </span>
+            </span>
+          </label>
           <div class="pdpInfoPane" data-t="price" style="padding:2px 18px 10px;">
             <div style="display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;border-bottom:1px solid #E2EBFF;"><div style="padding:8px 0;font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:0.6px;color:#9B8F7E;text-transform:uppercase;">Component</div><div style="padding:8px 0;font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:0.6px;color:#9B8F7E;text-transform:uppercase;">Rate</div><div style="padding:8px 0;font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:0.6px;color:#9B8F7E;text-transform:uppercase;">Weight/Qty</div><div style="padding:8px 0;font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:0.6px;color:#9B8F7E;text-transform:uppercase;text-align:right;">Value</div></div>
             <div style="display:grid;grid-template-columns:1.4fr 1fr 1.2fr 1fr;"><div style="padding:8px 0;font-family:'DM Sans';font-size:14px;color:#1A1917;">Gold</div><div style="padding:8px 0;font-family:'DM Sans';font-size:14px;color:#1A1917;">₹9,322/g</div><div style="padding:8px 0;font-family:'DM Sans';font-size:14px;color:#1A1917;">132.369 g</div><div style="padding:8px 0;font-family:'DM Sans';font-size:14px;color:#1A1917;text-align:right;">₹12,33,958</div></div>
@@ -721,19 +723,14 @@
       <div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-top:14px;">Preparing your collection for WhatsApp…</div>
     </div>
     <div id="gmStepConsentChoices" style="display:none;margin-top:18px;">
-      <div style="background:#ECE5DA;border-radius:12px;padding:12px;">
-        <div style="background:#fff;border-radius:10px 10px 10px 2px;padding:14px 16px;font-family:'DM Sans';font-size:13px;color:#1a1917;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.06);">
-          <div style="font-weight:700;">Your Sparkle collection is ready.</div>
-          <div id="gmConsentPreview" style="display:flex;gap:8px;overflow-x:auto;margin-top:10px;"></div>
-          <div style="margin-top:10px;">You can choose how you'd like us to stay connected.</div>
-          <div id="gmPurposeList" style="display:flex;flex-direction:column;gap:12px;margin-top:14px;"></div>
-          <div style="display:flex;gap:10px;margin-top:16px;">
-            <div id="gmConfirmChoices" class="v2btn yes">Yes I agree</div>
-            <div id="gmNoThanks" class="v2btn no">No, don't allow</div>
-          </div>
-        </div>
+      <div style="font-family:'DM Sans';font-weight:700;font-size:14px;color:#1a1917;">Today's collection is ready to send</div>
+      <div id="gmConsentPreview" style="display:flex;gap:8px;overflow-x:auto;margin-top:10px;"></div>
+      <div style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#796d62;line-height:1.5;margin-top:14px;">Choose how Indriya can stay connected with them going forward.</div>
+      <div id="gmPurposeList" style="display:flex;flex-direction:column;gap:14px;margin-top:14px;"></div>
+      <div style="display:flex;gap:10px;margin-top:20px;">
+        <button type="button" id="gmNoThanks" style="flex:1;height:50px;border:1px solid #E2DAC9;border-radius:12px;background:#fff;color:#655F51;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;">Decline All</button>
+        <button type="button" id="gmConfirmChoices" class="gmbtn" style="flex:1;margin-top:0;">Confirm Choices</button>
       </div>
-      <div style="text-align:center;margin-top:10px;font-family:'DM Sans';font-size:11.5px;color:#A99F92;">Sent as a WhatsApp message — each choice is independent.</div>
     </div>
     <div id="gmStepConsentResult" style="display:none;margin-top:18px;">
       <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#0A2A66;">Consent recorded</div>
@@ -836,7 +833,7 @@
   </div>
   <div id="otpSignModal" style="display:none;position:absolute;inset:0;z-index:92;">
     <div id="otpSignBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
-    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:440px;max-width:92%;max-height:88vh;overflow-y:auto;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:16px;">
+    <div id="otpSignSheet" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:440px;max-width:92%;max-height:88vh;overflow-y:auto;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:16px;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
         <div style="display:flex;flex-direction:column;gap:4px;"><span style="font-family:'DM Sans';font-weight:600;font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:#C8A14A;">Verify to continue</span><span id="otpSignTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;">Confirm with OTP</span></div>
         <button type="button" id="otpSignClose" style="width:32px;height:32px;border-radius:50%;border:1px solid #E6E0D6;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6E6358" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -854,10 +851,10 @@
       </div>
       <div id="osStepSign" style="display:none;flex-direction:column;gap:10px;">
         <div id="osOtpAlready" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:12.5px;color:#008838;margin-bottom:4px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Phone already verified &mdash; just sign to confirm</div>
-        <span class="bfLab" style="margin:0;">Customer&rsquo;s Signature* <span style="font-weight:400;font-size:12.5px;color:#9B8F7E;">&mdash; have them sign below</span></span>
-        <div style="position:relative;width:100%;height:120px;border:1px solid #CCC;border-radius:12px;background:#fff;overflow:hidden;">
+        <span class="bfLab" style="margin:0;">Customer&rsquo;s Signature* <span style="font-weight:400;font-size:12.5px;color:#9B8F7E;">&mdash; have them sign below with a finger or stylus</span></span>
+        <div style="position:relative;width:100%;height:280px;border:1px solid #CCC;border-radius:12px;background:#fff;overflow:hidden;">
           <canvas id="osSigCanvas" style="width:100%;height:100%;display:block;cursor:crosshair;touch-action:none;"></canvas>
-          <span id="osSigPlaceholder" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:'DM Sans';font-weight:400;font-size:13px;color:#C9BFB0;pointer-events:none;">Sign here</span>
+          <span id="osSigPlaceholder" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'DM Sans';font-weight:400;font-size:15px;color:#C9BFB0;pointer-events:none;">Sign here</span>
           <button type="button" id="osSigClear" style="position:absolute;right:10px;top:10px;height:28px;padding:0 12px;border:1px solid #E2DAC9;border-radius:8px;background:#fff;color:#7C7268;font-family:'DM Sans';font-weight:600;font-size:11.5px;cursor:pointer;">Clear</button>
         </div>
         <button type="button" id="osConfirm" class="gmbtn disabled" style="margin-top:6px;">Confirm</button>
@@ -1317,7 +1314,7 @@
   }
   // Two separate moments, never merged: 'manual' = JC noting down who the customer is (personal info,
   // no consent involved, available any time for new or returning guests). 'end' = the end-of-session
-  // collection-sharing offer, where WhatsApp purpose-consent actually happens.
+  // collection-sharing offer, where purpose-consent (OTP + signature, captured in person) happens.
   var _gmSheetMode='drawer';
   // Collection-sharing (consent) is a centered pop-up; personal-info capture ("Add guest details")
   // is a side drawer — two visually distinct surfaces so they never read as the same action.
@@ -1435,23 +1432,17 @@
   function goToConsentStep(phone){
     var missing=missingPurposes(phone);
     if(!missing.length){ closeGuestModal(); toast('Already up to date — no new consent needed.'); return; }
+    renderConsentChoices(phone,missing);
     resetGmSteps();
-    document.getElementById('gmStepSending').style.display='block';
-    document.getElementById('gmTitle').textContent='Sending your collection';
-    document.getElementById('gmSubtitle').textContent='One moment…';
-    setTimeout(function(){
-      renderConsentChoices(phone,missing);
-      resetGmSteps();
-      document.getElementById('gmStepConsentChoices').style.display='block';
-      document.getElementById('gmTitle').textContent='Choose how to stay connected';
-      document.getElementById('gmSubtitle').textContent='Sent on WhatsApp — each choice is independent.';
-    },900);
+    document.getElementById('gmStepConsentChoices').style.display='block';
+    document.getElementById('gmTitle').textContent='Choose how to stay connected';
+    document.getElementById('gmSubtitle').textContent='Confirmed in person — each choice is independent.';
   }
   function renderConsentChoices(phone,missing){
     var list=document.getElementById('gmPurposeList'); if(!list) return;
     var known=CUSTOMER_CONSENT[phone]||{};
     list.innerHTML = PURPOSE_ORDER.map(function(p){
-      if(missing.indexOf(p)>-1){ return '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;"><input type="checkbox" class="purposeChk" data-purpose="'+p+'" checked style="margin-top:2px;width:16px;height:16px;accent-color:#0A2A66;flex:none;"/><span>'+PURPOSE_META[p].label+'</span></label>'; }
+      if(missing.indexOf(p)>-1){ return '<label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;background:#FAFAF8;border:1px solid #EFEAE2;border-radius:12px;padding:12px 14px;"><input type="checkbox" class="purposeChk" data-purpose="'+p+'" checked style="margin-top:2px;width:16px;height:16px;accent-color:#0A2A66;flex:none;"/><span style="font-family:\'DM Sans\';font-size:13px;color:#1a1917;line-height:1.4;">'+PURPOSE_META[p].label+'</span></label>'; }
       return '<div style="font-family:\'DM Sans\';font-size:12px;color:#9B8F7E;">'+PURPOSE_META[p].short+' — already '+(known[p]==='allowed'?'on':'off')+' file, no change needed.</div>';
     }).join('');
     var prev=document.getElementById('gmConsentPreview');
@@ -1462,7 +1453,7 @@
     }
   }
   function recordPurposeConsent(phone,purpose,status){
-    CONSENT_LOG.push({sessionId:SESSION_ID,store:'NS0002',mobile:phone||null,purpose:purpose,status:status,channel:'whatsapp',ts:new Date().toISOString(),noticeVersion:'v1'});
+    CONSENT_LOG.push({sessionId:SESSION_ID,store:'NS0002',mobile:phone||null,purpose:purpose,status:status,channel:'in-store (OTP verified)',ts:new Date().toISOString(),noticeVersion:'v1'});
     if(phone){ if(!CUSTOMER_CONSENT[phone]) CUSTOMER_CONSENT[phone]={}; CUSTOMER_CONSENT[phone][purpose]=status; }
   }
   window.__recordPurposeConsent=recordPurposeConsent;
@@ -1476,6 +1467,7 @@
     document.getElementById('gmStepConsentResult').style.display='block';
     document.getElementById('gmTitle').textContent='Consent recorded';
     document.getElementById('gmSubtitle').textContent='Purpose-specific — nothing assumed beyond what they chose.';
+    var doneBtn=document.getElementById('gmResultDone'); if(doneBtn) doneBtn.textContent=(_gmContext==='end')?'Done':'Continue browsing';
     window.__collectionOffered=true;
   }
   document.getElementById('gmOfferSend').onclick=function(){
@@ -1685,15 +1677,28 @@
       closeGuestModal();
     });
   };
+  function gmSendThenResult(ph,msg,sending){
+    if(!sending){ showConsentResult(ph); toast(msg); return; }
+    resetGmSteps();
+    document.getElementById('gmStepSending').style.display='block';
+    document.getElementById('gmTitle').textContent='Sending your collection';
+    document.getElementById('gmSubtitle').textContent='One moment…';
+    setTimeout(function(){ showConsentResult(ph); toast(msg); },900);
+  }
   document.getElementById('gmConfirmChoices').onclick=function(){
     var ph=document.getElementById('gPhone').value;
-    document.querySelectorAll('.purposeChk').forEach(function(chk){ recordPurposeConsent(ph,chk.getAttribute('data-purpose'),chk.checked?'allowed':'declined'); });
-    showConsentResult(ph); toast('Consent recorded.');
+    var sendingCollection=false;
+    document.querySelectorAll('.purposeChk').forEach(function(chk){
+      var purpose=chk.getAttribute('data-purpose');
+      recordPurposeConsent(ph,purpose,chk.checked?'allowed':'declined');
+      if(purpose==='collection'&&chk.checked) sendingCollection=true;
+    });
+    gmSendThenResult(ph,'Consent recorded.',sendingCollection);
   };
   document.getElementById('gmNoThanks').onclick=function(){
     var ph=document.getElementById('gPhone').value;
     document.querySelectorAll('.purposeChk').forEach(function(chk){ recordPurposeConsent(ph,chk.getAttribute('data-purpose'),'declined'); });
-    showConsentResult(ph); toast('No thanks — recorded.');
+    gmSendThenResult(ph,'No thanks — recorded.',false);
   };
   document.getElementById('gmResultDone').onclick=closeGuestModal;
   // ---- back navigation + where catalogue came from ----
@@ -1761,14 +1766,17 @@
   var _pdpBk=document.getElementById('pdpBack'); if(_pdpBk) _pdpBk.onclick=function(){ showView('viewCatalogue'); };
   var _pab=document.getElementById('pdpAdd'); if(_pab) _pab.onclick=function(){var v=document.getElementById('viewPDP'); var ok=addToTray({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); if(ok){this.textContent='Added to selection \u2713';this.style.background='#E7CB8E';} };
   // ---- PDP: Price Breakdown / Stone Information toggle, so both fit without scrolling ----
-  document.querySelectorAll('.pdpInfoTab').forEach(function(b){
-    b.onclick=function(){
-      document.querySelectorAll('.pdpInfoTab').forEach(function(x){ x.classList.remove('on'); x.style.background='transparent'; x.style.color='#655F51'; x.style.boxShadow='none'; });
-      b.classList.add('on'); b.style.background='#fff'; b.style.color='#2B5198'; b.style.boxShadow='0 1px 2px rgba(26,25,23,0.08)';
-      var t=b.getAttribute('data-t');
-      document.querySelectorAll('.pdpInfoPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
-    };
-  });
+  function pdpSetInfo(showStone){
+    var track=document.getElementById('pdpInfoToggle'), thumb=document.getElementById('pdpInfoThumb');
+    var lp=document.getElementById('pdpInfoLabelPrice'), ls=document.getElementById('pdpInfoLabelStone');
+    if(track){ track.style.background=showStone?'#2B5198':'#D9D0C0'; track.setAttribute('aria-checked',showStone?'true':'false'); }
+    if(thumb) thumb.style.transform=showStone?'translateX(18px)':'translateX(0)';
+    if(lp){ lp.style.color=showStone?'#9B8F7E':'#2B5198'; lp.style.fontWeight=showStone?'600':'700'; }
+    if(ls){ ls.style.color=showStone?'#2B5198':'#655F51'; ls.style.fontWeight=showStone?'700':'600'; }
+    document.querySelectorAll('.pdpInfoPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===(showStone?'stone':'price'))?'block':'none'; });
+  }
+  var _pdpInfoTgl=document.getElementById('pdpInfoToggle');
+  if(_pdpInfoTgl){ _pdpInfoTgl.closest('label').onclick=function(){ pdpSetInfo(_pdpInfoTgl.getAttribute('aria-checked')!=='true'); }; }
   // ---- PDP: copy serial number ----
   function copyText(text){
     try{
@@ -2285,7 +2293,10 @@
   (function(){
     var _osOtpBoxes=[].slice.call(document.querySelectorAll('#osOtpBoxes .otpBox'));
     var _osOtpIv=null, _osPhone=null, _osCallback=null;
-    function osShow(id){ ['osStepStart','osStepEnter','osStepSign','osStepDone'].forEach(function(x){ var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none'; }); }
+    function osShow(id){
+      ['osStepStart','osStepEnter','osStepSign','osStepDone'].forEach(function(x){ var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none'; });
+      var sheet=document.getElementById('otpSignSheet'); if(sheet) sheet.style.width=(id==='osStepSign')?'640px':'440px';
+    }
     function osGetOtp(){ return _osOtpBoxes.map(function(b){return b.value;}).join(''); }
     function osStartResend(){
       var el=document.getElementById('osResend'); if(!el) return;
