@@ -44,13 +44,9 @@
   .hCalApplyBtn{height:36px;padding:0 16px;border:none;border-radius:9px;background:linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;flex:none;transition:opacity .15s;}
   .hCalApplyBtn.disabled{opacity:.4;pointer-events:none;}
   .hStatCard{background:#fff;border:1px solid #ECE5DA;border-radius:14px;padding:10px 16px;width:150px;flex:none;}
-  .hStatCard.target{background:#fff;border:1px solid #ECE5DA;}
   .hStatLab{font-family:'DM Sans';font-weight:700;font-size:10px;letter-spacing:0.8px;text-transform:uppercase;color:#9B8F7E;}
-  .hStatLab.gold{color:#B89149;}
   .hStatVal{font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:4px;}
   .hStatSub{font-family:'DM Sans';font-weight:600;font-size:12px;color:#3E8E5A;}
-  .hProgressTrack{height:6px;background:rgba(10,42,102,0.09);border-radius:999px;margin-top:6px;overflow:hidden;}
-  .hProgressFill{height:100%;background:#C8A14A;border-radius:999px;transition:width .4s ease;}
   .ongoBadge{display:inline-flex;align-items:center;height:22px;padding:0 10px;background:rgba(200,161,74,0.14);border-radius:20px;font-family:'DM Sans';font-weight:600;font-size:12px;color:#B8902F;}
   .resumeBtn{height:42px;padding:0 18px;border:1.5px solid #0A2A66;border-radius:10px;background:transparent;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:7px;flex:none;}
   .compTag{display:inline-flex;align-items:center;height:26px;padding:0 14px;border-radius:20px;background:rgba(62,142,90,0.14);border:1px solid rgba(62,142,90,0.3);font-family:'DM Sans';font-weight:600;font-size:12px;color:#3E8E5A;white-space:nowrap;flex:none;}
@@ -245,7 +241,7 @@
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;">
           <div>
             <h1 class="greet" style="margin-top:0;">Today&rsquo;s walk-ins<span id="homeCount"></span></h1>
-            <div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#7C7268;margin-top:8px;">Indriya Bandra Store (NS0002), 3/06/2026</div>
+            <div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#7C7268;margin-top:4px;">Indriya Bandra Store (NS0002), 3/06/2026</div>
           </div>
           <button id="startNewBtn" class="save-btn" style="width:200px;height:44px;padding:0;font-size:14px;font-weight:600;flex:none;">Start a New Session</button>
         </div>
@@ -254,11 +250,10 @@
             <div class="hStatCard"><div class="hStatLab">Sessions</div><div class="hStatVal" id="hSessions">0</div></div>
             <div class="hStatCard"><div class="hStatLab">Converted</div><div class="hStatVal" id="hConverted">0 <span class="hStatSub" id="hConvPct">· 0%</span></div></div>
             <div class="hStatCard"><div class="hStatLab">Sales value</div><div class="hStatVal" id="hSales" style="font-size:18px;">&#8377;0</div></div>
-            <div class="hStatCard target"><div class="hStatLab gold">Target progress</div><div class="hStatVal" id="hTargetPct">0%</div><div class="hProgressTrack"><div class="hProgressFill" id="hProgressFill" style="width:0%;"></div></div></div>
           </div>
           <div class="hRangeWrap" id="hRangeWrap">
             <div class="hRangeToggle" id="hRangeToggle">
-              <button type="button" class="hRangeSeg on" data-val="today">Today</button>
+              <button type="button" class="hRangeSeg on" data-val="today">Yesterday</button>
               <button type="button" class="hRangeSeg" data-val="week">This Week</button>
               <button type="button" class="hRangeSeg" data-val="month">This Month</button>
               <button type="button" class="hRangeSeg" data-val="custom">Custom</button>
@@ -523,11 +518,13 @@
             </div>
           </div>
           <div id="bfPanSection" style="display:none;flex-direction:column;gap:10px;width:100%;border-top:1px solid #EADFC9;margin-top:4px;padding-top:20px;">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-              <span class="bfLab" style="margin:0;">PAN Card*</span>
-              <button type="button" id="bfPanScanBtn" style="height:36px;padding:0 16px;border:1px solid #C4D5FB;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:7px;flex:none;white-space:nowrap;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                <span class="bfLab" style="margin:0;">PAN Card*</span>
+                <button type="button" id="bfPanScanBtn" style="height:36px;padding:0 16px;border:1px solid #C4D5FB;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;flex:none;white-space:nowrap;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
+              </div>
+              <span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#8A7A4A;">Required for purchases above &#8377; 2,00,000</span>
             </div>
-            <span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#8A7A4A;">Required for purchases above &#8377; 2,00,000</span>
             <div id="bfPanManual" style="display:none;flex-direction:column;gap:10px;">
               <input id="bfPan" class="billField" maxlength="10" placeholder="ABCDE1234F" style="width:100%;text-transform:uppercase;letter-spacing:1px;font-weight:600;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10)"/>
               <button type="button" id="bfPanManualUse" class="gmbtn disabled" style="margin-top:0;">Use this PAN</button>
@@ -1112,32 +1109,25 @@
     if(typeof window.__renderHomeStats==='function')window.__renderHomeStats();}
   var HOME_RANGE='today';
   var HOME_CUSTOM_RANGE=null;
-  var HOME_STATIC={week:{sessions:34,converted:11,sales:2146900,target:2800000},month:{sessions:142,converted:49,sales:9218400,target:11000000}};
+  // "Today" (still in progress, always near-zero at the start of a session) is hard to read
+  // anything into, so the default view shows yesterday's finished numbers instead — labelled
+  // "Yesterday" on the toggle rather than exposing a "T-1" kind of internal name.
+  var HOME_STATIC={today:{sessions:5,converted:2,sales:315000},week:{sessions:34,converted:11,sales:2146900},month:{sessions:142,converted:49,sales:9218400}};
   function renderHomeStats(){
-    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct'),salEl=document.getElementById('hSales'),tEl=document.getElementById('hTargetPct'),fEl=document.getElementById('hProgressFill');
+    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct'),salEl=document.getElementById('hSales');
     if(!sEl)return;
-    var sessions,converted,sales,target;
-    if(HOME_RANGE==='today'){
-      var purchasedToday=SESSIONS.filter(function(s){return s.status==='purchased';});
-      sessions=SESSIONS.length+((typeof sessStarted!=='undefined'&&sessStarted&&!sessEnded)?1:0);
-      converted=purchasedToday.length;
-      sales=purchasedToday.reduce(function(a,s){return a+(s.amount||0);},0);
-      target=500000;
-    } else if(HOME_RANGE==='custom'&&HOME_CUSTOM_RANGE){
+    var sessions,converted,sales;
+    if(HOME_RANGE==='custom'&&HOME_CUSTOM_RANGE){
       var days=Math.max(1,Math.round((HOME_CUSTOM_RANGE.end.getTime()-HOME_CUSTOM_RANGE.start.getTime())/86400000)+1);
       sessions=Math.max(1,Math.round(142/30*days));
       converted=Math.min(sessions,Math.round(49/30*days));
       sales=Math.round(9218400/30*days);
-      target=Math.round(11000000/30*days);
-    } else { var d=HOME_STATIC[HOME_RANGE]||HOME_STATIC.week; sessions=d.sessions; converted=d.converted; sales=d.sales; target=d.target; }
+    } else { var d=HOME_STATIC[HOME_RANGE]||HOME_STATIC.week; sessions=d.sessions; converted=d.converted; sales=d.sales; }
     var pct=sessions>0?Math.round((converted/sessions)*100):0;
-    var tpct=target>0?Math.min(100,Math.round((sales/target)*100)):0;
     sEl.textContent=sessions;
     cEl.childNodes[0].textContent=converted+' ';
     pEl.textContent='· '+pct+'%';
     salEl.textContent=fmtMoney(sales);
-    tEl.textContent=tpct+'%';
-    if(fEl)fEl.style.width=tpct+'%';
   }
   window.__renderHomeStats=renderHomeStats;
   // ---- range filter (stroke pill + Airbnb-style calendar) ----
