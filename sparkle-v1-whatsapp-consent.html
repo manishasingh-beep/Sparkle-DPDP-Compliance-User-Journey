@@ -93,8 +93,8 @@
   .prodc{transition:box-shadow .18s,transform .18s;cursor:pointer;} .prodc:hover{box-shadow:0 12px 26px rgba(10,42,102,0.10);transform:translateY(-2px);}
   .pillsum{display:inline-flex;align-items:center;height:28px;padding:0 12px;background:#fff;border:1px solid #EADFC9;border-radius:30px;font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#0A2A66;}
 
-  .addbtn{width:100%;height:40px;margin-top:10px;border:1.5px solid transparent;border-radius:10px;background-image:linear-gradient(#fff,#fff),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);background-origin:border-box;background-clip:padding-box,border-box;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
-  .addbtn:hover{background-image:linear-gradient(#0A2A66,#0A2A66),linear-gradient(90deg,#184BA9,#0640AB,#3D76E3);color:#fff;}
+  .addbtn{width:100%;height:40px;margin-top:10px;border:1px solid #E2DAC9;border-radius:10px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+  .addbtn:hover{background:#0A2A66;border-color:#0A2A66;color:#fff;}
   .addbtn.added{pointer-events:none;}
   .pdpact:hover,.moreopt:hover{border-color:#C8A14A;}
   .invSize{display:flex;flex-direction:column;gap:1px;border:1px solid #E6E0D6;border-radius:12px;padding:10px 12px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
@@ -420,12 +420,15 @@
     <div style="flex:1;display:flex;flex-direction:column;min-width:0;background:#fff;">
       <div style="padding:16px 24px 0;display:flex;align-items:center;gap:16px;">
         <span id="catCount" style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">9 pieces</span>
-        <div id="otherStoreToggle" class="miniToggle" style="margin-left:auto;"><span class="track"><span class="knob"></span></span><span class="lab">Other stores only</span></div>
-        <div style="position:relative;">
-          <button type="button" id="sortBtn" class="sortBtn"><span id="sortBtnLabel">Sort</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
-          <div id="sortPop" class="sortPop">
+        <div style="margin-left:auto;display:flex;align-items:stretch;border:1px solid #E2DAC9;border-radius:10px;background:#fff;">
+          <div id="otherStoreToggle" class="miniToggle" style="padding:0 14px;"><span class="track"><span class="knob"></span></span><span class="lab">Other stores only</span></div>
+          <span style="width:1px;align-self:stretch;background:#E2DAC9;"></span>
+          <div style="position:relative;">
+            <button type="button" id="sortBtn" class="sortBtn" style="border:none;border-radius:0;height:100%;"><span id="sortBtnLabel">Sort</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+            <div id="sortPop" class="sortPop">
             <div class="sortOpt" data-v="high">High to Low</div>
             <div class="sortOpt" data-v="low">Low to High</div>
+          </div>
           </div>
         </div>
       </div>
