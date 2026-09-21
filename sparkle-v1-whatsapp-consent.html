@@ -461,7 +461,7 @@
       </div></div></div>
       <div style="width:1px;align-self:stretch;background:#E2EBFF;flex:none;"></div><div style="flex:1;min-width:0;">
         <h1 id="pdpName" style="font-family:'Playfair Display',serif;font-weight:600;font-size:23px;color:#0A2A66;line-height:28px;">22KT Yellow Gold with Stone Neckwear - Choker.</h1>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:3px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;"><span>Item OEAYA80-ACNL851</span><span style="width:4px;height:4px;border-radius:50%;background:#C9BFB0;"></span><span id="pdpSerialVal">Serial A0033666</span><button type="button" id="pdpCopySerial" title="Copy serial number" style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;padding:0;border:none;background:transparent;border-radius:6px;cursor:pointer;color:#9B8F7E;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.2"/><path d="M16 8V6.2A2.2 2.2 0 0 0 13.8 4H6.2A2.2 2.2 0 0 0 4 6.2v7.6A2.2 2.2 0 0 0 6.2 16H8"/></svg></button></div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:3px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;"><span id="pdpItemVal">Item OEAYA80-ACNL851</span><button type="button" id="pdpCopyItem" title="Copy item code" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin:-12px 0;padding:0;border:none;background:transparent;border-radius:10px;cursor:pointer;color:#9B8F7E;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.2"/><path d="M16 8V6.2A2.2 2.2 0 0 0 13.8 4H6.2A2.2 2.2 0 0 0 4 6.2v7.6A2.2 2.2 0 0 0 6.2 16H8"/></svg></button><span style="width:4px;height:4px;border-radius:50%;background:#C9BFB0;"></span><span id="pdpSerialVal">Serial A0033666</span><button type="button" id="pdpCopySerial" title="Copy serial number" style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin:-12px 0;padding:0;border:none;background:transparent;border-radius:10px;cursor:pointer;color:#9B8F7E;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.2"/><path d="M16 8V6.2A2.2 2.2 0 0 0 13.8 4H6.2A2.2 2.2 0 0 0 4 6.2v7.6A2.2 2.2 0 0 0 6.2 16H8"/></svg></button></div>
         <div style="border:1px solid #E2EBFF;border-radius:12px;margin-top:20px;overflow:hidden;background:#fff;">
           <div style="background:#F7FAFF;padding:8px;border-bottom:1px solid #E2EBFF;display:flex;gap:6px;">
             <button type="button" id="pdpTabPrice" style="flex:1;height:36px;border:none;border-radius:9px;cursor:pointer;font-family:'DM Sans';font-weight:500;font-size:13px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Price Breakdown</button>
@@ -1835,6 +1835,16 @@
     var checkSvg='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#3E8E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
     var orig=_pcs.innerHTML; _pcs.innerHTML=checkSvg;
     setTimeout(function(){ _pcs.innerHTML=orig; },1400);
+  };
+  var _pci=document.getElementById('pdpCopyItem');
+  if(_pci) _pci.onclick=function(){
+    var raw=document.getElementById('pdpItemVal').textContent; var val=raw.replace(/^Item\s*/i,'');
+    var ok=copyText(val);
+    if(!ok) return;
+    toast('Item code copied.');
+    var checkSvg='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#3E8E5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+    var orig=_pci.innerHTML; _pci.innerHTML=checkSvg;
+    setTimeout(function(){ _pci.innerHTML=orig; },1400);
   };
   // ---- catalogue: SKU/stock + quick Add + recommended-for-guest ----
   function pseudoSku(name,cat){ var h=0; for(var i=0;i<name.length;i++){h=(h*31+name.charCodeAt(i))>>>0;} return (cat||'GEN').substring(0,3).toUpperCase()+((h%9000)+1000); }
