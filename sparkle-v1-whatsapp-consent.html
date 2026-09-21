@@ -1507,32 +1507,49 @@
     var g=amt/GOLD_RATE_22K;
     return '≈ '+(g<10?g.toFixed(1):Math.round(g))+'g gold secured';
   }
-  // GGP is a rupee-based savings scheme, so its equivalent value is shown in money; GQP is a
-  // gold-quantity scheme, so its equivalent is shown as grams secured at today's rate.
-  var ICON_RUPEE='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#2B62C4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.3h.01M18 14.7h.01"/></svg>';
-  var ICON_GOLDBAR='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#B8912B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l2.2 8H3.3z"/><path d="M5.5 8l1.8-3h9.4l1.8 3"/></svg>';
-  function schemeEquiv(sc){
-    if(sc.name==='GQP'){ var amt=(typeof priceNum==='function')?priceNum(sc.paid):0; if(!amt) return ''; var g=amt/GOLD_RATE_22K; return (g<10?g.toFixed(1):Math.round(g))+'g'; }
-    return sc.paid||'';
+  // GGP is a rupee-based savings scheme (its native unit is money, so gold is the "equivalent");
+  // GQP is a gold-quantity scheme (its native unit is grams, so money paid is the "equivalent").
+  // Both figures are shown for either scheme — just which one leads differs.
+  function goldGramsOf(sc){
+    var amt=(typeof priceNum==='function')?priceNum(sc.paid):0; if(!amt) return '';
+    var g=amt/GOLD_RATE_22K;
+    return (g<10?g.toFixed(1):Math.round(g))+'g';
   }
-  // Deliberately terse: an icon for the scheme's unit (money vs gold), its equivalent value, the
-  // stepped progress bar, and a "Paid: x · Pending: y" count at the bar's right end — no separate
-  // paid/due lines or next-instalment copy, so a JC can read scheme status in one glance.
+  // One shared gold-coin motif (same as Metal Rates) for both scheme types — same color, same
+  // subtle 3D shine — so the icon reads as "this is a value/asset", not a money-vs-gold split.
+  function schemeCoinIcon(){ return '<span class="coin coin-gold" style="width:20px;height:20px;flex:none;"><span class="coinShine"></span></span>'; }
+  // Terse by design: icon, native value with its cross-unit equivalent underneath, a paid/pending
+  // count flanking the progress bar, and — when only one instalment remains or it's fully paid —
+  // the same in-store redemption nudge the fuller view shows, just condensed to one line.
   function schemeCompactCardHTML(sc){
     var isGQP=sc.name==='GQP';
-    var icon=isGQP?ICON_GOLDBAR:ICON_RUPEE, iconBg=isGQP?'rgba(200,161,74,0.16)':'rgba(43,98,196,0.12)';
-    var equiv=schemeEquiv(sc);
+    var grams=goldGramsOf(sc);
+    var main=isGQP?grams:(sc.paid||''), secondary=isGQP?sc.paid:grams;
     var paid=(sc.instPaid!=null)?sc.instPaid:'–';
     var pending=(sc.instTotal!=null&&sc.instPaid!=null)?Math.max(sc.instTotal-sc.instPaid,0):'–';
+    var nudge='';
+    if(sc.instTotal!=null&&sc.instPaid!=null){
+      var matured=pending<=0, near=!matured&&pending===1;
+      if(matured||near){
+        var icon=GM_SPARKLE_ICON.split('{S}').join('13');
+        var copy=matured?'Fully paid — a great moment to raise redemption today.':'1 instalment away from redemption — worth raising today.';
+        nudge='<div style="margin-top:7px;background:#FBF6EC;border:1px solid #EAD9AE;border-radius:8px;padding:7px 10px;display:flex;align-items:flex-start;gap:7px;">'+icon+'<span style="font-family:\'DM Sans\';font-weight:500;font-size:11px;color:#6E5A28;line-height:1.4;">'+copy+'</span></div>';
+      }
+    }
     return '<div style="display:flex;align-items:center;gap:8px;">'
-      +'<span style="width:22px;height:22px;border-radius:6px;background:'+iconBg+';display:flex;align-items:center;justify-content:center;flex:none;">'+icon+'</span>'
+      +schemeCoinIcon()
       +'<span style="font-family:\'DM Sans\';font-weight:700;font-size:12.5px;color:#0A2A66;flex:1;min-width:0;">'+sc.name+'</span>'
-      +(equiv?'<span style="font-family:\'DM Sans\';font-weight:700;font-size:12px;color:#7C7268;white-space:nowrap;">'+equiv+'</span>':'')
+      +'<span style="text-align:right;">'
+        +'<span style="font-family:\'DM Sans\';font-weight:700;font-size:13px;color:#0A2A66;">'+main+'</span>'
+        +(secondary?'<div style="font-family:\'DM Sans\';font-weight:500;font-size:10.5px;color:#9B8F7E;margin-top:1px;">≈ '+secondary+'</div>':'')
+      +'</span>'
       +'</div>'
-      +'<div style="display:flex;align-items:center;gap:10px;margin-top:7px;">'
-        +'<div style="flex:1;min-width:0;">'+schemeProgressHTML(sc,true)+'</div>'
-        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;white-space:nowrap;">Paid: '+paid+' · Pending: '+pending+'</span>'
-      +'</div>';
+      +'<div style="display:flex;justify-content:space-between;margin-top:8px;">'
+        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;">Paid: '+paid+'</span>'
+        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;">Pending: '+pending+'</span>'
+      +'</div>'
+      +schemeProgressHTML(sc,true)
+      +nudge;
   }
   function schemePaidDueHTML(sc,compact){
     var gEquiv=goldEquivText(sc), fs=compact?'11.5px':'13px', fsG=compact?'12.5px':'15px';
