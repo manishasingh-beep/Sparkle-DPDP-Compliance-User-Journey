@@ -228,7 +228,7 @@
   .clkDot.live{animation:clkPulse 1.8s ease-in-out infinite;}
 @keyframes oppIconSway{0%,100%{transform:rotate(-6deg);}50%{transform:rotate(6deg);}}
 .oppIconMotion{display:inline-flex;transform-origin:50% 88%;animation:oppIconSway 2.6s ease-in-out infinite;}
-@keyframes spin{to{transform:rotate(360deg);}} .spin{animation:spin .8s linear infinite;display:inline-block;box-sizing:border-box;}.coin{position:relative;width:17px;height:17px;border-radius:50%;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);}.coin::before{content:'';position:absolute;inset:1.6px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);box-shadow:inset 0 1px 1.5px rgba(255,255,255,0.55),inset 0 -1px 2px rgba(0,0,0,0.3);box-sizing:border-box;z-index:1;}.coin-gold{background:radial-gradient(circle at 33% 29%,#FBEFC4 0%,#E7C766 38%,#C99C37 70%,#A67C27 100%);}.coin-silver{background:radial-gradient(circle at 33% 29%,#FFFFFF 0%,#E1E6EC 38%,#B5BDC7 70%,#929AA5 100%);}.coin-plat{background:radial-gradient(circle at 33% 29%,#F2F6FC 0%,#C2D0E4 38%,#8DA2C0 70%,#5E7397 100%);}.coinShine{position:absolute;top:-12%;left:-70%;width:46%;height:124%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.92),transparent);transform:skewX(-18deg);animation:coinSheen 3.4s ease-in-out infinite;}@keyframes coinSheen{0%,55%{left:-70%;}82%,100%{left:135%;}}@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7);}50%{opacity:.85;transform:scale(1.1);}}.tw{position:absolute;pointer-events:none;z-index:1;animation:twinkle 3s ease-in-out infinite;}</style></head>
+@keyframes spin{to{transform:rotate(360deg);}} .spin{animation:spin .8s linear infinite;display:inline-block;box-sizing:border-box;}.coin{position:relative;width:17px;height:17px;border-radius:50%;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);}.coin::before{content:'';position:absolute;inset:1.6px;border-radius:50%;border:1px solid rgba(255,255,255,0.4);box-shadow:inset 0 1px 1.5px rgba(255,255,255,0.55),inset 0 -1px 2px rgba(0,0,0,0.3);box-sizing:border-box;z-index:1;}.coin-gold{background:radial-gradient(circle at 33% 29%,#FBEFC4 0%,#E7C766 38%,#C99C37 70%,#A67C27 100%);}.coin-silver{background:radial-gradient(circle at 33% 29%,#FFFFFF 0%,#E1E6EC 38%,#B5BDC7 70%,#929AA5 100%);}.coin-plat{background:radial-gradient(circle at 33% 29%,#F2F6FC 0%,#C2D0E4 38%,#8DA2C0 70%,#5E7397 100%);}.coinShine{position:absolute;top:-12%;left:-70%;width:46%;height:124%;background:linear-gradient(105deg,transparent,rgba(255,255,255,0.92),transparent);transform:skewX(-18deg);animation:coinSheen 3.4s ease-in-out infinite;}@keyframes coinSheen{0%,55%{left:-70%;}82%,100%{left:135%;}}.billIcon{position:relative;width:20px;height:14px;border-radius:3px;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);background:radial-gradient(circle at 33% 29%,#FBEFC4 0%,#E7C766 38%,#C99C37 70%,#A67C27 100%);}.billIcon::before{content:'';position:absolute;inset:2px;border-radius:2px;border:1px solid rgba(255,255,255,0.4);box-shadow:inset 0 1px 1.5px rgba(255,255,255,0.55),inset 0 -1px 2px rgba(0,0,0,0.3);box-sizing:border-box;z-index:1;}.billIcon::after{content:'\20B9';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:800;font-size:8.5px;color:rgba(110,80,20,0.6);z-index:1;}.brickIcon{position:relative;width:20px;height:14px;flex:none;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.22);clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 100%);background:linear-gradient(155deg,#FBEFC4 0%,#E7C766 30%,#C99C37 65%,#8A6A1C 100%);}.brickIcon::before{content:'';position:absolute;left:14%;right:14%;top:26%;height:1px;background:rgba(255,255,255,0.55);}@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.7);}50%{opacity:.85;transform:scale(1.1);}}.tw{position:absolute;pointer-events:none;z-index:1;animation:twinkle 3s ease-in-out infinite;}</style></head>
 <body><div id="fit">
   <div id="stage">
   <div id="gmNudge">✨ Save this visit — unlock loyalty rewards, keep today's picks, and get them on WhatsApp.</div>
@@ -1515,9 +1515,10 @@
     var g=amt/GOLD_RATE_22K;
     return (g<10?g.toFixed(1):Math.round(g))+'g';
   }
-  // One shared gold-coin motif (same as Metal Rates) for both scheme types — same color, same
-  // subtle 3D shine — so the icon reads as "this is a value/asset", not a money-vs-gold split.
-  function schemeCoinIcon(){ return '<span class="coin coin-gold" style="width:20px;height:20px;flex:none;"><span class="coinShine"></span></span>'; }
+  // GGP (money-based) gets a rupee-note icon, GQP (gold-quantity) gets a gold-brick icon — same
+  // 3D gold-gradient + shine treatment as the Metal Rates coin, so they read as one family, but
+  // the shape tells GGP and GQP apart at a glance.
+  function schemeCoinIcon(isGQP){ return '<span class="'+(isGQP?'brickIcon':'billIcon')+'"><span class="coinShine"></span></span>'; }
   // Terse by design: icon, native value with its cross-unit equivalent underneath, a paid/pending
   // count flanking the progress bar, and — when only one instalment remains or it's fully paid —
   // the same in-store redemption nudge the fuller view shows, just condensed to one line.
@@ -1533,20 +1534,20 @@
       if(matured||near){
         var icon=GM_SPARKLE_ICON.split('{S}').join('13');
         var copy=matured?'Fully paid — a great moment to raise redemption today.':'1 instalment away from redemption — worth raising today.';
-        nudge='<div style="margin-top:7px;background:#FBF6EC;border:1px solid #EAD9AE;border-radius:8px;padding:7px 10px;display:flex;align-items:flex-start;gap:7px;">'+icon+'<span style="font-family:\'DM Sans\';font-weight:500;font-size:11px;color:#6E5A28;line-height:1.4;">'+copy+'</span></div>';
+        nudge='<div style="margin-top:7px;background:#FBF6EC;border:1px solid #EAD9AE;border-radius:8px;padding:7px 10px;display:flex;align-items:flex-start;gap:7px;">'+icon+'<span style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#6E5A28;line-height:1.4;">'+copy+'</span></div>';
       }
     }
     return '<div style="display:flex;align-items:center;gap:8px;">'
-      +schemeCoinIcon()
+      +schemeCoinIcon(isGQP)
       +'<span style="font-family:\'DM Sans\';font-weight:700;font-size:12.5px;color:#0A2A66;flex:1;min-width:0;">'+sc.name+'</span>'
       +'<span style="text-align:right;">'
         +'<span style="font-family:\'DM Sans\';font-weight:700;font-size:13px;color:#0A2A66;">'+main+'</span>'
-        +(secondary?'<div style="font-family:\'DM Sans\';font-weight:500;font-size:10.5px;color:#9B8F7E;margin-top:1px;">≈ '+secondary+'</div>':'')
+        +(secondary?'<div style="font-family:\'DM Sans\';font-weight:600;font-size:12px;color:#8B7239;margin-top:1px;">≈ '+secondary+'</div>':'')
       +'</span>'
       +'</div>'
       +'<div style="display:flex;justify-content:space-between;margin-top:8px;">'
-        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;">Paid: '+paid+'</span>'
-        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;">Pending: '+pending+'</span>'
+        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:12px;color:#7C7268;">Paid: '+paid+'</span>'
+        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:12px;color:#7C7268;">Pending: '+pending+'</span>'
       +'</div>'
       +schemeProgressHTML(sc,true)
       +nudge;
