@@ -246,7 +246,6 @@
           <div id="hStatsGrid" style="display:flex;gap:12px;">
             <div class="hStatCard"><div class="hStatLab">Sessions</div><div class="hStatVal" id="hSessions">0</div></div>
             <div class="hStatCard"><div class="hStatLab">Converted</div><div class="hStatVal" id="hConverted">0 <span class="hStatSub" id="hConvPct">· 0%</span></div></div>
-            <div class="hStatCard"><div class="hStatLab">Sales value</div><div class="hStatVal" id="hSales" style="font-size:18px;">&#8377;0</div></div>
           </div>
           <div class="hRangeWrap" id="hRangeWrap">
             <div class="hRangeToggle" id="hRangeToggle">
@@ -683,8 +682,8 @@
       <div id="gmRecogWrap" style="display:flex;flex-direction:column;background:#fff;border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(10,42,102,0.05);">
         <div style="display:flex;align-items:center;gap:13px;padding:15px 17px;background:linear-gradient(90deg,#FBF6EC,#FDFBF6);border-bottom:1px solid #F1ECE2;">
           <div id="gmrAv" style="width:44px;height:44px;border-radius:50%;background:transparent;border:1.6px solid #B9CDEC;box-sizing:border-box;color:#0A2A66;font-family:'Playfair Display',serif;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none;">MS</div>
-          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;">
-            <div id="gmrName" style="font-family:'DM Sans';font-weight:500;font-size:14.5px;color:#0A2A66;line-height:19px;">Manisha has shopped with Indriya before</div>
+          <div style="flex:1;min-width:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
+            <span id="gmrName" style="font-family:'DM Sans';font-weight:600;font-size:15px;color:#0A2A66;">Manisha</span>
             <span id="gmrTier" style="font-family:'DM Sans';font-weight:600;font-size:12px;color:#8A6A1C;">Gold Tier · 12,400 pts</span>
           </div>
         </div>
@@ -939,7 +938,7 @@
   var fit=document.getElementById('fit'),stage=document.getElementById('stage');
   function resize(){var s=fit.clientWidth/1280;stage.style.transform='scale('+s+')';fit.style.height=(800*s)+'px';}
   resize();window.addEventListener('resize',resize);
-  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
+  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',aov:'₹ 1,16,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',aov:'₹ 46,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
   var sel={cats:[],occ:null,who:null,'for':null,budget:null};
   var phone=document.getElementById('phone');
   var saveBtn=document.getElementById('saveBtn'),saveLbl=document.getElementById('saveLbl');
@@ -1146,22 +1145,20 @@
   // "Today" (still in progress, always near-zero at the start of a session) is hard to read
   // anything into, so the default view shows yesterday's finished numbers instead — labelled
   // "Yesterday" on the toggle rather than exposing a "T-1" kind of internal name.
-  var HOME_STATIC={today:{sessions:5,converted:2,sales:315000},week:{sessions:34,converted:11,sales:2146900},month:{sessions:142,converted:49,sales:9218400}};
+  var HOME_STATIC={today:{sessions:5,converted:2},week:{sessions:34,converted:11},month:{sessions:142,converted:49}};
   function renderHomeStats(){
-    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct'),salEl=document.getElementById('hSales');
+    var sEl=document.getElementById('hSessions'),cEl=document.getElementById('hConverted'),pEl=document.getElementById('hConvPct');
     if(!sEl)return;
-    var sessions,converted,sales;
+    var sessions,converted;
     if(HOME_RANGE==='custom'&&HOME_CUSTOM_RANGE){
       var days=Math.max(1,Math.round((HOME_CUSTOM_RANGE.end.getTime()-HOME_CUSTOM_RANGE.start.getTime())/86400000)+1);
       sessions=Math.max(1,Math.round(142/30*days));
       converted=Math.min(sessions,Math.round(49/30*days));
-      sales=Math.round(9218400/30*days);
-    } else { var d=HOME_STATIC[HOME_RANGE]||HOME_STATIC.week; sessions=d.sessions; converted=d.converted; sales=d.sales; }
+    } else { var d=HOME_STATIC[HOME_RANGE]||HOME_STATIC.week; sessions=d.sessions; converted=d.converted; }
     var pct=sessions>0?Math.round((converted/sessions)*100):0;
     sEl.textContent=sessions;
     cEl.childNodes[0].textContent=converted+' ';
     pEl.textContent='· '+pct+'%';
-    salEl.textContent=fmtMoney(sales);
   }
   window.__renderHomeStats=renderHomeStats;
   // ---- range filter (stroke pill + Airbnb-style calendar) ----
@@ -1510,6 +1507,33 @@
     var g=amt/GOLD_RATE_22K;
     return '≈ '+(g<10?g.toFixed(1):Math.round(g))+'g gold secured';
   }
+  // GGP is a rupee-based savings scheme, so its equivalent value is shown in money; GQP is a
+  // gold-quantity scheme, so its equivalent is shown as grams secured at today's rate.
+  var ICON_RUPEE='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#2B62C4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6.5" width="19" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.3h.01M18 14.7h.01"/></svg>';
+  var ICON_GOLDBAR='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#B8912B" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l2.2 8H3.3z"/><path d="M5.5 8l1.8-3h9.4l1.8 3"/></svg>';
+  function schemeEquiv(sc){
+    if(sc.name==='GQP'){ var amt=(typeof priceNum==='function')?priceNum(sc.paid):0; if(!amt) return ''; var g=amt/GOLD_RATE_22K; return (g<10?g.toFixed(1):Math.round(g))+'g'; }
+    return sc.paid||'';
+  }
+  // Deliberately terse: an icon for the scheme's unit (money vs gold), its equivalent value, the
+  // stepped progress bar, and a "Paid: x · Pending: y" count at the bar's right end — no separate
+  // paid/due lines or next-instalment copy, so a JC can read scheme status in one glance.
+  function schemeCompactCardHTML(sc){
+    var isGQP=sc.name==='GQP';
+    var icon=isGQP?ICON_GOLDBAR:ICON_RUPEE, iconBg=isGQP?'rgba(200,161,74,0.16)':'rgba(43,98,196,0.12)';
+    var equiv=schemeEquiv(sc);
+    var paid=(sc.instPaid!=null)?sc.instPaid:'–';
+    var pending=(sc.instTotal!=null&&sc.instPaid!=null)?Math.max(sc.instTotal-sc.instPaid,0):'–';
+    return '<div style="display:flex;align-items:center;gap:8px;">'
+      +'<span style="width:22px;height:22px;border-radius:6px;background:'+iconBg+';display:flex;align-items:center;justify-content:center;flex:none;">'+icon+'</span>'
+      +'<span style="font-family:\'DM Sans\';font-weight:700;font-size:12.5px;color:#0A2A66;flex:1;min-width:0;">'+sc.name+'</span>'
+      +(equiv?'<span style="font-family:\'DM Sans\';font-weight:700;font-size:12px;color:#7C7268;white-space:nowrap;">'+equiv+'</span>':'')
+      +'</div>'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-top:7px;">'
+        +'<div style="flex:1;min-width:0;">'+schemeProgressHTML(sc,true)+'</div>'
+        +'<span style="font-family:\'DM Sans\';font-weight:600;font-size:11px;color:#7C7268;white-space:nowrap;">Paid: '+paid+' · Pending: '+pending+'</span>'
+      +'</div>';
+  }
   function schemePaidDueHTML(sc,compact){
     var gEquiv=goldEquivText(sc), fs=compact?'11.5px':'13px', fsG=compact?'12.5px':'15px';
     var gBadge=gEquiv?'<div style="display:inline-flex;align-items:center;margin-top:5px;padding:3px 10px;border-radius:20px;background:rgba(184,145,73,0.12);font-family:\'DM Sans\';font-weight:700;font-size:'+fsG+';color:#8B7239;">'+gEquiv+'</div>':'';
@@ -1536,12 +1560,12 @@
   }
   function gmRenderSnap(k){
     var sn=document.getElementById('gmRecogSnap'); if(!sn) return;
-    var S=[['Loyalty',k.points],['Active since',k.since],['Lifetime',k.ltv],['Last visit',k.last]];
-    var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<3?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
+    var S=[['Active since',k.since],['Avg. order value',k.aov||k.ltv],['Last visit',k.last]];
+    var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<S.length-1?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:9.5px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
     var opp='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
     var _multi=_sch.length>1;
-    var schemeInner=_sch.length?_sch.map(function(sc){ return '<div><span style="font-family:\'DM Sans\';font-weight:700;font-size:11.5px;color:#0A2A66;">'+sc.name+'</span><div style="margin-top:5px;">'+schemePaidDueHTML(sc,true)+schemeProgressHTML(sc,true)+schemeExtrasHTML(sc,true)+'</div></div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>'):'';
+    var schemeInner=_sch.length?_sch.map(function(sc){ return '<div>'+schemeCompactCardHTML(sc)+'</div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>'):'';
     var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
     var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
     // Schemes and recently-viewed used to stack as two more full sections under Opportunities —
@@ -1596,7 +1620,7 @@
   var _gmFetchTok=0;
   function gmShowRecogWithFetch(k){
     document.getElementById('gmrAv').textContent=k.init;
-    document.getElementById('gmrName').textContent=k.name+' has shopped with Indriya before';
+    document.getElementById('gmrName').textContent=k.name;
     document.getElementById('gmrTier').textContent=k.tier+' · '+k.points+' pts';
     var ld=document.getElementById('gmRecogLoader'), sn=document.getElementById('gmRecogSnap');
     ld.style.display='flex'; sn.style.display='none'; sn.innerHTML='';
@@ -2267,7 +2291,7 @@
     if(this.classList.contains('disabled')) return;
     var ph=document.getElementById('rsPhone').value;
     document.getElementById('rateShareModal').style.display='none';
-    window.__requestOtpSign(ph,'Confirm before sharing rates',function(){
+    function sendRates(){
       document.getElementById('rateShareModal').style.display='block';
       document.getElementById('rsStepPhone').style.display='none';
       document.getElementById('rsStepSending').style.display='block';
@@ -2276,7 +2300,11 @@
         document.getElementById('rsDonePhone').textContent='+91 '+ph;
         document.getElementById('rsStepDone').style.display='block';
       },900);
-    });
+    }
+    // Sharing a rate/trend is low-stakes, read-only info — no signature needed here, and an
+    // already-known customer skips OTP too since we already have them on record.
+    if(KNOWN[ph]){ sendRates(); return; }
+    window.__requestOtpSign(ph,'Confirm before sharing rates',sendRates,{skipSign:true});
   };
   function closeRateShare(){ document.getElementById('rateShareModal').style.display='none'; }
   document.getElementById('rateShareClose').onclick=closeRateShare;
@@ -2292,7 +2320,17 @@
   window.__isOtpValid=isOtpValid; window.__markOtpValid=markOtpValid;
   (function(){
     var _osOtpBoxes=[].slice.call(document.querySelectorAll('#osOtpBoxes .otpBox'));
-    var _osOtpIv=null, _osPhone=null, _osCallback=null;
+    var _osOtpIv=null, _osPhone=null, _osCallback=null, _osSkipSign=false;
+    function osFinish(){
+      markOtpValid(_osPhone);
+      osShow('osStepDone');
+      setTimeout(function(){
+        document.getElementById('otpSignModal').style.display='none';
+        var cb=_osCallback; _osCallback=null;
+        if(cb) cb();
+      },900);
+    }
+    function osOtpComplete(){ if(_osSkipSign){ osFinish(); } else { osShow('osStepSign'); osFitSig(); } }
     function osShow(id){
       ['osStepStart','osStepEnter','osStepSign','osStepDone'].forEach(function(x){ var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none'; });
       var sheet=document.getElementById('otpSignSheet'); if(sheet) sheet.style.width=(id==='osStepSign')?'640px':'440px';
@@ -2314,10 +2352,10 @@
       b.addEventListener('input',function(){
         b.value=b.value.replace(/[^0-9]/g,'').slice(0,1); b.classList.toggle('filled',!!b.value);
         if(b.value&&i<_osOtpBoxes.length-1)_osOtpBoxes[i+1].focus();
-        if(osGetOtp().length===6){ osShow('osStepSign'); osFitSig(); }
+        if(osGetOtp().length===6){ osOtpComplete(); }
       });
       b.addEventListener('keydown',function(e){ if(e.key==='Backspace'&&!b.value&&i>0){_osOtpBoxes[i-1].focus();} });
-      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<_osOtpBoxes.length;j++){_osOtpBoxes[j].value=d[j]||'';_osOtpBoxes[j].classList.toggle('filled',!!d[j]);} (_osOtpBoxes[Math.min(d.length,5)]||b).focus(); if(osGetOtp().length===6){ osShow('osStepSign'); osFitSig(); } });
+      b.addEventListener('paste',function(e){ e.preventDefault(); var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/[^0-9]/g,'').slice(0,6); for(var j=0;j<_osOtpBoxes.length;j++){_osOtpBoxes[j].value=d[j]||'';_osOtpBoxes[j].classList.toggle('filled',!!d[j]);} (_osOtpBoxes[Math.min(d.length,5)]||b).focus(); if(osGetOtp().length===6){ osOtpComplete(); } });
     });
     var _osResendEl=document.getElementById('osResend'); if(_osResendEl) _osResendEl.onclick=function(){ if(_osResendEl.style.cursor==='pointer'){ osSendOtp(); toast('A new OTP has been sent.'); } };
     var _osSendBtn=document.getElementById('osSend'); if(_osSendBtn) _osSendBtn.onclick=osSendOtp;
@@ -2341,22 +2379,19 @@
     var _osClearBtn=document.getElementById('osSigClear'); if(_osClearBtn) _osClearBtn.onclick=function(){ osResetSig(); };
     var _osConfirmBtn=document.getElementById('osConfirm'); if(_osConfirmBtn) _osConfirmBtn.onclick=function(){
       if(this.classList.contains('disabled')) return;
-      markOtpValid(_osPhone);
-      osShow('osStepDone');
-      setTimeout(function(){
-        document.getElementById('otpSignModal').style.display='none';
-        var cb=_osCallback; _osCallback=null;
-        if(cb) cb();
-      },900);
+      osFinish();
     };
     function osClose(){ clearInterval(_osOtpIv); document.getElementById('otpSignModal').style.display='none'; _osCallback=null; }
     var _osCloseBtn=document.getElementById('otpSignClose'); if(_osCloseBtn) _osCloseBtn.onclick=osClose;
     var _osBackdrop=document.getElementById('otpSignBackdrop'); if(_osBackdrop) _osBackdrop.onclick=osClose;
-    // Main entry point: requestOtpSign(phone, label, onDone). Skips straight to the signature
-    // step if this phone already verified an OTP within the last 15 minutes.
-    window.__requestOtpSign=function(phone, label, onDone){
+    // Main entry point: requestOtpSign(phone, label, onDone, opts). Skips straight to the
+    // signature step if this phone already verified an OTP within the last 15 minutes.
+    // opts.skipSign drops the signature step entirely (e.g. low-stakes info shares) — OTP
+    // completion alone marks the phone verified and calls onDone.
+    window.__requestOtpSign=function(phone, label, onDone, opts){
       if(!phone||phone.length!==10){ toast('A 10-digit mobile number is needed first.'); return; }
-      _osPhone=phone; _osCallback=onDone;
+      _osPhone=phone; _osCallback=onDone; _osSkipSign=!!(opts&&opts.skipSign);
+      if(_osSkipSign&&isOtpValid(phone)){ markOtpValid(phone); if(onDone) onDone(); return; }
       var t=document.getElementById('otpSignTitle'); if(t) t.textContent=label||'Confirm with OTP';
       var d=document.getElementById('osDest'); if(d) d.textContent='+91 '+phone;
       osResetSig();
