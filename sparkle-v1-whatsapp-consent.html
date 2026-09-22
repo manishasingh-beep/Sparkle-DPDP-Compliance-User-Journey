@@ -872,13 +872,13 @@
   </div>
   <div id="tagInfoModal" style="display:none;position:absolute;inset:0;z-index:92;">
     <div id="tagInfoBackdrop" style="position:absolute;inset:0;background:rgba(7,20,42,0.5);"></div>
-    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;max-width:92%;max-height:82vh;overflow-y:auto;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:14px;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+    <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;max-width:92%;max-height:82vh;overflow-y:auto;background:#fff;border:1px solid #EAE6DF;border-radius:20px;padding:26px;box-shadow:0 30px 80px rgba(3,20,45,0.35);display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
         <div style="display:flex;align-items:center;gap:9px;"><span id="tagInfoDot" style="width:9px;height:9px;border-radius:50%;flex:none;"></span><span id="tagInfoTitle" style="font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:#0A2A66;">Unbreakable Set</span></div>
         <button type="button" id="tagInfoClose" style="width:32px;height:32px;border-radius:50%;border:1px solid #E6E0D6;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6E6358" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
       </div>
-      <div id="tagInfoDesc" style="font-family:'DM Sans';font-weight:400;font-size:13.5px;color:#7C7268;line-height:1.55;"></div>
-      <div id="tagInfoCompanions" style="display:flex;flex-direction:column;gap:10px;"></div>
+      <div id="tagInfoDesc" style="font-family:'DM Sans';font-weight:400;font-size:13.5px;color:#7C7268;line-height:1.5;"></div>
+      <div id="tagInfoCompanions" style="display:flex;flex-direction:column;gap:10px;margin-top:2px;"></div>
     </div>
   </div>
   <div id="addMorePop" style="display:none;position:absolute;inset:0;z-index:82;">
@@ -1842,7 +1842,7 @@
   // Set" also surfaces the other pieces in the set with a one-tap Add, since that's the one tag
   // that implies more than a single-piece attribute.
   var TAG_INFO={
-    'Unbreakable Set':{color:'#2E9E6B',desc:"This piece is tested and sold as part of a matching set, built to be worn together every day.",companions:['kundan drop earrings','polki floral necklace']},
+    'Unbreakable Set':{color:'#2E9E6B',desc:"This piece is tested and sold as part of a matching set, built to be worn together.",companions:['kundan drop earrings','polki floral necklace']},
     'Modular':{color:'#6D5DD3',desc:"Designed with detachable elements — can be styled multiple ways to suit the occasion.",companions:[]},
     'KVI':{color:'#C8A14A',desc:"Known Value Item — a reference piece customers often price-check across stores, so it stays competitively priced.",companions:[]}
   };
