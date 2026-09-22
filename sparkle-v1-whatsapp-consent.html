@@ -687,7 +687,10 @@
     <div id="gmStepRecog" style="display:none;margin-top:18px;">
       <div id="gmRecogWrap" style="display:flex;flex-direction:column;background:#fff;border:1px solid #ECE5DA;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(10,42,102,0.05);">
         <div style="display:flex;align-items:center;gap:13px;padding:15px 17px;background:linear-gradient(90deg,#FBF6EC,#FDFBF6);border-bottom:1px solid #F1ECE2;">
-          <div id="gmrAv" style="width:44px;height:44px;border-radius:50%;background:transparent;border:1.6px solid #C8A14A;box-sizing:border-box;color:#0A2A66;font-family:'Playfair Display',serif;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;flex:none;">MS</div>
+          <div style="position:relative;flex:none;">
+            <div id="gmrAv" style="width:44px;height:44px;border-radius:50%;background:transparent;border:1.6px solid #C8A14A;box-sizing:border-box;color:#0A2A66;font-family:'Playfair Display',serif;font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center;">MS</div>
+            <span id="gmrGenderBadge" style="display:none;position:absolute;right:-2px;bottom:-2px;width:18px;height:18px;border-radius:50%;background:linear-gradient(155deg,#FFD9E8 0%,#F5A8C4 45%,#D66E97 100%);border:1.5px solid #fff;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,0.18);"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="9" r="6"/><path d="M12 15v7M8.5 19h7"/></svg></span>
+          </div>
           <div style="flex:1;min-width:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
             <span id="gmrName" style="font-family:'DM Sans';font-weight:600;font-size:15px;color:#0A2A66;">Manisha</span>
             <span id="gmrTier" style="font-family:'DM Sans';font-weight:600;font-size:12px;color:#8A6A1C;">Gold Tier · 12,400 pts</span>
@@ -955,7 +958,7 @@
   var fit=document.getElementById('fit'),stage=document.getElementById('stage');
   function resize(){var s=fit.clientWidth/1280;stage.style.transform='scale('+s+')';fit.style.height=(800*s)+'px';}
   resize();window.addEventListener('resize',resize);
-  var PROFILE={name:'Manisha Singh',init:'MS',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',aov:'₹ 1,16,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',aov:'₹ 46,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
+  var PROFILE={name:'Manisha Singh',init:'MS',gender:'Female',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',aov:'₹ 1,16,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',gender:'Male',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',aov:'₹ 46,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
   var sel={cats:[],occ:null,who:null,'for':null,budget:null};
   var phone=document.getElementById('phone');
   var saveBtn=document.getElementById('saveBtn'),saveLbl=document.getElementById('saveLbl');
@@ -1596,14 +1599,14 @@
   }
   function gmRenderSnap(k){
     var sn=document.getElementById('gmRecogSnap'); if(!sn) return;
-    var S=[['Active since',k.since],['Avg. order value',k.aov||k.ltv],['Last visit',k.last]];
-    var stats='<div style="display:flex;padding:12px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<S.length-1?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
+    var S=[['AOV',fmtCompactINR(priceNum(k.aov||k.ltv))],['Last visit',k.last]];
+    var stats='<div style="display:flex;padding:16px 4px;border-bottom:1px solid #F1ECE2;">'+S.map(function(x,i){return '<div style="flex:1;padding:0 10px;'+(i<S.length-1?'border-right:1px solid #F1ECE2;':'')+'min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12px;letter-spacing:.4px;color:#9B8F7E;text-transform:uppercase;white-space:nowrap;">'+x[0]+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:14px;color:#0A2A66;margin-top:3px;line-height:17px;">'+x[1]+'</div></div>';}).join('')+'</div>';
     var opp='<div style="padding:14px 18px;border-bottom:1px solid #F1ECE2;"><div style="'+GM_H+'">Opportunities</div>'+gmOppRow(GM_GIFT,'Birthday',k.bday,k.bdayIn)+'<div style="height:1px;background:#F5F0E6;"></div>'+gmOppRow(GM_SPARK,'Anniversary',k.anniv,k.annivIn)+'</div>';
     var _sch=(k.schemes&&k.schemes.length)?k.schemes:(k.scheme?[{name:k.scheme,paid:k.paid,due:k.due,pct:k.pct,next:k.next}]:[]);
     var _multi=_sch.length>1;
     var schemeInner=_sch.length?_sch.map(function(sc){ return '<div>'+schemeCompactCardHTML(sc)+'</div>'; }).join('<div style="height:1px;background:#F1ECE2;margin:11px 0;"></div>'):'';
     var cards=[].slice.call(document.querySelectorAll('#prodgrid .prodc')).slice(0,3);
-    var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:7px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12px;letter-spacing:.3px;text-transform:uppercase;color:#9B8F7E;">'+cat+'</div></div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;white-space:nowrap;">'+pr+'</div></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
+    var rv=cards.map(function(c){var info=c.children[1];var nm=info.children[1].textContent,cat=info.children[0].textContent,pr=info.children[2].textContent,img=c.querySelector('img').src;return '<div style="display:flex;align-items:center;gap:11px;padding:8px 0;"><div style="width:38px;height:30px;border-radius:7px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+img+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;"><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+nm+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:12.5px;color:#0A2A66;">'+pr+'</div></div><button type="button" class="gmRvAdd" data-name="'+nm+'" data-cat="'+cat+'" data-price="'+pr+'" data-img="'+img+'" style="height:30px;padding:0 12px;border:1px solid #E2DAC9;border-radius:8px;background:#fff;color:#0A2A66;font-family:\'DM Sans\';font-weight:600;font-size:12px;cursor:pointer;flex:none;">Add</button></div>';}).join('<div style="height:1px;background:#F5F0E6;"></div>');
     // Schemes and recently-viewed used to stack as two more full sections under Opportunities —
     // between the stats, opportunities, and now segmented scheme cards, that read as cluttered.
     // Tabbing the two lets each get full width/attention without competing for vertical space.
@@ -1615,13 +1618,13 @@
         +'<button type="button" class="gmSnapTab on" data-t="sch" style="flex:1;height:36px;border:none;border-radius:9px;cursor:pointer;font-family:\'DM Sans\';font-weight:600;font-size:12.5px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Active Scheme'+(_multi?'s':'')+'</button>'
         +'<button type="button" class="gmSnapTab" data-t="rec" style="flex:1;height:36px;border:none;border-radius:9px;cursor:pointer;font-family:\'DM Sans\';font-weight:600;font-size:12.5px;background:transparent;color:#343330;box-shadow:none;">Previously Viewed</button>'
         +'</div>'
-        +'<div class="gmSnapPane" data-t="sch" style="padding:0 18px 16px;">'+schemeInner+'</div>'
-        +'<div class="gmSnapPane" data-t="rec" style="display:none;padding:0 16px 14px;">'+rv+'</div>'
+        +'<div class="gmSnapPane" data-t="sch" style="padding:0 18px 20px;">'+schemeInner+'</div>'
+        +'<div class="gmSnapPane" data-t="rec" style="display:none;padding:0 16px 20px;">'+rv+'</div>'
         +'</div>';
     } else if(hasSch){
-      tail='<div style="padding:14px 18px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+schemeInner+'</div>';
+      tail='<div style="padding:16px 18px 20px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Active Scheme'+(_multi?'s':'')+'</div>'+schemeInner+'</div>';
     } else if(hasRec){
-      tail='<div style="padding:12px 16px 14px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>';
+      tail='<div style="padding:14px 16px 20px;border-top:1px solid #F1ECE2;"><div style="'+GM_H+'">Items viewed in previous visit</div>'+rv+'</div>';
     }
     sn.innerHTML=stats+opp+tail;
     sn.querySelectorAll('.gmSnapTab').forEach(function(b){
@@ -1631,6 +1634,9 @@
         var t=b.getAttribute('data-t');
         sn.querySelectorAll('.gmSnapPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
       };
+    });
+    sn.querySelectorAll('.gmRvAdd').forEach(function(b){
+      b.onclick=function(){ addToTray({name:b.getAttribute('data-name'),price:b.getAttribute('data-price'),cat:b.getAttribute('data-cat'),img:b.getAttribute('data-img')}); };
     });
   }
   // The end-of-session "send collection" moment only needs to confirm who they are and flag
@@ -1658,6 +1664,7 @@
     document.getElementById('gmrAv').textContent=k.init;
     document.getElementById('gmrName').textContent=k.name;
     document.getElementById('gmrTier').textContent=k.tier+' · '+k.points+' pts';
+    var _gb=document.getElementById('gmrGenderBadge'); if(_gb) _gb.style.display=(k.gender==='Female')?'flex':'none';
     var ld=document.getElementById('gmRecogLoader'), sn=document.getElementById('gmRecogSnap');
     ld.style.display='flex'; sn.style.display='none'; sn.innerHTML='';
     document.getElementById('gmStepRecog').style.display='block';
@@ -1673,7 +1680,7 @@
       ld.style.display='none';
       if(_gmContext==='end'){ gmRenderSnapCompact(k); } else { gmRenderSnap(k); }
       sn.style.display='flex';
-      document.getElementById('gmSubtitle').textContent='Here are the details';
+      document.getElementById('gmSubtitle').textContent='';
     },1300);
   }
   document.getElementById('gmContinue').onclick=function(){
@@ -1774,6 +1781,13 @@
   var tray=[];
   function fmtMoney(n){var s=String(n);var l=s.slice(-3),r=s.slice(0,-3);if(r)l=','+l;r=r.replace(/\B(?=(\d{2})+(?!\d))/g,',');return '\u20B9 '+r+l;}
   function priceNum(pp){return parseInt(String(pp).replace(/[^0-9]/g,''),10)||0;}
+  // Compact Indian currency: lacs above 1,00,000, thousands above 1,000 — for tight stat tiles
+  // where the full grouped figure (₹ 1,16,000) would wrap or crowd the label.
+  function fmtCompactINR(n){
+    if(n>=100000) return '₹'+parseFloat((n/100000).toFixed(2))+'L';
+    if(n>=1000) return '₹'+parseFloat((n/1000).toFixed(1))+'K';
+    return '₹'+n;
+  }
   // Pieces bought/sold as a matching set get grouped visually in the tray instead of reading as
   // unrelated single items \u2014 keyed by (lowercased) product name since the tray only ever stores
   // plain {name,price,cat,img} objects.
