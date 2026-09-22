@@ -673,15 +673,13 @@
       <button type="button" id="mdClose" style="width:32px;height:32px;border-radius:50%;border:1px solid #E6E0D6;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#6E6358" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
     <div style="flex:1;display:flex;min-height:0;">
-      <div id="mdCatList" style="width:200px;flex:none;border-right:1px solid #ECE5DA;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:4px;"></div>
+      <div style="width:200px;flex:none;border-right:1px solid #ECE5DA;display:flex;flex-direction:column;min-height:0;">
+        <div style="flex:none;padding:14px 14px 4px;font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#B89149;">Select categories</div>
+        <div id="mdCatList" style="flex:1;overflow-y:auto;padding:6px 14px 14px;display:flex;flex-direction:column;gap:4px;"></div>
+      </div>
       <div style="flex:1;overflow-y:auto;padding:24px 26px;display:flex;flex-direction:column;gap:24px;">
         <div>
-          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;margin-bottom:2px;">1. Discount applied to</div>
-          <div style="font-family:'DM Sans';font-weight:400;font-size:12.5px;color:#9B8F7E;margin-bottom:13px;">Choose which master categories this discount covers &mdash; it&rsquo;s applied to each item in them individually.</div>
-          <div id="mdTargetChips" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
-        </div>
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;margin-bottom:13px;">2. Select Discount</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;margin-bottom:13px;">Select Discount</div>
           <div id="mdPctRow" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
           <div id="mdCustomWrap" style="display:none;margin-top:14px;flex-direction:column;gap:10px;">
             <div style="display:inline-flex;align-items:center;background:#FAFAF8;border:1px solid #EFEAE2;border-radius:11px;padding:4px;gap:4px;width:fit-content;">
@@ -692,7 +690,7 @@
           </div>
         </div>
         <div id="mdPreviewWrap" style="display:none;flex-direction:column;gap:10px;">
-          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;">3. Discounts to apply</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;">Discounts to apply</div>
           <div id="mdPreviewList" style="display:flex;flex-direction:column;border:1px solid #ECE5DA;border-radius:12px;overflow:hidden;"></div>
         </div>
       </div>
@@ -2088,12 +2086,21 @@
     // preset %, or a custom one entered as either a % or a flat ₹ amount — 3) review the
     // resulting per-category lines before committing with Apply.
     var _mdPct=null, _mdTargets={}, _mdCustomType='pct';
+    // The left panel IS the category picker — clicking a row (if it has items) toggles it as a
+    // discount target. There's no separate chip row for this; showing the same categories twice,
+    // once as inert info and once as the real control, is what made the info-only list look
+    // clickable but do nothing.
     function mdRenderCatList(){
       var g=masterCatGroups(); var host=document.getElementById('mdCatList'); if(!host) return;
       host.innerHTML=MASTER_CATS.map(function(m){
-        var has=g[m].idxs.length>0;
-        return '<div style="padding:10px 10px;border-radius:10px;'+(has?'':'opacity:0.55;')+'"><div style="font-family:\'DM Sans\';font-weight:700;font-size:13.5px;color:#1a1917;">'+m+'</div><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;margin-top:2px;">'+(has?(g[m].idxs.length+' items &middot; '+fmtMoney(g[m].total)):'No items in this session')+'</div></div>';
-      }).join('<div style="height:1px;background:#F1ECE2;margin:2px 0;"></div>');
+        var has=g[m].idxs.length>0, sel=!!_mdTargets[m];
+        return '<div class="mdCatRow" data-m="'+m+'" style="padding:10px 11px;border-radius:10px;cursor:'+(has?'pointer':'default')+';border:1px solid '+(sel?'#0A2A66':'transparent')+';background:'+(sel?'#F2F6FD':'transparent')+';'+(has?'':'opacity:0.5;')+'transition:background .12s,border-color .12s;"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><span style="font-family:\'DM Sans\';font-weight:700;font-size:13.5px;color:'+(sel?'#0A2A66':'#1a1917')+';">'+m+'</span>'+(sel?'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0A2A66" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M4 12.6l4.8 4.9L20 6.2"/></svg>':'')+'</div><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;margin-top:2px;">'+(has?(g[m].idxs.length+' items &middot; '+fmtMoney(g[m].total)):'No items in this session')+'</div></div>';
+      }).join('');
+      host.querySelectorAll('.mdCatRow').forEach(function(row){
+        var m=row.getAttribute('data-m');
+        if(!g[m].idxs.length) return;
+        row.onclick=function(){ if(_mdTargets[m]) delete _mdTargets[m]; else _mdTargets[m]=true; mdRenderCatList(); mdSync(); };
+      });
     }
     function mdRenderPct(){
       var host=document.getElementById('mdPctRow'); if(!host) return;
@@ -2115,16 +2122,6 @@
       if(inp) inp.placeholder=_mdCustomType==='pct'?'Enter %':'Enter amount';
       pctBtn.onclick=function(){ _mdCustomType='pct'; mdRenderCustomTypeToggle(); mdSync(); };
       amtBtn.onclick=function(){ _mdCustomType='amt'; mdRenderCustomTypeToggle(); mdSync(); };
-    }
-    function mdRenderTargets(){
-      var g=masterCatGroups(); var host=document.getElementById('mdTargetChips'); if(!host) return;
-      var present=MASTER_CATS.filter(function(m){return g[m].idxs.length>0;});
-      if(!present.length){ host.innerHTML='<span style="font-family:\'DM Sans\';font-weight:400;font-size:13px;color:#A99F92;font-style:italic;">No items in the tray yet.</span>'; return; }
-      host.innerHTML=present.map(function(m){
-        var sel=!!_mdTargets[m];
-        return '<button type="button" class="mdTargetChip" data-m="'+m+'" style="height:34px;display:inline-flex;align-items:center;gap:6px;padding:0 14px;border:1px solid '+(sel?'#0A2A66':'#E2DAC9')+';border-radius:30px;background:'+(sel?'#0A2A66':'#fff')+';color:'+(sel?'#fff':'#3A4252')+';font-family:\'DM Sans\';font-weight:600;font-size:13px;cursor:pointer;">'+m+' &middot; '+g[m].idxs.length+'</button>';
-      }).join('');
-      host.querySelectorAll('.mdTargetChip').forEach(function(b){ b.onclick=function(){ var m=b.getAttribute('data-m'); if(_mdTargets[m]) delete _mdTargets[m]; else _mdTargets[m]=true; mdRenderTargets(); mdSync(); }; });
     }
     // Returns {type:'pct'|'amt', value} for the currently chosen discount, or null while invalid/incomplete.
     function mdCurrentDiscount(){
@@ -2158,7 +2155,7 @@
     var _mci=document.getElementById('mdCustomInput'); if(_mci) _mci.addEventListener('input', mdSync);
     function mdOpen(){
       _mdPct=null; _mdTargets={}; _mdCustomType='pct';
-      mdRenderCatList(); mdRenderPct(); mdRenderTargets();
+      mdRenderCatList(); mdRenderPct();
       document.getElementById('mdCustomWrap').style.display='none';
       document.getElementById('mdPreviewWrap').style.display='none';
       document.getElementById('mdModal').style.display='block';
