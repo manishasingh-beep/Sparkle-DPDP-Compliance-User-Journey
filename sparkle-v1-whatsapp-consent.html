@@ -174,7 +174,7 @@
 
   #viewPDP{background:#fff;}
 
-  .tenderChk{width:22px;height:22px;border:1.5px solid #E2DAC9;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:background .15s,border-color .15s;}
+  .tenderChk{width:22px;height:22px;border:1.5px solid #E2DAC9;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;background:rgba(255,255,255,0.5);transition:background .15s,border-color .15s;}
   .tenderChk.on{background:#032560;border-color:#032560;}
   .tenderChk.on::after{content:"\2713";color:#fff;font-size:13px;line-height:1;}
   .bfLab{font-family:'DM Sans';font-weight:600;font-size:14px;color:#000;}
@@ -196,7 +196,7 @@
   .sigBox.signed{border-style:solid;border-color:#E2DAC9;background:#fff;}
   #doneStage{position:relative;flex:1;overflow:hidden;background:radial-gradient(120% 95% at 68% 26%,#11264F 0%,#0A1B3D 46%,#050F28 100%);}
   #doneSparks{position:absolute;inset:0;pointer-events:none;z-index:1;}
-  .dSpark{position:absolute;color:#E7CB8E;opacity:0;will-change:transform,opacity;}
+  .dSpark{position:absolute;color:#C6CFDA;opacity:0;will-change:transform,opacity;}
   @keyframes dTwinkle{0%,100%{opacity:0;transform:scale(.4) rotate(0deg);}45%{opacity:.95;transform:scale(1) rotate(25deg);}}
   @keyframes dFloat{0%{opacity:0;transform:translate(0,0) scale(.3);}12%{opacity:1;}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1);}}
   .doneWrap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
@@ -212,7 +212,7 @@
   .doneSeal .sealCore{transform-origin:center;animation:sealPop .6s cubic-bezier(.34,1.56,.64,1) both;}
   .doneSeal .ringPath{stroke-dasharray:352;stroke-dashoffset:352;animation:ringDraw .8s ease-out .15s forwards;}
   .doneSeal .checkPath{stroke-dasharray:48;stroke-dashoffset:48;animation:checkDraw .45s ease-out .75s forwards;}
-  .doneSeal .doneGaz{position:absolute;left:50%;top:50%;width:auto;height:96px;transform:translate(-50%,-50%);opacity:0;filter:brightness(1.14) saturate(0.82);animation:gazPop .55s cubic-bezier(.34,1.56,.64,1) .55s both;}
+  .doneSeal .doneGaz{position:absolute;left:50%;top:50%;width:112px;height:90px;transform:translate(-50%,-50%);opacity:0;animation:gazPop .55s cubic-bezier(.34,1.56,.64,1) .55s both;}
   @keyframes gazPop{from{opacity:0;transform:translate(-50%,-50%) scale(.55);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}
   .doneSeal .ray{position:absolute;left:50%;top:50%;width:3px;height:16px;border-radius:3px;background:linear-gradient(#F4E2B6,rgba(244,226,182,0));transform-origin:center -34px;opacity:0;}
   @keyframes rayBurst{0%{opacity:0;transform:rotate(var(--rot)) translateY(8px) scaleY(.2);}40%{opacity:1;}100%{opacity:0;transform:rotate(var(--rot)) translateY(-10px) scaleY(1);}}
@@ -518,12 +518,13 @@
             </div>
           </div>
           <div id="bfPanSection" style="display:none;flex-direction:column;gap:10px;width:100%;border-top:1px solid #EADFC9;margin-top:4px;padding-top:20px;">
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+              <div style="display:flex;flex-direction:column;gap:4px;">
                 <span class="bfLab" style="margin:0;">PAN Card*</span>
-                <button type="button" id="bfPanScanBtn" style="height:36px;padding:0 16px;border:1px solid #E2DAC9;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;flex:none;white-space:nowrap;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
+                <span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#8A7A4A;">Required for purchases above &#8377; 2,00,000</span>
               </div>
-              <span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#8A7A4A;">Required for purchases above &#8377; 2,00,000</span>
+              <button type="button" id="bfPanScanBtn" style="height:36px;padding:0 16px;border:1px solid #E2DAC9;border-radius:9px;background:#fff;color:#0A2A66;font-family:'DM Sans';font-weight:600;font-size:12.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;flex:none;white-space:nowrap;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5V7a2 2 0 0 1 2-2h1.5l1-1.5h7l1 1.5H18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z"/><circle cx="12" cy="12.5" r="3.5"/></svg>Scan PAN card</button>
+              <div id="bfPanStatus" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#008838;flex:none;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>PAN verified</div>
             </div>
             <div id="bfPanManual" style="display:none;flex-direction:column;gap:10px;">
               <input id="bfPan" class="billField" maxlength="10" placeholder="ABCDE1234F" style="width:100%;text-transform:uppercase;letter-spacing:1px;font-weight:600;" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,10)"/>
@@ -542,10 +543,8 @@
                 <div style="height:1px;background:#EFEAE2;"></div>
                 <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#9B8F7E;">Date of Birth</span><span id="bfPanFetchedDob" style="font-family:'DM Sans';font-weight:700;font-size:14px;color:#0A2A66;">15 / 08 / 1988</span></div>
               </div>
-              <button type="button" id="bfPanVerify" class="gmbtn" style="margin-top:0;">Verify Details</button>
             </div>
             <div id="bfPanVerifying" style="display:none;align-items:center;gap:8px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;"><span class="spin" style="width:14px;height:14px;border-radius:50%;border:2px solid #EADFC6;border-top-color:#C8A14A;display:inline-block;"></span>Verifying with SETU (Government of India)&hellip;</div>
-            <div id="bfPanStatus" style="display:none;align-items:center;gap:7px;font-family:'DM Sans';font-weight:600;font-size:13px;color:#008838;"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>PAN verified</div>
           </div>
           <div style="display:flex;gap:16px;width:100%;">
             <div style="flex:1;"><div style="display:flex;flex-direction:column;gap:10px;width:100%;"><span class="bfLab">Date of Birth <span style="font-weight:500;font-size:12px;color:#9B8F7E;">&mdash; optional</span></span><div style="position:relative;width:100%;"><input id="bfDob" class="billField" inputmode="numeric" maxlength="14" placeholder="DD / MM / YYYY" style="width:100%;padding-right:46px;"/><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:#8A6A1C;display:flex;"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg></span><input id="bfDobPicker" type="date" onclick="try{this.showPicker()}catch(e){}" aria-label="Pick date of birth" style="position:absolute;right:4px;top:50%;transform:translateY(-50%);width:42px;height:42px;opacity:0;cursor:pointer;"/></div></div></div>
@@ -618,7 +617,15 @@
               <circle class="ringPath" cx="64" cy="64" r="56" stroke="#E7CB8E" stroke-width="2.2" stroke-linecap="round"/>
             </svg>
             
-            <img class="doneGaz" alt=""/><div class="sealRays"></div>
+            <svg class="doneGaz" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="gazGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#F4E2B6"/><stop offset="50%" stop-color="#D8B463"/><stop offset="100%" stop-color="#B5893A"/></linearGradient></defs>
+              <path d="M25 55 L14 78 M32 58 L24 78" stroke="url(#gazGold)" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M62 55 L58 78 M70 52 L70 78" stroke="url(#gazGold)" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M20 50 Q15 30 40 25 Q60 20 75 30 Q82 35 78 42 Q65 38 50 40 Q30 42 20 50 Z" fill="url(#gazGold)"/>
+              <path d="M75 30 Q85 20 90 12 Q88 18 92 16 Q90 22 86 22 Q80 26 75 30 Z" fill="url(#gazGold)"/>
+              <path d="M88 12 L92 4 M90 10 L95 6 M88 12 L84 5" stroke="url(#gazGold)" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M20 48 L14 44" stroke="url(#gazGold)" stroke-width="3" stroke-linecap="round" fill="none"/>
+            </svg><div class="sealRays"></div>
           </div>
           <h1 class="doneTitle doneRise" style="animation-delay:.5s;">Details captured <span class="em">&#10024;</span></h1>
           <div class="doneDiv doneRise" style="margin:20px 0 18px;animation-delay:.62s;"><span class="ln"></span><span class="dia"></span><span class="ln r"></span></div>
@@ -2054,11 +2061,17 @@
     function panShow(id){
       // 'bfPanIdle' has no container of its own — it's just "show the scan button, hide
       // the rest", since scanning is the only thing offered before anything's been fetched.
+      // 'bfPanStatus' (the verified checkmark) lives in the header row, not this sub-panel
+      // column, so it's toggled separately from the rest.
       var scanBtn=document.getElementById('bfPanScanBtn'); if(scanBtn) scanBtn.style.display=(id==='bfPanIdle')?'flex':'none';
-      ['bfPanManual','bfPanFailed','bfPanFetched','bfPanVerifying','bfPanStatus'].forEach(function(x){
+      var status=document.getElementById('bfPanStatus'); if(status) status.style.display=(id==='bfPanStatus')?'flex':'none';
+      ['bfPanManual','bfPanFailed','bfPanFetched','bfPanVerifying'].forEach(function(x){
         var e=document.getElementById(x); if(e) e.style.display=(x===id)?'flex':'none';
       });
     }
+    // Capturing the PAN (scan or manual) auto-triggers verification -- no separate "Verify
+    // Details" tap. Briefly shows the fetched PAN/DOB for the JC to glance at, then chains
+    // straight into the verifying spinner and on to the verified state automatically.
     function panApplyFetched(panVal){
       var pv=document.getElementById('bfPanFetchedVal'); if(pv) pv.textContent=panVal;
       var pd=document.getElementById('bfPanFetchedDob'); if(pd) pd.textContent=PAN_DEMO_DOB;
@@ -2067,6 +2080,18 @@
       window.__panVerified=false;
       toast('PAN details fetched.');
       billSync();
+      var tok=_panScanTok;
+      setTimeout(function(){
+        if(tok!==_panScanTok) return;
+        panShow('bfPanVerifying');
+        setTimeout(function(){
+          if(tok!==_panScanTok) return;
+          panShow('bfPanStatus');
+          window.__panVerified=true;
+          toast('PAN verified.');
+          billSync();
+        },1100);
+      },1100);
     }
     function panOpenScan(){
       var tok=++_panScanTok;
@@ -2083,15 +2108,6 @@
     var _pgm=document.getElementById('bfPanGoManual'); if(_pgm) _pgm.onclick=function(){ var i=document.getElementById('bfPan'); if(i){i.value='';i.focus();} var u=document.getElementById('bfPanManualUse'); if(u)u.classList.add('disabled'); panShow('bfPanManual'); };
     var _pin=document.getElementById('bfPan'); if(_pin) _pin.addEventListener('input',function(){ var u=document.getElementById('bfPanManualUse'); if(u) u.classList.toggle('disabled',this.value.length!==10); });
     var _pmu=document.getElementById('bfPanManualUse'); if(_pmu) _pmu.onclick=function(){ if(this.classList.contains('disabled')) return; panApplyFetched(val('bfPan')); };
-    var _pvf=document.getElementById('bfPanVerify'); if(_pvf) _pvf.onclick=function(){
-      panShow('bfPanVerifying');
-      setTimeout(function(){
-        panShow('bfPanStatus');
-        window.__panVerified=true;
-        toast('PAN verified.');
-        billSync();
-      },1100);
-    };
     window.__panReset=function(){ _panScanTok++; window.__panVerified=false; panShow('bfPanIdle'); };
     var _dobEl=document.getElementById('bfDob');
     if(_dobEl)_dobEl.addEventListener('input',function(){var d=_dobEl.value.replace(/\D/g,'').slice(0,8);var out=d.slice(0,2);if(d.length>2)out+=' / '+d.slice(2,4);if(d.length>4)out+=' / '+d.slice(4,8);_dobEl.value=out;if(window.__billSync)window.__billSync();});
@@ -2167,9 +2183,9 @@
     // ---- magic: build the sparkle field + radiating rays each time the screen opens ----
     window.__playDone=function(){
       // the journey is complete — reflect that the session has ended in the app bar
-      // paint the Indriya gazelle in gold (reuse the logo silhouette as a mask)
+      // the gazelle is a static inline SVG (gold gradient) in the markup — just retrigger its animation
       var sp=document.getElementById('doneSparks'); if(!sp) return; sp.innerHTML='';
-      var _dg=document.querySelector('#viewDone .doneGaz'); var _gz=document.getElementById('gz'); if(_dg&&_gz){ _dg.src=_gz.src; _dg.style.animation='none'; void _dg.offsetWidth; _dg.style.animation=''; }
+      var _dg=document.querySelector('#viewDone .doneGaz'); if(_dg){ _dg.style.animation='none'; void _dg.offsetWidth; _dg.style.animation=''; }
       var glyphs=['\u2726','\u2727','\u2728','\u2724','\u00b7'];
       function rnd(a,b){return a+(b-a)*((Math.sin((sp.childElementCount+1)*97.13+a*1.7+b*0.3)+1)/2);}
       for(var i=0;i<46;i++){
