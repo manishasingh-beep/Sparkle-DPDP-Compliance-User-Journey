@@ -681,12 +681,12 @@
         <div>
           <div style="font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:#0A2A66;margin-bottom:13px;">Select Discount</div>
           <div id="mdPctRow" style="display:flex;flex-wrap:wrap;gap:10px;"></div>
-          <div id="mdCustomWrap" style="display:none;margin-top:14px;flex-direction:column;gap:10px;">
-            <div style="display:inline-flex;align-items:center;background:#FAFAF8;border:1px solid #EFEAE2;border-radius:11px;padding:4px;gap:4px;width:fit-content;">
+          <div id="mdCustomWrap" style="display:none;margin-top:14px;align-items:center;gap:12px;">
+            <div style="display:inline-flex;align-items:center;background:#FAFAF8;border:1px solid #EFEAE2;border-radius:11px;padding:4px;gap:4px;width:fit-content;flex:none;">
               <button type="button" id="mdCustomPctBtn" style="height:32px;padding:0 14px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:12.5px;">Percentage</button>
               <button type="button" id="mdCustomAmtBtn" style="height:32px;padding:0 14px;border:none;border-radius:8px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:12.5px;">Amount</button>
             </div>
-            <div class="nf" style="max-width:180px;"><span id="mdCustomPrefix" class="prefix">%</span><span style="width:1px;height:22px;background:#E2DAC9;"></span><input id="mdCustomInput" type="number" min="1" placeholder="Enter value" style="flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;min-width:0;"/></div>
+            <div class="nf" style="max-width:160px;flex:none;"><span id="mdCustomPrefix" class="prefix">%</span><span style="width:1px;height:22px;background:#E2DAC9;"></span><input id="mdCustomInput" type="number" min="1" placeholder="Enter value" style="flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;min-width:0;"/></div>
           </div>
         </div>
         <div id="mdPreviewWrap" style="display:none;flex-direction:column;gap:10px;">
@@ -2094,12 +2094,21 @@
       var g=masterCatGroups(); var host=document.getElementById('mdCatList'); if(!host) return;
       host.innerHTML=MASTER_CATS.map(function(m){
         var has=g[m].idxs.length>0, sel=!!_mdTargets[m];
-        return '<div class="mdCatRow" data-m="'+m+'" style="padding:10px 11px;border-radius:10px;cursor:'+(has?'pointer':'default')+';border:1px solid '+(sel?'#0A2A66':'transparent')+';background:'+(sel?'#F2F6FD':'transparent')+';'+(has?'':'opacity:0.5;')+'transition:background .12s,border-color .12s;"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;"><span style="font-family:\'DM Sans\';font-weight:700;font-size:13.5px;color:'+(sel?'#0A2A66':'#1a1917')+';">'+m+'</span>'+(sel?'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#0A2A66" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex:none;"><path d="M4 12.6l4.8 4.9L20 6.2"/></svg>':'')+'</div><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;margin-top:2px;">'+(has?(g[m].idxs.length+' items &middot; '+fmtMoney(g[m].total)):'No items in this session')+'</div></div>';
+        return '<div class="mdCatRow" data-m="'+m+'" style="padding:10px 11px;border-radius:10px;cursor:'+(has?'pointer':'default')+';border:1px solid '+(sel?'#0A2A66':'transparent')+';background:'+(sel?'#F2F6FD':'transparent')+';'+(has?'':'opacity:0.5;')+'transition:background .12s,border-color .12s;"><span style="font-family:\'DM Sans\';font-weight:700;font-size:13.5px;color:'+(sel?'#0A2A66':'#1a1917')+';">'+m+'</span><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;margin-top:2px;">'+(has?(g[m].idxs.length+' items &middot; '+fmtMoney(g[m].total)):'No items in this session')+'</div></div>';
       }).join('');
       host.querySelectorAll('.mdCatRow').forEach(function(row){
         var m=row.getAttribute('data-m');
         if(!g[m].idxs.length) return;
-        row.onclick=function(){ if(_mdTargets[m]) delete _mdTargets[m]; else _mdTargets[m]=true; mdRenderCatList(); mdSync(); };
+        // Changing which categories are targeted clears any discount already picked, rather than
+        // silently carrying a rate chosen for a different combination onto the new one — the JC
+        // re-confirms the discount every time the target set changes.
+        row.onclick=function(){
+          if(_mdTargets[m]) delete _mdTargets[m]; else _mdTargets[m]=true;
+          _mdPct=null; _mdCustomType='pct';
+          var inp=document.getElementById('mdCustomInput'); if(inp) inp.value='';
+          document.getElementById('mdCustomWrap').style.display='none';
+          mdRenderCatList(); mdRenderPct(); mdSync();
+        };
       });
     }
     function mdRenderPct(){
