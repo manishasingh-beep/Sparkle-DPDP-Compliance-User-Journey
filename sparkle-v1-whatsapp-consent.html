@@ -177,6 +177,9 @@
   @keyframes miniRingDraw{to{stroke-dashoffset:0;}}
   @keyframes miniCheckDraw{to{stroke-dashoffset:0;}}
   @media (prefers-reduced-motion: reduce){ .miniSeal .miniRing,.miniSeal .miniCheck{animation:none;stroke-dashoffset:0;} }
+  .metalBtn svg{transition:transform .15s ease;}
+  .metalBtn:hover svg{transform:scale(1.07);}
+  .metalBtn:active svg{transform:scale(0.97);}
   #gmNudge{position:absolute;z-index:210;max-width:270px;background:#FBF8F3;border:1px solid #ECE5DA;color:#3A4252;font-family:'DM Sans';font-weight:500;font-size:12.5px;line-height:1.5;padding:12px 14px;border-radius:12px;box-shadow:0 14px 34px rgba(10,27,51,0.16);opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s;pointer-events:none;}
   #gmNudge.show{opacity:1;transform:translateY(0);}
   #gmNudge:after{content:'';position:absolute;top:-6px;right:28px;width:12px;height:12px;background:#FBF8F3;border-left:1px solid #ECE5DA;border-top:1px solid #ECE5DA;transform:rotate(45deg);}
@@ -251,7 +254,7 @@
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:24px;">
           <div>
             <h1 class="greet" style="margin-top:0;">Today&rsquo;s walk-ins<span id="homeCount"></span></h1>
-            <div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#7C7268;margin-top:4px;">Indriya Bandra Store (NS0002), 3/06/2026</div>
+            <div style="font-family:'DM Sans';font-weight:500;font-size:14px;color:#7C7268;margin-top:4px;">NS0002 &middot; 3rd June 2026</div>
           </div>
           <button id="startNewBtn" class="save-btn" style="width:200px;height:44px;padding:0;font-size:14px;font-weight:600;flex:none;">Start a New Session</button>
         </div>
@@ -290,10 +293,7 @@
           <div class="homeTab" data-tab="completed">Completed sessions</div>
         </div>
         <div id="homeList"><div id="homeOngoing" style="display:none;"></div><div id="homeEmpty"><div style="margin-top:22px;border:1px solid #ECE5DA;border-radius:16px;background:#FFFFFF;padding:66px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;">
-          <div style="width:74px;height:74px;border-radius:50%;background:rgba(10,42,102,0.05);display:flex;align-items:center;justify-content:center;">
-            <img id="homeEmptyImg" alt="Sparkle" style="height:34px;width:auto;display:block;opacity:.85;"/>
-          </div>
-          <div style="font-family:'DM Sans';font-weight:600;font-size:17px;color:#0A2A66;margin-top:20px;">No session recorded yet</div>
+          <div style="font-family:'DM Sans';font-weight:600;font-size:17px;color:#0A2A66;">No session recorded yet</div>
           <div style="font-family:'DM Sans';font-weight:400;font-size:14px;color:#7C7268;margin-top:7px;max-width:330px;line-height:21px;">Start a new session to help your customer find their perfect jewellery</div>
         </div></div></div>
       </div>
@@ -1151,13 +1151,16 @@
   ['endLink','endLinkP','endLinkC'].forEach(function(id){var e=document.getElementById(id);if(e)e.onclick=function(){ if(window.__requestEndSession){window.__requestEndSession();} else {fullReset();toast('Session ended.');} };});
   // ---- session history / home page ----
   var SESSIONS=[];
-  function metaLine(who,when,intent,pieces){var p=pieces?('<span>&middot;</span><span>'+pieces+' piece'+(pieces===1?'':'s')+'</span>'):'';return '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;flex-wrap:wrap;"><span>'+who+'</span><span>&middot;</span><span>'+when+'</span><span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span>'+p+'</div>';}
+  function metaLine(who,when,intent,pieces){var p=pieces?('<span>&middot;</span><span>'+pieces+' piece'+(pieces===1?'':'s')+'</span>'):'';var i=intent?('<span>&middot;</span><span style="color:#0A2A66;font-weight:600;">'+intent+'</span>'):'';return '<div style="display:flex;align-items:center;gap:8px;margin-top:8px;font-family:DM Sans,sans-serif;font-weight:500;font-size:13px;color:#7C7268;flex-wrap:wrap;"><span>'+who+'</span><span>&middot;</span><span>'+when+'</span>'+i+p+'</div>';}
   var CHECK_SVG='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#008838" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.6l4.8 4.9L20 6.2"/></svg>';
   function sessionCardHTML(s){
     var isP=s.status==='purchased';
     var badge=isP?'<span class="purBadge">Purchased</span>':'<span class="noPurBadge">Didn&rsquo;t purchase</span>';
     var right='<span class="compTag'+(isP?'':' neutral')+'">Completed</span>';
-    return '<div class="sessCard" data-stype="'+(isP?'purchased':'notpurchased')+'" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span><span style="color:#D9D0C2;">|</span>'+badge+'</div>'+metaLine(s.who,s.when,s.intent,s.pieces)+'</div>'+right+'</div>';
+    // "Exploring" is only a meaningful signal for sessions that didn't convert — once purchased,
+    // pairing it with the Purchased badge reads as a contradiction, so drop it there.
+    var intent=(isP&&s.intent==='Exploring')?'':s.intent;
+    return '<div class="sessCard" data-stype="'+(isP?'purchased':'notpurchased')+'" style="margin-top:14px;"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+s.name+'</span>'+badge+'</div>'+metaLine(s.who,s.when,intent,s.pieces)+'</div>'+right+'</div>';
   }
   var DEMO_SESSION_POOL=[
     {name:'Ritika Sharma',who:'For self',intent:'Looking for Rings',pieces:2,when:'Yesterday',status:'purchased',amount:186500},
@@ -1185,7 +1188,7 @@
     if(HOME_RANGE==='today'){
     var active=(typeof sessStarted!=='undefined'&&sessStarted&&!sessEnded);
     if(active){var who=(sel&&sel.who)?sel.who:'Walk-in';var mins=sessSecs<60?'Just now':(Math.floor(sessSecs/60)+' min ago');var intent=(sel&&sel.cats&&sel.cats.length)?('Looking for '+sel.cats[0]):((sel&&sel.occ)?sel.occ:'Exploring');var nm=(CUR&&CUR.name&&CUR.name!=='Guest')?CUR.name:'Guest_001';
-      cards+='<div class="sessCard" data-stype="ongoing"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span style="color:#D9D0C2;">|</span><span class="ongoBadge">Ongoing Session</span></div>'+metaLine(who,mins,intent,0)+'</div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';}
+      cards+='<div class="sessCard" data-stype="ongoing"><div><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:15px;color:#0A2A66;">'+nm+'</span><span class="ongoBadge">Ongoing Session</span></div>'+metaLine(who,mins,intent,0)+'</div><button class="resumeBtn" id="resumeBtn">Resume Session <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6s6 4.419 6 6s-6 6-6 6"/></svg></button></div>';}
     SESSIONS.forEach(function(s){cards+=sessionCardHTML(s);});
     total=(active?1:0)+SESSIONS.length;
     } else {
@@ -2440,7 +2443,11 @@
   (function(){
     var AL="<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" style=\"display:inline-block;vertical-align:middle;color:#0A2A66;flex:none;\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M15 6s-6 4.419-6 6s6 6 6 6\"/></svg>", CROWN="<svg viewBox=\"0 0 24 24\" width=\"13\" height=\"13\" fill=\"none\" style=\"display:inline-block;vertical-align:middle;color:#C8A14A;flex:none;\"><path fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M5 20.5h14m-2.128-3H7.128c-1.028 0-1.542 0-1.932-.277c-.39-.276-.56-.761-.9-1.732L2.052 9.077a.97.97 0 0 1 .241-1.007a1.01 1.01 0 0 1 1.26-.123l1.231.81c1.244.818 1.866 1.226 2.495 1.078c.629-.149 1.002-.793 1.749-2.08l2.214-3.82A.88.88 0 0 1 12 3.5c.314 0 .603.166.759.434l2.214 3.82c.747 1.288 1.12 1.932 1.749 2.08c.629.15 1.25-.26 2.494-1.077l1.233-.81a1.01 1.01 0 0 1 1.259.123c.267.264.36.653.24 1.007l-2.245 6.414c-.34.97-.51 1.456-.9 1.732c-.39.277-.903.277-1.931.277\"/></svg>";
     var refImgs=document.querySelectorAll('#viewCatalogue .bar img');
-    var WORDSRC=refImgs[0]?refImgs[0].src:'', GOLDSRC=refImgs[1]?refImgs[1].src:'', ABJSRC=refImgs[2]?refImgs[2].src:'';
+    var WORDSRC=refImgs[0]?refImgs[0].src:'', ABJSRC=refImgs[2]?refImgs[2].src:'';
+    // A proper 3D coin (radial-shaded body, rim, specular highlight) in place of the old flat
+    // rate icon — same glossy-metal language as the coin/bill icons used inside Metal Rates, just
+    // scaled up and given a soft ambient shadow so it reads as a real button, not a stray image.
+    var GOLD_COIN_ICON='<svg viewBox="0 0 40 40" width="34" height="34" style="display:block;filter:drop-shadow(0 2px 4px rgba(166,124,39,0.4));"><defs><radialGradient id="gcBody" cx="35%" cy="28%" r="78%"><stop offset="0%" stop-color="#FFF6D8"/><stop offset="38%" stop-color="#F3D273"/><stop offset="72%" stop-color="#D9A73C"/><stop offset="100%" stop-color="#A9761F"/></radialGradient></defs><circle cx="20" cy="20" r="18.5" fill="#8A631C"/><circle cx="20" cy="20" r="18" fill="#C99A3E"/><circle cx="20" cy="20" r="15.6" fill="url(#gcBody)"/><circle cx="20" cy="20" r="15.6" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="1"/><circle cx="20" cy="20" r="12.6" fill="none" stroke="rgba(120,80,10,0.28)" stroke-width="0.8" stroke-dasharray="1.6 2"/><text x="20" y="25.5" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="15" fill="rgba(103,70,14,0.62)">&#8377;</text><ellipse cx="13.5" cy="12" rx="7" ry="3.8" fill="rgba(255,255,255,0.55)" transform="rotate(-28 13.5 12)"/></svg>';
     function bar(hasBack, backTarget){
       var back = hasBack ? '<button class="navback" data-bt="'+(backTarget||'')+'" style="width:38px;height:38px;border:1.5px solid #0A2A66;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;">'+AL+'</button>' : '';
       var word = '<img src="'+WORDSRC+'" style="height:30px;width:auto;display:block;"/>';
@@ -2450,7 +2457,7 @@
       // details" prompt and this filled state share the same border color (#E2DAC9) and radius
       // via .shimmerAttn above, so they read as the same pill regardless of line count.
       var chip = '<div class="custChip" style="display:none;align-items:center;gap:14px;padding:9px 14px;border:1px solid #E2DAC9;border-radius:12px;background:transparent;cursor:pointer;"><span class="chipFull" style="display:flex;flex-direction:column;gap:4px;min-width:0;"><span style="display:flex;align-items:center;gap:8px;"><span class="chipName" style="font-family:DM Sans,sans-serif;font-weight:500;font-size:15px;color:#0A2A66;letter-spacing:-0.1px;white-space:nowrap;">Guest</span><span style="display:inline-flex;align-items:center;gap:3px;padding:1px 8px 1px 5px;border-radius:999px;background:transparent;border:1px solid #EAD8B0;white-space:nowrap;">'+CROWN+'<span class="chipTier" style="font-family:DM Sans,sans-serif;font-weight:600;font-size:12px;color:#8A6A1C;">Tier</span></span></span><span class="chipPts" style="font-family:DM Sans,sans-serif;font-weight:500;font-size:12.5px;color:#7C7268;white-space:nowrap;">&mdash;</span></span><span class="chipAdd" style="display:none;align-items:center;gap:10px;"><span style="font-family:DM Sans,sans-serif;font-weight:600;font-size:14.5px;color:#0A2A66;white-space:nowrap;letter-spacing:-0.1px;">Add Guest details</span></span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="flex:none;color:#B9AE9C;margin-left:2px;"><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6l-6 6"/></svg></div>';
-      var icons = '<span class="metalBtn" title="Metal rates" style="cursor:pointer;display:inline-flex;align-items:center;"><img src="'+GOLDSRC+'" style="width:34px;height:34px;display:block;"/></span><img src="'+ABJSRC+'" style="height:34px;width:auto;display:block;"/>';
+      var icons = '<span class="metalBtn" title="Metal rates" style="cursor:pointer;display:inline-flex;align-items:center;">'+GOLD_COIN_ICON+'</span><img src="'+ABJSRC+'" style="height:34px;width:auto;display:block;"/>';
       var divider = '<span style="width:1px;height:34px;background:#ECE5DA;flex:none;"></span>';
       return '<div style="display:flex;align-items:center;gap:16px;">'+back+word+divider+clock+end+'</div>'+
              '<div style="display:flex;align-items:center;gap:16px;">'+chip+icons+'</div>';
@@ -2471,8 +2478,7 @@
     var _hb=document.querySelector('#viewHome .bar');
     if(_hb){ _hb.style.cssText='display:flex;align-items:center;justify-content:space-between;height:80px;padding:0 40px;border-bottom:1px solid #ECE5DA;background:#fff;flex:none;';
       _hb.innerHTML='<div style="display:flex;align-items:center;gap:16px;"><button class="barMenu" style="border:none;background:none;padding:0;display:flex;align-items:center;cursor:pointer;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2A66" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><img src="'+WORDSRC+'" style="height:30px;"/></div>'+
-        '<div style="display:flex;align-items:center;gap:14px;"><span class="metalBtn" title="Metal rates" style="cursor:pointer;display:inline-flex;align-items:center;"><img src="'+GOLDSRC+'" style="width:34px;height:34px;"/></span><img src="'+ABJSRC+'" style="height:34px;"/></div>'; }
-    var _hei=document.getElementById('homeEmptyImg'); if(_hei)_hei.src=WORDSRC;
+        '<div style="display:flex;align-items:center;gap:14px;"><span class="metalBtn" title="Metal rates" style="cursor:pointer;display:inline-flex;align-items:center;">'+GOLD_COIN_ICON+'</span><img src="'+ABJSRC+'" style="height:34px;"/></div>'; }
     var _snb=document.getElementById('startNewBtn'); if(_snb) _snb.onclick=function(){ CUR=null; if(typeof reset==='function')reset(); if(typeof showSearch==='function')showSearch(); };
     window.__applyHomeTab=function(){ var act=document.querySelector('#viewHome .homeTab.on'); var tab=act?act.getAttribute('data-tab'):'all'; document.querySelectorAll('#homeOngoing .sessCard').forEach(function(c){ var ty=c.getAttribute('data-stype'); var show=(tab==='all')||(tab==='ongoing'&&ty==='ongoing')||(tab==='completed'&&ty!=='ongoing'); c.style.display=show?'flex':'none'; }); };
     document.querySelectorAll('#viewHome .homeTab').forEach(function(t){ t.onclick=function(){ document.querySelectorAll('#viewHome .homeTab').forEach(function(x){x.classList.remove('on');}); t.classList.add('on'); window.__applyHomeTab(); }; });
