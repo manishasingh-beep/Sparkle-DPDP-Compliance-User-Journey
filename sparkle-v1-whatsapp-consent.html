@@ -332,27 +332,46 @@
     <div style="display:flex;align-items:center;gap:16px;margin-top:10px;">
       <div id="pfAvatar" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#E6EFFB,#C3D8F2);color:#0A2A66;font-family:'Playfair Display',serif;font-weight:600;font-size:22px;display:flex;align-items:center;justify-content:center;">MS</div>
       <div><h1 id="pfName" style="font-family:'Playfair Display',serif;font-weight:600;font-size:30px;color:#0A2A66;line-height:34px;">Welcome back, Manisha Singh</h1>
-      <div id="pfTierWrap" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;border:1px solid #D8B86A;border-radius:6px;padding:5px 10px;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" style="display:inline-block;vertical-align:middle;color:#B89149;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 20.5h14m-2.128-3H7.128c-1.028 0-1.542 0-1.932-.277c-.39-.276-.56-.761-.9-1.732L2.052 9.077a.97.97 0 0 1 .241-1.007a1.01 1.01 0 0 1 1.26-.123l1.231.81c1.244.818 1.866 1.226 2.495 1.078c.629-.149 1.002-.793 1.749-2.08l2.214-3.82A.88.88 0 0 1 12 3.5c.314 0 .603.166.759.434l2.214 3.82c.747 1.288 1.12 1.932 1.749 2.08c.629.15 1.25-.26 2.494-1.077l1.233-.81a1.01 1.01 0 0 1 1.259.123c.267.264.36.653.24 1.007l-2.245 6.414c-.34.97-.51 1.456-.9 1.732c-.39.277-.903.277-1.931.277"/></svg><span id="pfTierText" style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#8B7239;">Gold Tier Member</span></div></div>
+      <div id="pfTierWrap" style="display:inline-flex;align-items:center;gap:7px;margin-top:8px;border:1px solid #D8B86A;border-radius:6px;padding:5px 10px;"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" style="display:inline-block;vertical-align:middle;color:#B89149;flex:none;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 20.5h14m-2.128-3H7.128c-1.028 0-1.542 0-1.932-.277c-.39-.276-.56-.761-.9-1.732L2.052 9.077a.97.97 0 0 1 .241-1.007a1.01 1.01 0 0 1 1.26-.123l1.231.81c1.244.818 1.866 1.226 2.495 1.078c.629-.149 1.002-.793 1.749-2.08l2.214-3.82A.88.88 0 0 1 12 3.5c.314 0 .603.166.759.434l2.214 3.82c.747 1.288 1.12 1.932 1.749 2.08c.629.15 1.25-.26 2.494-1.077l1.233-.81a1.01 1.01 0 0 1 1.259.123c.267.264.36.653.24 1.007l-2.245 6.414c-.34.97-.51 1.456-.9 1.732c-.39.277-.903.277-1.931.277"/></svg><span id="pfTierText" style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#8B7239;">Gold Tier Member</span></div><div id="pfCustId" style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#9B8F7E;margin-top:7px;">Customer ID: &mdash;</div></div>
     </div>
-    <div style="display:flex;background:#FCFAF6;border:1px solid #EFE8DC;border-radius:16px;padding:20px 4px;margin-top:22px;">
-      <div style="flex:1;padding:0 22px;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Loyalty Points</div><div id="pfLoyalty" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">12,400</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Active Since</div><div id="pfSince" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">2 years</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Lifetime Value</div><div id="pfLtv" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">₹ 3,48,000</div></div><div style="flex:1;padding:0 22px;border-left:1px solid #EAE1D2;"><div style="font-family:'DM Sans';font-weight:500;font-size:13px;color:#7C7268;">Last Visit</div><div id="pfLast" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:6px;">2 months ago</div></div>
+    <div class="seclabel" style="margin:26px 0 12px;">Personal Details and Important Events</div>
+    <div id="pfDetailsRow" style="display:flex;background:#fff;border:1px solid #EFE8DC;border-radius:16px;overflow:hidden;"></div>
+    <div id="pfStatsRow" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;"></div>
+    <div style="display:flex;gap:26px;border-bottom:1px solid #ECE5DA;margin-top:28px;overflow-x:auto;">
+      <div class="pfMainTab on" data-t="loyalty" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#0A2A66;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid #0A2A66;margin-bottom:-1px;white-space:nowrap;">Loyalty Points</div>
+      <div class="pfMainTab" data-t="instore" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#9B8F7E;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;">Instore Activity</div>
+      <div class="pfMainTab" data-t="online" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#9B8F7E;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;">Online Activity</div>
+      <div class="pfMainTab" data-t="schemes" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#9B8F7E;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;">Schemes</div>
+      <div class="pfMainTab" data-t="actions" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#9B8F7E;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;">Actions</div>
+      <div class="pfMainTab" data-t="oge" style="font-family:'DM Sans';font-weight:600;font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#9B8F7E;padding:0 1px 13px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;">Old Gold Exchange</div>
     </div>
-    <div id="pfGridWrap" style="display:flex;flex-direction:column;gap:18px;margin-top:18px;">
+    <div class="pfMainPane" data-t="loyalty" style="display:block;margin-top:20px;">
+      <div id="pfBalanceCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:16px 18px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:12px;"><span style="width:38px;height:38px;border-radius:50%;border:1.5px solid #C8A14A;display:flex;align-items:center;justify-content:center;flex:none;"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" style="color:#B89149;"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v8m-4-8v8m8-8v8M4 6h16M5 6l1-2h12l1 2M6 6v13a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V6"/></svg></span><div><div style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#9B8F7E;">Balance Points</div><div id="pfBalancePts" style="font-family:'Playfair Display',serif;font-weight:600;font-size:21px;color:#0A2A66;margin-top:2px;">12,400</div></div></div>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" style="color:#B9AE9C;flex:none;"><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6l-6 6"/></svg>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #F1ECE2;display:flex;align-items:center;gap:7px;"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" style="color:#B0432F;flex:none;"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 7v5l3.5 2"/></svg><span style="font-family:'DM Sans';font-weight:500;font-size:12.5px;color:#7C7268;">Points expiring in <span id="pfPtsExpDays">30</span> days: <strong id="pfPtsExp" style="color:#B0432F;font-weight:700;">1,850</strong></span></div>
+      </div>
+      <div class="seclabel" style="margin:22px 0 10px;">Transaction History</div>
+      <div id="pfTxnList" style="display:flex;flex-direction:column;border:1px solid #EFE8DC;border-radius:14px;overflow:hidden;"></div>
+    </div>
+    <div class="pfMainPane" data-t="instore" style="display:none;margin-top:20px;">
+      <div class="seclabel" style="margin:0 0 10px;">Previously Viewed</div>
+      <div id="pfViewedList" style="background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:4px 20px;"></div>
+    </div>
+    <div class="pfMainPane" data-t="online" style="display:none;margin-top:20px;"><div style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#9B8F7E;font-style:italic;">No online activity recorded for this customer yet.</div></div>
+    <div class="pfMainPane" data-t="schemes" style="display:none;margin-top:20px;">
+      <div id="pfSchemeCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
+        <div id="pfSchemeBody" style="display:flex;flex-direction:column;"></div>
+      </div>
+    </div>
+    <div class="pfMainPane" data-t="actions" style="display:none;margin-top:20px;"><div style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#9B8F7E;font-style:italic;">No pending actions for this customer.</div></div>
+    <div class="pfMainPane" data-t="oge" style="display:none;margin-top:20px;"><div style="font-family:'DM Sans';font-weight:400;font-size:13px;color:#9B8F7E;font-style:italic;">No old gold exchange history recorded.</div></div>
+    <div id="pfGridWrap" style="display:flex;flex-direction:column;gap:18px;margin-top:22px;">
       <div style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
         <div style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#0A2A66;margin-bottom:16px;">Opportunities</div>
         <div id="pfOppRow" style="display:flex;flex-direction:column;gap:16px;"></div>
-      </div>
-      <div id="pfSchemeCard" style="background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px 24px;">
-        <div style="display:flex;background:#FAFAF8;border:1px solid #EFEAE2;border-radius:12px;padding:4px;gap:4px;margin-bottom:18px;">
-          <button type="button" class="pfSnapTab on" data-t="sch" style="flex:1;height:38px;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13.5px;background:#fff;color:#2B5198;box-shadow:0 1px 2px rgba(26,25,23,0.1);">Active Schemes</button>
-          <button type="button" class="pfSnapTab" data-t="rec" style="flex:1;height:38px;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans';font-weight:600;font-size:13.5px;background:transparent;color:#343330;box-shadow:none;">Previously Viewed</button>
-        </div>
-        <div class="pfSnapPane" data-t="sch" id="pfSchemeBody" style="display:flex;flex-direction:column;"></div>
-        <div class="pfSnapPane" data-t="rec" style="display:none;">
-          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Polki Floral Necklace</span><span style="font-family:'DM Sans';font-weight:500;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Neckwear</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 40,98,545</span></div>
-          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid #F2EEE6;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kundan Drop Earrings</span><span style="font-family:'DM Sans';font-weight:500;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Earrings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 1,24,500</span></div>
-          <div style="display:flex;align-items:center;gap:14px;padding:13px 0;"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img class="pfViewedImg" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Solitaire Halo Ring</span><span style="font-family:'DM Sans';font-weight:500;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">Rings</span></div><span style="font-family:'DM Sans';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">&#8377; 89,000</span></div>
-        </div>
       </div>
     </div>
     <div id="pfInterest" style="display:none;margin-top:18px;background:#fff;border:1px solid #EFE8DC;border-radius:16px;padding:20px;">
@@ -1001,7 +1020,7 @@
   var fit=document.getElementById('fit'),stage=document.getElementById('stage');
   function resize(){var s=fit.clientWidth/1280;stage.style.transform='scale('+s+')';fit.style.height=(800*s)+'px';}
   resize();window.addEventListener('resize',resize);
-  var PROFILE={name:'Manisha Singh',init:'MS',gender:'Female',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',aov:'₹ 1,16,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}]};var PROFILE2={name:'Aarav Mehta',init:'AM',gender:'Male',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',aov:'₹ 46,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
+  var PROFILE={name:'Manisha Singh',init:'MS',gender:'Female',tier:'Gold Tier',points:'12,400',since:'2 years',ltv:'₹ 3,48,000',aov:'₹ 1,16,000',last:'2 months ago',bday:'11th June',bdayIn:'in 9 days',marital:'Married',anniv:'11th December',annivIn:'in 5 months',scheme:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',schemes:[{name:'GGP',paid:'₹ 10,000',due:'₹ 15,000',pct:40,next:'12 July 2026',instPaid:4,instTotal:10},{name:'GQP',paid:'₹ 11,000',due:'₹ 1,000',pct:92,next:'20 Aug 2026',instPaid:11,instTotal:12}],phone:'9876543210',email:'manisha.singh@karnival.com',custId:'CUST100234',lastStore:'Indriya Bandra',totalBills:6,mhScore:82,pointsExp:'1,850',pointsExpDays:30,txns:[{label:'Order #ACNL851',amount:'+2,000'},{label:'Birthday Bonus',amount:'+400'},{label:'Referral Bonus',amount:'+1,000'}]};var PROFILE2={name:'Aarav Mehta',init:'AM',gender:'Male',tier:'Silver Tier',points:'4,200',since:'1 year',ltv:'₹ 92,000',aov:'₹ 46,000',last:'3 weeks ago',bday:'',bdayIn:'',marital:'',anniv:'',annivIn:'',scheme:'GGP',paid:'₹ 5,000',due:'₹ 20,000',pct:20,next:'2 Aug 2026',schemes:[{name:'GGP',paid:'₹ 20,000',due:'₹ 0',pct:100,next:'—',instPaid:10,instTotal:10}],phone:'9090873901',email:'aarav.mehta@karnival.com',custId:'CUST100987',lastStore:'Indriya Worli',totalBills:2,mhScore:58,pointsExp:'620',pointsExpDays:14,txns:[{label:'Order #GGP021',amount:'+800'},{label:'Welcome Bonus',amount:'+200'}]};var KNOWN={'9876543210':PROFILE,'9090873901':PROFILE2};
   var sel={cats:[],occ:null,who:null,'for':null,budget:null};
   var phone=document.getElementById('phone');
   var saveBtn=document.getElementById('saveBtn'),saveLbl=document.getElementById('saveLbl');
@@ -1114,12 +1133,62 @@
         +'</div>';
     }).join('<div style="height:1px;background:#F1ECE2;margin:16px 0;"></div>');
   }
-  document.querySelectorAll('.pfSnapTab').forEach(function(b){
+  // ---- Customer 360: personal details row, stat tiles, main tabs (Loyalty Points/Instore
+  // Activity/Online Activity/Schemes/Actions/Old Gold Exchange), balance + transaction history.
+  var PF_ICON_PHONE='<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2.18 2A17.5 17.5 0 0 1 4.5 5.68A2 2 0 0 1 6.5 3.5Z"/></svg>';
+  var PF_ICON_MAIL='<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3.5 6.5h17v11h-17z"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 7l8 6l8-6"/></svg>';
+  var PF_ICON_GIFT='<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 10.5h16v9a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 7.5h18v3H3zM12 7.5v13"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 7.5C10 3.5 5 4.5 5 7.5M12 7.5c2-4 7-3 7 0"/></svg>';
+  var PF_ICON_RINGS='<svg viewBox="0 0 24 24" width="16" height="16" fill="none"><circle cx="9" cy="14.5" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="15" cy="14.5" r="5" stroke="currentColor" stroke-width="1.5"/><path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5l1.8 3.8l3.8.5l-2.8 2.6"/></svg>';
+  function pfDetailItemHTML(icon,label,val){
+    return '<div style="flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:16px 18px;"><span style="width:36px;height:36px;border-radius:50%;background:rgba(200,161,74,0.12);display:flex;align-items:center;justify-content:center;flex:none;color:#B89149;">'+icon+'</span><div style="min-width:0;"><div style="font-family:\'DM Sans\';font-weight:500;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:13.5px;color:'+(val?'#1a1917':'#B5A891')+';margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+(val||'Not on file')+'</div></div></div>';
+  }
+  function renderPfDetails(k){
+    var wrap=document.getElementById('pfDetailsRow'); if(!wrap) return;
+    var items=[
+      pfDetailItemHTML(PF_ICON_PHONE,'Phone',k.phone?('+91 '+k.phone):''),
+      pfDetailItemHTML(PF_ICON_MAIL,'Email',k.email),
+      pfDetailItemHTML(PF_ICON_GIFT,'Birthday',k.bday),
+      pfDetailItemHTML(PF_ICON_RINGS,'Anniversary',k.anniv)
+    ];
+    wrap.innerHTML=items.join('<div style="width:1px;background:#F1ECE2;"></div>');
+  }
+  function pfStatTileHTML(label,val){
+    return '<div style="flex:1;min-width:130px;background:#fff;border:1px solid #ECE5DA;border-radius:14px;padding:12px 16px;"><div style="font-family:\'DM Sans\';font-weight:700;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:#9B8F7E;">'+label+'</div><div style="font-family:\'Playfair Display\',serif;font-weight:600;font-size:19px;color:#0A2A66;margin-top:5px;">'+val+'</div></div>';
+  }
+  function renderPfStats(k){
+    var wrap=document.getElementById('pfStatsRow'); if(!wrap) return;
+    wrap.innerHTML=[
+      pfStatTileHTML('Last Store Visited',k.lastStore||'&mdash;'),
+      pfStatTileHTML('Total Bills',k.totalBills!=null?k.totalBills:'&mdash;'),
+      pfStatTileHTML('Total Bills Value',k.ltv||'&mdash;'),
+      pfStatTileHTML('Average Bills',k.aov||'&mdash;'),
+      pfStatTileHTML('MH Score',k.mhScore!=null?k.mhScore:'&mdash;')
+    ].join('');
+  }
+  function renderPfTxns(k){
+    var list=document.getElementById('pfTxnList'); if(!list) return;
+    var txns=k.txns||[];
+    if(!txns.length){ list.style.border='none'; list.innerHTML='<div style="font-family:\'DM Sans\';font-weight:400;font-size:13px;color:#9B8F7E;font-style:italic;">No transactions recorded yet.</div>'; return; }
+    list.style.border='1px solid #EFE8DC';
+    list.innerHTML=txns.map(function(t,i){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;'+(i>0?'border-top:1px solid #F1ECE2;':'')+'"><div style="display:flex;align-items:center;gap:10px;"><span style="font-family:\'DM Sans\';font-weight:600;font-size:13.5px;color:#1a1917;">'+t.label+'</span><span class="purBadge">Earned</span></div><span style="font-family:\'DM Sans\';font-weight:700;font-size:14px;color:#008838;">'+t.amount+'</span></div>';
+    }).join('');
+  }
+  function renderPfViewed(){
+    var list=document.getElementById('pfViewedList'); if(!list) return;
+    var demo=[{name:'Polki Floral Necklace',cat:'Neckwear',price:'₹ 40,98,545'},{name:'Kundan Drop Earrings',cat:'Earrings',price:'₹ 1,24,500'},{name:'Solitaire Halo Ring',cat:'Rings',price:'₹ 89,000'}];
+    var imgs=document.querySelectorAll('#prodgrid .prodc img');
+    list.innerHTML=demo.map(function(d,i){
+      var src=imgs[i]?imgs[i].src:'';
+      return '<div style="display:flex;align-items:center;gap:14px;padding:13px 0;'+(i>0?'border-top:1px solid #F2EEE6;':'')+'"><div style="width:48px;height:48px;border-radius:10px;overflow:hidden;background:#F4EEE4;flex:none;"><img src="'+src+'" style="width:100%;height:100%;object-fit:cover;display:block;"/></div><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;"><span style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#1a1917;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+d.name+'</span><span style="font-family:\'DM Sans\';font-weight:500;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:#9B8F7E;">'+d.cat+'</span></div><span style="font-family:\'DM Sans\';font-weight:600;font-size:14px;color:#032560;white-space:nowrap;">'+d.price+'</span></div>';
+    }).join('');
+  }
+  document.querySelectorAll('.pfMainTab').forEach(function(b){
     b.onclick=function(){
-      document.querySelectorAll('.pfSnapTab').forEach(function(x){ x.classList.remove('on'); x.style.background='transparent'; x.style.color='#343330'; x.style.boxShadow='none'; });
-      b.classList.add('on'); b.style.background='#fff'; b.style.color='#2B5198'; b.style.boxShadow='0 1px 2px rgba(26,25,23,0.1)';
+      document.querySelectorAll('.pfMainTab').forEach(function(x){ x.classList.remove('on'); x.style.color='#9B8F7E'; x.style.borderBottomColor='transparent'; });
+      b.classList.add('on'); b.style.color='#0A2A66'; b.style.borderBottomColor='#0A2A66';
       var t=b.getAttribute('data-t');
-      document.querySelectorAll('.pfSnapPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
+      document.querySelectorAll('.pfMainPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')===t)?'block':'none'; });
     };
   });
   function showProfile(k){
@@ -1130,10 +1199,17 @@
     var nm=document.getElementById('pfName'); if(nm) nm.textContent = (isNew?'Welcome, ':'Welcome back, ')+(k.name||'Guest');
     var tw=document.getElementById('pfTierWrap'); var tt=document.getElementById('pfTierText');
     if(tw){ if(k.tier && k.tier!=='New'){ tw.style.display='inline-flex'; if(tt) tt.textContent=k.tier+' Member'; } else { tw.style.display='none'; } }
-    var ptsEl=document.getElementById('pfLoyalty'); if(ptsEl) ptsEl.textContent = k.points||'0';
-    var sinceEl=document.getElementById('pfSince'); if(sinceEl) sinceEl.textContent = k.since||'Today';
-    var ltvEl=document.getElementById('pfLtv'); if(ltvEl) ltvEl.textContent = k.ltv||'₹ 0';
-    var lastEl=document.getElementById('pfLast'); if(lastEl) lastEl.textContent = k.last||'--';
+    var cidEl=document.getElementById('pfCustId'); if(cidEl) cidEl.textContent='Customer ID: '+(k.custId||'—');
+    var balEl=document.getElementById('pfBalancePts'); if(balEl) balEl.textContent=k.points||'0';
+    var expEl=document.getElementById('pfPtsExp'); if(expEl) expEl.textContent=k.pointsExp||'0';
+    var expDaysEl=document.getElementById('pfPtsExpDays'); if(expDaysEl) expDaysEl.textContent=k.pointsExpDays!=null?k.pointsExpDays:'30';
+    renderPfDetails(k);
+    renderPfStats(k);
+    renderPfTxns(k);
+    renderPfViewed();
+    // Every recognition starts back on the Loyalty Points tab, not wherever the last customer's view was left.
+    document.querySelectorAll('.pfMainTab').forEach(function(x){ var on=x.getAttribute('data-t')==='loyalty'; x.classList.toggle('on',on); x.style.color=on?'#0A2A66':'#9B8F7E'; x.style.borderBottomColor=on?'#0A2A66':'transparent'; });
+    document.querySelectorAll('.pfMainPane').forEach(function(p){ p.style.display=(p.getAttribute('data-t')==='loyalty')?'block':'none'; });
     renderPfOpp();
     renderPfSchemes(k);
     var chips=interestChips();var box=document.getElementById('pfInterest');if(chips.length){box.style.display='block';document.getElementById('pfInterestChips').innerHTML=chips.map(function(x){return '<span class="pillsum">'+x+'</span>';}).join('');}else{box.style.display='none';}
@@ -2828,7 +2904,6 @@
     var im=document.getElementById('srchImage'); if(im) im.onclick=function(){ toast('Snap or upload a photo to find similar pieces.'); };
   })();
   setToggle('product');
-  (function(){var pv=document.querySelectorAll('.pfViewedImg');var pi=document.querySelectorAll('#prodgrid .prodc img');pv.forEach(function(im,k){if(pi[k])im.src=pi[k].src;});})();
 
   (function(){ if(typeof openPDP==='function'){ var _opb=openPDP; openPDP=function(pp){ _opb(pp); var nb=document.querySelector('#viewPDP .navback'); if(nb)nb.setAttribute('data-bt','viewCatalogue'); }; } })();
 
