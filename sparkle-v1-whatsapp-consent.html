@@ -2047,7 +2047,7 @@
     wrap.innerHTML=cells.join('');
   }
   window.renderPdpStatRow=renderPdpStatRow;
-  renderPdpStatRow({netWeight:'132.369 g',metals:[{label:'Gold Purity',value:'22K',tone:'gold'}],stoneCount:1});
+  renderPdpStatRow({netWeight:'132.369 g',metals:[{label:'Gold Purity',value:'22K',tone:'gold'},{label:'Platinum Purity',value:'950',tone:'platinum'}],stoneCount:1});
   function openPDP(prod){ window.__currProd=prod; ensureInTray(prod); document.getElementById('pdpName').textContent='22KT Yellow Gold with Stone Neckwear - Choker.'; document.getElementById('pdpImg').src=prod.img; document.getElementById('pdpTotal').textContent=prod.price; var v=document.getElementById('viewPDP'); v.setAttribute('data-name',prod.name); v.setAttribute('data-price',prod.price); v.setAttribute('data-img',prod.img); v.setAttribute('data-cat',prod.cat); showView('viewPDP'); if(typeof setToggle==='function')setToggle('product'); }
   var _pdpBk=document.getElementById('pdpBack'); if(_pdpBk) _pdpBk.onclick=function(){ showView('viewCatalogue'); };
   var _pab=document.getElementById('pdpAdd'); if(_pab) _pab.onclick=function(){var v=document.getElementById('viewPDP'); var ok=addToTray({name:v.getAttribute('data-name'),price:v.getAttribute('data-price'),cat:v.getAttribute('data-cat'),img:v.getAttribute('data-img')}); if(ok){this.textContent='Added to selection \u2713';this.style.background='#E7CB8E';} };
