@@ -2027,13 +2027,13 @@
     return '<svg viewBox="0 0 44 30" width="18" height="12" style="flex:none;"><defs><linearGradient id="gbT'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="'+s.t0+'"/><stop offset="100%" stop-color="'+s.t1+'"/></linearGradient><linearGradient id="gbL'+uid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="'+s.l0+'"/><stop offset="100%" stop-color="'+s.l1+'"/></linearGradient><linearGradient id="gbR'+uid+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="'+s.r0+'"/><stop offset="100%" stop-color="'+s.r1+'"/></linearGradient></defs><path d="M5 11 L19 3 L41 7 L27 15 Z" fill="url(#gbT'+uid+')"/><path d="M5 11 L27 15 L27 24 L5 20 Z" fill="url(#gbL'+uid+')"/><path d="M27 15 L41 7 L41 15 L27 24 Z" fill="url(#gbR'+uid+')"/><path d="M13 6.5 L14.3 9 L13 11.5 L11.7 9 Z M10 9 L13 9.8 L16 9 L13 8.2 Z" fill="#FFFCEF"/></svg>';
   }
   function pdpStatCellHTML(label,valueHTML){
-    return '<div style="flex:1;min-width:0;padding:11px 12px;"><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:15px;color:#0A2A66;margin-top:3px;">'+valueHTML+'</div></div>';
+    return '<div style="flex:1;min-width:0;padding:11px 12px;"><div style="font-family:\'DM Sans\';font-weight:500;font-size:12px;color:#9B8F7E;white-space:nowrap;">'+label+'</div><div style="font-family:\'DM Sans\';font-weight:600;font-size:15px;color:#0A2A66;margin-top:3px;">'+valueHTML+'</div></div>';
   }
   // One joined, unfilled strip with hairline dividers (not individually-boxed tiles) — reads as
   // a single fact block rather than a cluster of cards, and takes less vertical/visual weight.
   function renderPdpStatRow(row){
     var wrap=document.getElementById('pdpStatRow'); if(!wrap) return;
-    var cells=[pdpStatCellHTML('Net Weight',row.netWeight)];
+    var cells=[pdpStatCellHTML('Net Wt.',row.netWeight)];
     (row.metals||[]).forEach(function(m){
       cells.push(pdpStatCellHTML(m.label,'<span style="display:flex;align-items:center;gap:6px;">'+pdpMetalIcon(m.tone)+'<span>'+m.value+'</span></span>'));
     });
