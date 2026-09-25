@@ -123,6 +123,8 @@
   .estItem{display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #EFE8DC;border-radius:14px;padding:12px;}
 
   .gnf{display:flex;align-items:center;gap:10px;height:48px;border:1px solid #E2DAC9;border-radius:11px;background:#FFFDF9;padding:0 14px;}
+  .giAnnivWrap{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .35s cubic-bezier(.22,.61,.36,1),opacity .3s ease,margin-top .3s ease;}
+  .giAnnivWrap.show{max-height:92px;opacity:1;margin-top:8px;}
   .gnf:focus-within{border-color:#C8A14A;box-shadow:0 0 0 3px rgba(200,161,74,0.14);}
   .gnf input{flex:1;border:none;outline:none;background:transparent;font-family:'DM Sans';font-weight:500;font-size:14px;color:#0A2A66;min-width:0;}
   .gnf input::placeholder{color:#A99F92;}
@@ -781,6 +783,17 @@
           <span class="giGenderChip" data-g="Male" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Male</span>
           <span class="giGenderChip" data-g="Female" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Female</span>
           <span class="giGenderChip" data-g="Other" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Other</span>
+        </div>
+        <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;margin-top:8px;">Birthday <span style="font-weight:400;font-size:12px;color:#9B8F7E;">— optional</span></div>
+        <div class="gnf"><input id="giBday" type="text" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
+        <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;margin-top:8px;">Marital Status <span style="font-weight:400;font-size:12px;color:#9B8F7E;">— optional</span></div>
+        <div id="giMaritalRow" style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span class="giMaritalChip" data-m="Married" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Married</span>
+          <span class="giMaritalChip" data-m="Single" style="height:38px;padding:0 16px;display:inline-flex;align-items:center;background:#fff;border:1px solid #E2DAC9;border-radius:40px;font-family:'DM Sans';font-weight:500;font-size:13px;color:#3A4252;cursor:pointer;transition:all .15s;">Single</span>
+        </div>
+        <div id="giAnnivWrap" class="giAnnivWrap">
+          <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;">Anniversary</div>
+          <div class="gnf" style="margin-top:8px;"><input id="giAnniv" type="text" placeholder="DD/MM" maxlength="5" oninput="var v=this.value.replace(/[^0-9]/g,'').slice(0,4);this.value=v.length>2?v.slice(0,2)+'/'+v.slice(2):v;"/></div>
         </div>
         <div style="font-family:'DM Sans';font-weight:600;font-size:13px;color:#0A2A66;margin-top:8px;">Referred by</div>
         <div style="font-family:'DM Sans';font-weight:400;font-size:12px;color:#9B8F7E;margin-top:-2px;">Referrer must be an existing customer. We'll only add them to Indriya's records once they confirm the referral themselves.</div>
@@ -1495,8 +1508,9 @@
   function openGuestModal(context){
     _gmContext=context||'manual';
     document.getElementById('gPhone').value='';
-    ['giName','giEmail','giRefNum','giRefName'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
-    document.querySelectorAll('.giGenderChip').forEach(function(c){ c.classList.remove('sel'); c.style.background='#fff'; c.style.borderColor='#E2DAC9'; c.style.color='#3A4252'; });
+    ['giName','giEmail','giRefNum','giRefName','giBday','giAnniv'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+    document.querySelectorAll('.giGenderChip,.giMaritalChip').forEach(function(c){ c.classList.remove('sel'); c.style.background='#fff'; c.style.borderColor='#E2DAC9'; c.style.color='#3A4252'; });
+    var annivWrap=document.getElementById('giAnnivWrap'); if(annivWrap) annivWrap.classList.remove('show');
     resetGmSteps();
     document.getElementById('gmBack').style.display='none';
     document.getElementById('gmContinue').classList.add('disabled');
@@ -1909,6 +1923,22 @@
       if(!already){ chip.classList.add('sel'); chip.style.background='#0A2A66'; chip.style.borderColor='#0A2A66'; chip.style.color='#fff'; }
     };
   });
+  // Anniversary only makes sense once we know they're married, so it stays collapsed until
+  // "Married" is picked — a quiet slide/fade reveal rather than always showing an irrelevant field.
+  document.querySelectorAll('.giMaritalChip').forEach(function(chip){
+    chip.onclick=function(){
+      var already=chip.classList.contains('sel');
+      document.querySelectorAll('.giMaritalChip').forEach(function(c){ c.classList.remove('sel'); c.style.background='#fff'; c.style.borderColor='#E2DAC9'; c.style.color='#3A4252'; });
+      var annivWrap=document.getElementById('giAnnivWrap');
+      if(!already){
+        chip.classList.add('sel'); chip.style.background='#0A2A66'; chip.style.borderColor='#0A2A66'; chip.style.color='#fff';
+        if(annivWrap) annivWrap.classList.toggle('show', chip.getAttribute('data-m')==='Married');
+      } else if(annivWrap){
+        annivWrap.classList.remove('show');
+      }
+      if(annivWrap && !annivWrap.classList.contains('show')){ var ai=document.getElementById('giAnniv'); if(ai) ai.value=''; }
+    };
+  });
   document.getElementById('giRefNum').addEventListener('input',function(){ var v=this.value; var k=KNOWN[v]; var rn=document.getElementById('giRefName'); if(rn) rn.value=(v.length===10&&k)?k.name:''; });
   document.getElementById('gmInfoSave').onclick=function(){
     var ph=document.getElementById('gPhone').value;
@@ -1917,7 +1947,10 @@
     var gc=document.querySelector('.giGenderChip.sel'); var gd=gc?gc.getAttribute('data-g'):'';
     var rn=document.getElementById('giRefNum').value.trim();
     var rname=document.getElementById('giRefName').value.trim();
-    CUR={name:nm||'Guest',tier:'New',points:'0',since:'Today',ltv:'₹ 0',last:'--',detailed:true,phone:ph,email:em,gender:gd,refNum:rn,refName:rname,bday:'',anniv:'',marital:''};
+    var bday=document.getElementById('giBday').value.trim();
+    var mc=document.querySelector('.giMaritalChip.sel'); var marital=mc?mc.getAttribute('data-m'):'';
+    var anniv=marital==='Married'?document.getElementById('giAnniv').value.trim():'';
+    CUR={name:nm||'Guest',tier:'New',points:'0',since:'Today',ltv:'₹ 0',last:'--',detailed:true,phone:ph,email:em,gender:gd,refNum:rn,refName:rname,bday:bday,anniv:anniv,marital:marital};
     updateChrome();
     document.getElementById('guestModal').style.pointerEvents='none';
     window.__requestOtpSign(ph,'Confirm their details',function(){
