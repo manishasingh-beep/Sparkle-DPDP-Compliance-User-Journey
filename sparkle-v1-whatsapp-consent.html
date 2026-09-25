@@ -98,6 +98,10 @@
   .addbtn.added{pointer-events:none;}
   .pdpact:hover,.moreopt:hover{border-color:#C8A14A;}
   .pdpMergedBtn:hover{background:#FAF8F5;}
+  .pdpMergedBtn svg{transition:transform .28s cubic-bezier(.34,1.56,.64,1);}
+  .pdpMergedBtn.popBtn svg{transform:scale(1.25);}
+  @keyframes confettiPop{0%{opacity:1;transform:translate(-50%,-50%) rotate(var(--r,0deg)) scale(1);}100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--r,0deg)) scale(.5);}}
+  .pdpConfettiBit{position:absolute;pointer-events:none;z-index:250;animation:confettiPop .7s ease-out forwards;}
   .invSize{display:flex;flex-direction:column;gap:1px;border:1px solid #E6E0D6;border-radius:12px;padding:10px 12px;cursor:pointer;background:#fff;transition:border-color .12s,background .12s;}
   .invSize:hover{border-color:#C8A14A;}
   .invSize.on{border-color:#2B5198;background:#F2F6FD;box-shadow:inset 0 0 0 1px #2B5198;}
@@ -190,6 +194,8 @@
   #gmNudge{position:absolute;z-index:210;max-width:270px;background:#FBF8F3;border:1px solid #ECE5DA;color:#3A4252;font-family:'DM Sans';font-weight:500;font-size:12.5px;line-height:1.5;padding:12px 14px;border-radius:12px;box-shadow:0 14px 34px rgba(10,27,51,0.16);opacity:0;transform:translateY(-6px);transition:opacity .3s,transform .3s;pointer-events:none;}
   #gmNudge.show{opacity:1;transform:translateY(0);}
   #gmNudge:after{content:'';position:absolute;top:-6px;right:28px;width:12px;height:12px;background:#FBF8F3;border-left:1px solid #ECE5DA;border-top:1px solid #ECE5DA;transform:rotate(45deg);}
+  #gmNudge.leftArrow:after{right:auto;left:var(--arrowX,28px);}
+  #gmNudge.above:after{top:auto;bottom:-6px;border-left:none;border-top:none;border-right:1px solid #ECE5DA;border-bottom:1px solid #ECE5DA;}
 
   .clkTime{font-variant-numeric:tabular-nums;display:inline-block;min-width:42px;text-align:left;}
   .clkState{display:inline-block;min-width:46px;}
@@ -1574,6 +1580,49 @@
   var _showCat2=showCatalogue; showCatalogue=function(){ _showCat2(); updateChrome(); };
   // First time a piece lands in the tray (PDP auto-adds on view) without a captured customer,
   // nudge the JC — softly, since the tablet may well be facing the customer at that moment.
+  // positionNudge/GM_NUDGE_DEFAULT are shared by every trigger that wants to surface the single
+  // #gmNudge bubble near a specific element with its own copy — don't fork a second bubble.
+  var GM_NUDGE_DEFAULT='✨ Save this visit — unlock loyalty rewards, keep today’s picks, and get them on WhatsApp.';
+  function positionNudge(triggerEl,text,ms,opts){
+    var nudge=document.getElementById('gmNudge');
+    if(!nudge||!triggerEl) return;
+    nudge.textContent=text;
+    opts=opts||{};
+    var rect=triggerEl.getBoundingClientRect();
+    var stageEl=document.getElementById('stage');
+    var stageRect=stageEl.getBoundingClientRect();
+    var scale=stageRect.width/1280;
+    if(opts.leftAnchor){
+      // For triggers on the left/middle of the stage (e.g. the PDP like/dislike/wishlist row),
+      // right-anchoring (below) computes a huge offset and pushes the bubble off-canvas — anchor
+      // by left instead, clamped to stay on-stage, with the arrow re-centered under the trigger.
+      var bw=270;
+      var centerX=(rect.left+rect.width/2-stageRect.left)/scale;
+      var left=Math.max(12,Math.min(centerX-bw/2,1280-bw-12));
+      nudge.style.left=left+'px';
+      nudge.style.right='auto';
+      nudge.style.setProperty('--arrowX',(centerX-left-6)+'px');
+      nudge.classList.add('leftArrow');
+      if(opts.above){
+        nudge.style.top='auto';
+        nudge.style.bottom=((stageRect.bottom-rect.top)/scale+14)+'px';
+        nudge.classList.add('above');
+      } else {
+        nudge.style.bottom='auto';
+        nudge.style.top=((rect.bottom-stageRect.top)/scale+10)+'px';
+        nudge.classList.remove('above');
+      }
+    } else {
+      nudge.classList.remove('leftArrow','above');
+      nudge.style.bottom='auto';
+      nudge.style.top=((rect.bottom-stageRect.top)/scale+10)+'px';
+      nudge.style.right=((stageRect.right-rect.right)/scale)+'px';
+      nudge.style.left='auto';
+    }
+    requestAnimationFrame(function(){ nudge.classList.add('show'); });
+    clearTimeout(nudge.__hideT);
+    nudge.__hideT=setTimeout(function(){ nudge.classList.remove('show'); },ms||6500);
+  }
   var _firstItemNudgeShown=false;
   function showFirstItemNudge(){
     if(_firstItemNudgeShown || (CUR&&CUR.detailed)) return;
@@ -1583,19 +1632,68 @@
     if(!visible) return;
     visible.classList.add('shimmerBurst');
     setTimeout(function(){ visible.classList.remove('shimmerBurst'); },6000);
-    var rect=visible.getBoundingClientRect();
+    positionNudge(visible,GM_NUDGE_DEFAULT,6500);
+  }
+  // Small "sparkle" confetti burst — a handful of tiny gold/navy/brand-colored bits that fly out
+  // from a tapped icon and fade, purely decorative interactivity feedback (like/dislike/wishlist taps).
+  function burstConfetti(triggerEl,colors){
     var stageEl=document.getElementById('stage');
+    if(!stageEl||!triggerEl) return;
+    var rect=triggerEl.getBoundingClientRect();
     var stageRect=stageEl.getBoundingClientRect();
     var scale=stageRect.width/1280;
-    var nudge=document.getElementById('gmNudge');
-    if(nudge){
-      nudge.style.top=((rect.bottom-stageRect.top)/scale+10)+'px';
-      nudge.style.right=((stageRect.right-rect.right)/scale)+'px';
-      nudge.style.left='auto';
-      requestAnimationFrame(function(){ nudge.classList.add('show'); });
-      setTimeout(function(){ nudge.classList.remove('show'); },6500);
+    var cx=(rect.left+rect.width/2-stageRect.left)/scale;
+    var cy=(rect.top+rect.height/2-stageRect.top)/scale;
+    var n=10;
+    for(var i=0;i<n;i++){
+      var el=document.createElement('span');
+      el.className='pdpConfettiBit';
+      var angle=(Math.PI*2*i/n)+(Math.random()*0.5-0.25);
+      var dist=24+Math.random()*20;
+      var tx=Math.cos(angle)*dist, ty=Math.sin(angle)*dist;
+      var size=3+Math.random()*3;
+      var diamond=Math.random()>0.5;
+      el.style.left=cx+'px'; el.style.top=cy+'px';
+      el.style.width=size+'px'; el.style.height=size+'px';
+      el.style.background=colors[i%colors.length];
+      el.style.borderRadius=diamond?'1px':'50%';
+      el.style.setProperty('--tx',tx+'px');
+      el.style.setProperty('--ty',ty+'px');
+      el.style.setProperty('--r',diamond?'45deg':'0deg');
+      stageEl.appendChild(el);
+      (function(node){ setTimeout(function(){ node.remove(); },750); })(el);
     }
   }
+  // Like/Dislike/Wishlist merged pill on the PDP: tap fills the icon (Like/Dislike are mutually
+  // exclusive, Wishlist toggles independently), pops it and bursts a small confetti flourish on
+  // activation, and — whenever the JC hasn't captured this customer's number yet — surfaces the
+  // shared nudge bubble reminding them to add guest details so liked/viewed items get saved.
+  (function(){
+    var likeBtn=document.querySelector('.pdpMergedBtn[title="Like"]');
+    var dislikeBtn=document.querySelector('.pdpMergedBtn[title="Dislike"]');
+    var wishBtn=document.querySelector('.pdpMergedBtn[title="Wishlist"]');
+    function setActive(btn,on,color){
+      if(!btn) return;
+      var svg=btn.querySelector('svg'); if(svg) svg.style.color=on?color:'#032560';
+      var path=btn.querySelector('path'); if(path) path.style.fill=on?'currentColor':'none';
+    }
+    function pop(btn){
+      if(!btn) return;
+      btn.classList.remove('popBtn'); void btn.offsetWidth; btn.classList.add('popBtn');
+      setTimeout(function(){ btn.classList.remove('popBtn'); },260);
+    }
+    function handleTap(btn,color,confettiColors,exclusiveWith){
+      var wasActive=btn.classList.contains('mbActive');
+      if(exclusiveWith){ exclusiveWith.classList.remove('mbActive'); setActive(exclusiveWith,false,''); }
+      btn.classList.toggle('mbActive',!wasActive);
+      setActive(btn,!wasActive,color);
+      if(!wasActive){ pop(btn); burstConfetti(btn,confettiColors); }
+      if(!(CUR&&CUR.detailed)) positionNudge(btn,'📌 Add their number to save liked & viewed pieces to this session.',4000,{leftAnchor:true,above:true});
+    }
+    if(likeBtn) likeBtn.onclick=function(){ handleTap(likeBtn,'#0A2A66',['#0A2A66','#C8A14A','#5B7BAE'],dislikeBtn); };
+    if(dislikeBtn) dislikeBtn.onclick=function(){ handleTap(dislikeBtn,'#B0432F',['#B0432F','#C8A14A','#D98F7B'],likeBtn); };
+    if(wishBtn) wishBtn.onclick=function(){ handleTap(wishBtn,'#C8A14A',['#C8A14A','#0A2A66','#E7C766'],null); };
+  })();
   var _openPDP2=openPDP; openPDP=function(prod){ _openPDP2(prod); updateChrome(); };
   document.getElementById('gmClose').onclick=closeGuestModal;
   document.getElementById('gmBackdrop').onclick=closeGuestModal;
