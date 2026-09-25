@@ -2606,22 +2606,26 @@
     // the first match so it looked fine there, but Safari/WebKit (iPad) does not, and the fill
     // fails silently, leaving only the stroked outline. Minting a fresh id per call fixes that.
     var _coinIconSeq=0;
-    // A flatter, evenly-lit coin — bright rim + a softer two-tone face instead of the strong
-    // radial "shiny sphere" highlight the previous version had, matching the reference exactly.
+    // Embedded exactly as supplied ("Frame frame new.svg") — only the filter/gradient ids are
+    // uniquified per call site, same reason as above (duplicate SVG def ids break on Safari).
     function goldCoinIcon(){
       var uid='gc'+(_coinIconSeq++);
-      return '<span class="coinSpin" style="display:inline-block;"><svg width="42" height="42" viewBox="0 0 42 42" style="display:block;">'+
+      return '<span class="coinSpin" style="display:inline-block;"><svg width="42" height="42" viewBox="0 0 42 42" fill="none" style="display:block;">'+
+        '<g filter="url(#filter0_i'+uid+')"><circle cx="21" cy="21" r="21" fill="white"/></g>'+
+        '<circle cx="21" cy="21" r="20.25" stroke="url(#paint0'+uid+')" stroke-width="1.5"/>'+
+        '<path d="M35.267 7.62375C33.8706 7.62375 32.737 6.49018 32.737 5.09375C32.737 6.49018 31.6035 7.62375 30.207 7.62375C31.6035 7.62375 32.737 8.75732 32.737 10.1537C32.737 8.75732 33.8706 7.62375 35.267 7.62375Z" fill="#FECD54"/>'+
+        '<path d="M32.7377 10.1535C31.3413 10.1535 30.2077 9.01996 30.2077 7.62354C30.2077 9.01996 29.0742 10.1535 27.6777 10.1535C29.0742 10.1535 30.2077 11.2871 30.2077 12.6835C30.2077 11.2871 31.3413 10.1535 32.7377 10.1535Z" fill="#FECD54"/>'+
+        '<path d="M32.5236 19.1973C32.4661 19.3945 32.2936 19.5423 32.0061 19.6163C28.3097 21.3166 24.5311 23.0416 20.7854 24.7173C19.6026 25.2513 18.3786 25.7852 17.1876 26.2452C17.1136 26.2698 16.8097 26.2452 16.8179 26.1302C16.5304 24.1998 16.0376 22.2941 15.709 20.372V20.2241C20.3993 18.1048 25.0897 15.9773 29.7883 13.8498L30.1661 13.8252C31.004 15.5831 31.7926 17.382 32.5236 19.1891V19.1973Z" fill="#FECD54"/>'+
+        '<path d="M30.1663 13.8336L15.7091 20.3722L10.9941 19.0661L25.4513 12.6836L30.1663 13.8336Z" fill="#E1A337"/>'+
+        '<path d="M35.2676 19.9206L19.5619 27.0506L16.8184 26.2538C16.8184 26.2538 16.8184 26.1717 16.8184 26.1306C16.9662 26.2374 17.1141 26.1306 17.2537 26.0731C22.0426 24.1428 26.8234 21.736 31.5794 19.666C31.8834 19.5345 32.2366 19.3703 32.5159 19.1978C33.3537 19.551 34.438 19.6003 35.2676 19.9206Z" fill="#F5BA42"/>'+
+        '<path d="M35.2678 19.9203C35.35 19.9532 35.4485 19.9696 35.4814 20.0682C36.0892 21.7357 37.0503 23.3703 37.65 25.0214C37.6828 25.1118 37.7732 25.2596 37.7239 25.35L20.6792 32.94L19.5703 27.0503V26.9025C24.696 24.5696 29.83 22.245 34.9639 19.9121H35.2678V19.9203Z" fill="#FECD54"/>'+
+        '<path d="M9.49202 22.0806C9.19631 22.6802 8.91702 23.3045 8.63773 23.9124L6.74023 23.3209C7.47131 22.8034 8.69523 22.5488 9.49202 22.0806Z" fill="#F5BA42"/>'+
+        '<path d="M15.7105 20.3722C15.7598 20.4544 15.8008 20.5365 15.8419 20.6186C15.883 20.7008 15.9158 20.7829 15.9323 20.8733C16.2691 22.434 16.573 24.0111 16.8687 25.5801C16.8851 25.769 16.8687 25.9497 16.8194 26.1304C16.8605 26.2208 16.9919 26.2536 17.2055 26.229L19.5219 26.9026L19.563 27.0504L19.7026 27.0669L20.7951 32.8333L20.6801 32.9319L4.25977 28.2251V28.0279L6.60905 23.3622C6.63369 23.2965 6.72405 23.3294 6.74048 23.3211L7.01155 23.2719L8.58048 23.7565C8.77762 23.1158 9.08155 22.5572 9.48405 22.0808C9.97691 21.0786 10.4944 20.0765 10.9873 19.0744L11.3487 19.0415L15.6612 20.2408L15.7023 20.3886L15.7105 20.3722Z" fill="#E1A337"/>'+
+        '<path d="M14.9221 25.6786L12.5317 30.4511L11.3242 24.6929L14.9221 25.6786Z" fill="#FECD54"/>'+
         '<defs>'+
-          '<linearGradient id="coinFace'+uid+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E7AE34"/><stop offset="100%" stop-color="#D89C2A"/></linearGradient>'+
+          '<filter id="filter0_i'+uid+'" x="0" y="-2" width="42" height="44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/><feOffset dy="-2"/><feGaussianBlur stdDeviation="2"/><feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/><feBlend mode="normal" in2="shape" result="effect1_innerShadow"/></filter>'+
+          '<linearGradient id="paint0'+uid+'" x1="36.4414" y1="36.0741" x2="9.42977" y2="4.77791" gradientUnits="userSpaceOnUse"><stop stop-color="#C09A3E"/><stop offset="0.51341" stop-color="#F8E9CC"/><stop offset="1" stop-color="#C5830F"/></linearGradient>'+
         '</defs>'+
-        '<circle cx="21" cy="21" r="19.3" fill="#FBC94A"/>'+
-        '<circle cx="21" cy="21" r="19.3" fill="none" stroke="#C68A22" stroke-width="0.7"/>'+
-        '<circle cx="21" cy="21" r="16.6" fill="url(#coinFace'+uid+')" stroke="#C68A22" stroke-width="0.6"/>'+
-        '<g transform="translate(21 21) scale(0.84) translate(-21 -21)">'+
-          '<path d="M15.3 15.8 L26.7 15.8 L28.3 23.6 L13.7 23.6 Z" fill="#FED873" stroke="#C68A22" stroke-width="0.6" stroke-linejoin="round"/>'+
-          '<path d="M7.2 25.1 L18 25.1 L19.6 32.8 L5.6 32.8 Z" fill="#FED873" stroke="#C68A22" stroke-width="0.6" stroke-linejoin="round"/>'+
-          '<path d="M24 25.1 L34.8 25.1 L36.4 32.8 L22.4 32.8 Z" fill="#FED873" stroke="#C68A22" stroke-width="0.6" stroke-linejoin="round"/>'+
-        '</g>'+
         '</svg></span>';
     }
     function bar(hasBack, backTarget){
